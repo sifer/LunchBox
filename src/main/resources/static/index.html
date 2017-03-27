@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+         * element that contains the map. */
+        #map {
+            height: 80%;
+        }
+        /* Optional: Makes the sample page fill the window. */
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        #map {
+            width: 80%;
+        }
+        #panel {
+            
+            padding: 1%;
+        }
+
+    </style>
+
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&callback=initMap"></script>
+    <script type="text/javascript"src="app.js"></script>
+</head>
+<body>
+<div id="panel">
+<input id="address" type="textbox">
+<input id="submit" type="button" value="Hitta address">
+</div>
+<div id="map"></div>
+<script>
+
+</script>
+
+</body>
+</html>
