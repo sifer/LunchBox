@@ -38,7 +38,7 @@ public class Repository {
         }}
     public void addUser(String Firstname, String Lastname, String Email, String Username, String Password) throws Exception {
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[User](FirstName, LastName, Email, Username, Password)VALUES (?,?,?,?,?)", new String []{"Id"})) {
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[User](FirstName, LastName, Mail, Username, Password)VALUES (?,?,?,?,?)", new String []{"Id"})) {
             ps.setString(1, Firstname);
             ps.setString(2, Lastname);
             ps.setString(3, Email);

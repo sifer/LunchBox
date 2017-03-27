@@ -4,18 +4,18 @@ var map;
 
 //initMap körs automatiskt när sidan laddas med hjälp av "async defer" i .html
 function initMap() {
+    console.log("InitMap");
     var uluru = {lat: 59.3293235, lng: 18.0685808};
+    console.log(uluru);
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: uluru
     });
     var marker = new google.maps.Marker({
+        animation: google.maps.Animation.DROP,
         position: uluru,
         map: map
     });
-
-    var markerCluster = new MarkerClusterer(map, markers, {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-    
 
     document.getElementById('submit').addEventListener('click', function() {
         codeAddress(geocoder, map);
@@ -34,7 +34,9 @@ function codeAddress() {
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location
+                position: results[0].geometry.location,
+                animation: google.maps.Animation.BOUNCE,
+                label: "Hej"
             });
             //Om ingen träff på addressen
         } else {
