@@ -1,15 +1,8 @@
 package com.example.repository;
 
-
-import com.example.domain.GetUser;
 import com.example.domain.UserLogin;
 import com.example.domain.UserSignUp;
-import org.apache.catalina.User;
-import org.springframework.beans.ExtendedBeanInfoFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -24,6 +17,7 @@ public class Repository {
 
     @Autowired
     private DataSource dataSource;
+
 // hämtar ut från databasen
 
     public UserLogin getUserLogin(String Username, String Password) throws Exception {
@@ -42,7 +36,6 @@ public class Repository {
             }
 
         }}
-    @Override
     public void addUser(String Firstname, String Lastname, String Email, String Username, String Password) throws Exception {
         try (Connection conn = dataSource.getConnection();
              PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[User](FirstName, LastName, Email, Username, Password)VALUES (?,?,?,?,?)", new String []{"Id"})) {
