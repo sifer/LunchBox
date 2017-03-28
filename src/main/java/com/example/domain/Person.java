@@ -4,11 +4,19 @@ package com.example.domain;
  * Created by Administrator on 2017-03-09.
  */
 public class Person { //
-    public String firstName;
-    public String lastName;
-    public String phoneNumber;
+    private int PersonID;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+
 
     public Person(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
+    public Person(int personID, String firstName, String lastName, String phoneNumber) {
+        PersonID = personID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -16,6 +24,14 @@ public class Person { //
 
     public Person() {
 
+    }
+
+    public int getPersonID() {
+        return PersonID;
+    }
+
+    public void setPersonID(int personID) {
+        PersonID = personID;
     }
 
     public String getFirstName() {
