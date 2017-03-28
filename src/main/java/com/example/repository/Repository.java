@@ -17,9 +17,10 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
+
     public String addUser(User user, Person person) throws Exception {
         System.out.println(person.getFirstName());
-        ArrayList<Object> returnList = new ArrayList<>();
+
         String key = "";
 
         try (Connection conn = dataSource.getConnection();

@@ -1,9 +1,17 @@
 package com.example.domain;
 
+import org.hibernate.validator.constraints.Email;
+
+import javax.validation.constraints.Size;
+
 public class User {
+
     private int UserID;
+
+    @Size(min = 1)
     private String userName;
     private String password;
+    @Email
     private String mail;
 
     public User() {
