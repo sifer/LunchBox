@@ -29,6 +29,50 @@ public class LunchBox {
         this.fisk = fisk;
         this.image = image;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getIngridiences() {
+        return ingridiences;
+    }
+
+    public String getLongitud() {
+        return longitud;
+    }
+
+    public String getLatitud() {
+        return latitud;
+    }
+
+    public String getVego() {
+        return vego;
+    }
+
+    public String getVegan() {
+        return vegan;
+    }
+
+    public String getKyckling() {
+        return kyckling;
+    }
+
+    public String getFläsk() {
+        return fläsk;
+    }
+
+    public String getNöt() {
+        return nöt;
+    }
+
+    public String getFisk() {
+        return fisk;
+    }
+
+    public String getImage() {
+        return image;
+    }
 }
 
 

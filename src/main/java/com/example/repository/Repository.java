@@ -1,16 +1,14 @@
 package com.example.repository;
 
-import com.example.domain.UserLogin;
-import com.example.domain.UserSignUp;
+import com.example.domain.User;
+import com.example.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Observer;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class Repository {
@@ -18,60 +16,69 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-// hämtar ut från databasen
-
-    public UserLogin getUserLogin(String Username, String Password) throws Exception {
+    public void addUser(User user, Person person) throws Exception {
+        System.out.println(person.getFirstName());
+        String key = "";
 
         try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("SELECT Username, Password FROM [dbo].[User] WHERE Username= ? AND Password= ?")) {
-            ps.setString(1, Username);
-            ps.setString(2, Password);
+             PreparedStatement psPerson = conn.prepareStatement("INSERT INTO [dbo].[Person](FirstName, LastName, PhoneNumber) VALUES (?,?,?)", Statement.RETURN_GENERATED_KEYS);
+             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[User](UserID, UserName, Password, Mail)VALUES (?,?,?,?)");
+        ){
 
-            try (ResultSet rs = ps.executeQuery()) {
+             psPerson.setString(1, person.getFirstName());
+             psPerson.setString(2, person.getLastName());
+             psPerson.setString(3, person.getPhoneNumber());
 
-                if (!rs.next()) return null;
-                else return rsUserLogin(rs);
-            } catch (SQLException e) {
-                throw new Exception(e);
+             psPerson.executeUpdate();
+
+            ResultSet genKeys = psPerson.getGeneratedKeys();
+            if (genKeys.next()) {
+                key = genKeys.getString(1);
             }
 
-        }}
-    public void addUser(String Firstname, String Lastname, String Email, String Username, String Password) throws Exception {
-        try (Connection conn = dataSource.getConnection();
-             PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[User](FirstName, LastName, Mail, Username, Password)VALUES (?,?,?,?,?)", new String []{"Id"})) {
-            ps.setString(1, Firstname);
-            ps.setString(2, Lastname);
-            ps.setString(3, Email);
-            ps.setString(4, Username);
-            ps.setString(5, Password);
+
+            ps.setString(1, key);
+            ps.setString(2, user.getUserName());
+            ps.setString(3, user.getPassword());
+            ps.setString(4, user.getMail());
+
             ps.executeUpdate();
+
 
         } catch (SQLException e) {
             throw new Exception(e);
         }
     }
 
-    private UserLogin rsUserLogin(ResultSet rs) throws SQLException {
-        return new UserLogin(
-                rs.getString("Username"),
-                rs.getString("Password")
-
-        );
-    }
-    public UserSignUp rsUser(ResultSet rs) throws SQLException {
-        return new UserSignUp(
-                rs.getString("Firstname"),
-                rs.getString("Lastname"),
-                rs.getInt("phonenumber"),
-                rs.getString("Mail"),
-                rs.getString("Username"),
-                rs.getString("Password")
-        );
-
+    public List<User> getUsers() {
+        try(Connection conn = dataSource.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM [dbo].[User]")) {
+            ArrayList<User> users = new ArrayList<>();
+            while(resultSet.next()) {
+                users.add(rsUser(resultSet));
+            }
+            return users;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
 
     }
 
+
+
+    public User rsUser (ResultSet resultset) throws SQLException {
+        return new User(
+                resultset.getString(2),
+                resultset.getString(3),
+                resultset.getString(4));
+    }
 
 }
+
+
+
 
 
