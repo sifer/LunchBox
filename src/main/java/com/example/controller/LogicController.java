@@ -17,12 +17,15 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.PostConstruct;
 import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 @Controller
-public class loginController {
+public class LogicController {
     ArrayList<User> users;
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
@@ -44,7 +47,6 @@ public class loginController {
             }
 
         }
-        System.out.println("Fel login");
         return null;
     }
 
@@ -61,12 +63,26 @@ public class loginController {
 }
 
     @PostMapping("/newUser")
-    public ModelAndView newUser(@ModelAttribute User user ,@ModelAttribute Person person) throws Exception {
-        System.out.println(person.getFirstName());
+    public ModelAndView newUser(@Valid User user, BindingResult br, @ModelAttribute Person person) throws Exception {
+
+        if(br.hasErrors() || userNameDuplicate(user)){
+            return new ModelAndView("signUp");
+        }
         repository.addUser(user, person);
-
-
+        users.add(user);
+        //persons.add(person);
         return new ModelAndView("Adam");
+    }
+
+    public boolean userNameDuplicate(User user) {
+        boolean duplicate = false;
+
+        for(User index : users) {
+            if(index.getUserName().equals(user.getUserName())){
+                duplicate = true;
+                return duplicate;
+            }
+        }return duplicate;
     }
 
 

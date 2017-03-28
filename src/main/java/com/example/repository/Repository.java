@@ -17,7 +17,6 @@ public class Repository {
     private DataSource dataSource;
 
     public void addUser(User user, Person person) throws Exception {
-        System.out.println(person.getFirstName());
         String key = "";
 
         try (Connection conn = dataSource.getConnection();
