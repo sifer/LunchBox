@@ -1,6 +1,7 @@
 package com.example.domain;
 
 public class User {
+    private int UserID;
     private String userName;
     private String password;
     private String mail;
@@ -9,10 +10,20 @@ public class User {
 
     }
 
-    public User(String userName, String password, String mail) {
+    public User(int userID, String userName, String password, String mail) {
+        UserID = userID;
         this.userName = userName;
         this.password = password;
         this.mail = mail;
+    }
+
+
+    public int getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(int userID) {
+        UserID = userID;
     }
 
     public String getUserName() {
@@ -26,6 +37,7 @@ public class User {
     public String getMail() {
         return mail;
     }
+
 
     public void setUserName(String userName) {
         this.userName = userName;

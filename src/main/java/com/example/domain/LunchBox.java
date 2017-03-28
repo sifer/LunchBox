@@ -4,78 +4,162 @@ package com.example.domain;
  * Created by Administrator on 2017-03-27.
  */
 public class LunchBox {
-    public final String description;
-    public final String ingridiences;
-    public final String longitud;
-    public final String latitud;
-    public final String vego;
-    public final String vegan;
-    public final String kyckling;
-    public final String fläsk;
-    public final String nöt;
-    public final String fisk;
-    public final String image;
+    private int LunchBoxID;
+    private String description;
+    private String ingridiences;
+    private long longitud;
+    private long latitud;
+    private boolean vego;
+    private boolean vegan;
+    private boolean laktos;
+    private boolean gluten;
+    private boolean kyckling;
+    private boolean fläsk;
+    private boolean nöt;
+    private boolean fisk;
+    private int image;
+    private int Person_ID;
 
-    public LunchBox(String description, String ingridiences, String longitud, String latitud, String vego, String vegan, String kyckling, String fläsk, String nöt, String fisk, String image) {
+    public LunchBox() {
+
+    }
+
+    public LunchBox(int lunchBoxID, String description, String ingridiences, long longitud, long latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean fläsk, boolean nöt, boolean fisk, int image, int person_ID) {
+        this.LunchBoxID = lunchBoxID;
         this.description = description;
         this.ingridiences = ingridiences;
         this.longitud = longitud;
         this.latitud = latitud;
         this.vego = vego;
         this.vegan = vegan;
+        this.laktos = laktos;
+        this.gluten = gluten;
         this.kyckling = kyckling;
         this.fläsk = fläsk;
         this.nöt = nöt;
         this.fisk = fisk;
         this.image = image;
+        this.Person_ID = person_ID;
+    }
+
+    public int getLunchBoxID() {
+        return LunchBoxID;
+    }
+
+    public void setLunchBoxID(int lunchBoxID) {
+        LunchBoxID = lunchBoxID;
     }
 
     public String getDescription() {
         return description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getIngridiences() {
         return ingridiences;
     }
 
-    public String getLongitud() {
+    public void setIngridiences(String ingridiences) {
+        this.ingridiences = ingridiences;
+    }
+
+    public long getLongitud() {
         return longitud;
     }
 
-    public String getLatitud() {
+    public void setLongitud(long longitud) {
+        this.longitud = longitud;
+    }
+
+    public long getLatitud() {
         return latitud;
     }
 
-    public String getVego() {
+    public void setLatitud(long latitud) {
+        this.latitud = latitud;
+    }
+
+    public boolean isVego() {
         return vego;
     }
 
-    public String getVegan() {
+    public void setVego(boolean vego) {
+        this.vego = vego;
+    }
+
+    public boolean isVegan() {
         return vegan;
     }
 
-    public String getKyckling() {
+    public void setVegan(boolean vegan) {
+        this.vegan = vegan;
+    }
+
+    public boolean isLaktos() {
+        return laktos;
+    }
+
+    public void setLaktos(boolean laktos) {
+        this.laktos = laktos;
+    }
+
+    public boolean isGluten() {
+        return gluten;
+    }
+
+    public void setGluten(boolean gluten) {
+        this.gluten = gluten;
+    }
+
+    public boolean isKyckling() {
         return kyckling;
     }
 
-    public String getFläsk() {
+    public void setKyckling(boolean kyckling) {
+        this.kyckling = kyckling;
+    }
+
+    public boolean isFläsk() {
         return fläsk;
     }
 
-    public String getNöt() {
+    public void setFläsk(boolean fläsk) {
+        this.fläsk = fläsk;
+    }
+
+    public boolean isNöt() {
         return nöt;
     }
 
-    public String getFisk() {
+    public void setNöt(boolean nöt) {
+        this.nöt = nöt;
+    }
+
+    public boolean isFisk() {
         return fisk;
     }
 
-    public String getImage() {
+    public void setFisk(boolean fisk) {
+        this.fisk = fisk;
+    }
+
+    public int getImage() {
         return image;
     }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+    public int getPerson_ID() {
+        return Person_ID;
+    }
+
+    public void setPerson_ID(int person_ID) {
+        Person_ID = person_ID;
+    }
 }
-
-
-
-
 

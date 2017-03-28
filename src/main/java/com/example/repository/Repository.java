@@ -1,5 +1,6 @@
 package com.example.repository;
 
+import com.example.domain.LunchBox;
 import com.example.domain.User;
 import com.example.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,11 +72,73 @@ public class Repository {
 
     public User rsUser (ResultSet resultset) throws SQLException {
         return new User(
+                resultset.getInt(1),
                 resultset.getString(2),
                 resultset.getString(3),
                 resultset.getString(4));
     }
 
+    public List<Person> getPersons() {
+        try(Connection conn = dataSource.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM [dbo].[Person]")) {
+            ArrayList<Person> persons = new ArrayList<>();
+            while(resultSet.next()) {
+                persons.add(rsPerson(resultSet));
+            }
+            return persons;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
+    private Person rsPerson(ResultSet resultSet) throws SQLException {
+        return new Person(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4));
+    }
+
+    public List<LunchBox> getLunchBoxes() {
+        try(Connection conn = dataSource.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM [dbo].[LunchBox]")) {
+            ArrayList<LunchBox> lunchBoxes = new ArrayList<>();
+            while(resultSet.next()) {
+                lunchBoxes.add(rsLunchBox(resultSet));
+            }
+            return lunchBoxes;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private LunchBox rsLunchBox(ResultSet resultSet) throws SQLException {
+        return new LunchBox(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getLong(4),
+                resultSet.getLong(5),
+                resultSet.getBoolean(6),
+                resultSet.getBoolean(7),
+                resultSet.getBoolean(8),
+                resultSet.getBoolean(9),
+                resultSet.getBoolean(10),
+                resultSet.getBoolean(11),
+                resultSet.getBoolean(12),
+                resultSet.getBoolean(13),
+                resultSet.getInt(14),
+                resultSet.getInt(15)
+        );
+
+    }
 }
 
 
