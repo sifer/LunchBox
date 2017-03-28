@@ -9,6 +9,12 @@ public class Person { //
     private String lastName;
     private String phoneNumber;
 
+
+    public Person(String firstName, String lastName, String phoneNumber) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+    }
     public Person(int personID, String firstName, String lastName, String phoneNumber) {
         PersonID = personID;
         this.firstName = firstName;

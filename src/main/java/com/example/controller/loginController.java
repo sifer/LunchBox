@@ -34,6 +34,14 @@ public class loginController {
     public void RefreshUsers() {
         users = (ArrayList<User>) repository.getUsers();
     }
+    @PostConstruct
+    public void RefreshPersons() {
+        persons = (ArrayList<Person>) repository.getPersons();
+    }
+    @PostConstruct
+    public void RefreshLunchBoxes() {
+        lunchBoxes = (ArrayList<LunchBox>) repository.getLunchBoxes();
+    }
 
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
@@ -63,7 +71,10 @@ public class loginController {
     @PostMapping("/newUser")
     public ModelAndView newUser(@ModelAttribute User user ,@ModelAttribute Person person) throws Exception {
         System.out.println(person.getFirstName());
-        repository.addUser(user, person);
+
+        int key = Integer.parseInt(repository.addUser(user, person));
+        users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
+        persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
 
 
         return new ModelAndView("Adam");

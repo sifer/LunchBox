@@ -17,8 +17,9 @@ public class Repository {
     @Autowired
     private DataSource dataSource;
 
-    public void addUser(User user, Person person) throws Exception {
+    public String addUser(User user, Person person) throws Exception {
         System.out.println(person.getFirstName());
+        ArrayList<Object> returnList = new ArrayList<>();
         String key = "";
 
         try (Connection conn = dataSource.getConnection();
@@ -43,8 +44,10 @@ public class Repository {
             ps.setString(3, user.getPassword());
             ps.setString(4, user.getMail());
 
+
             ps.executeUpdate();
 
+            return key;
 
         } catch (SQLException e) {
             throw new Exception(e);
