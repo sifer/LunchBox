@@ -7,9 +7,9 @@ import javax.validation.constraints.Size;
 public class User {
 
     private int UserID;
-
-    @Size(min = 1)
+    @Size(min = 1, max = 25)
     private String userName;
+    @Size(min = 1, max = 20)
     private String password;
     @Email
     private String mail;
@@ -50,7 +50,6 @@ public class User {
     public String getMail() {
         return mail;
     }
-
 
     public void setUserName(String userName) {
         this.userName = userName;

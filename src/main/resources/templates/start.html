@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8"/>
-    <link href="/cssfil.css" rel="stylesheet" type="text/css"/>
+    <link href="style.css" rel="stylesheet" type="text/css"/>
     <title>Sign up!</title>
 </head>
 <body>
@@ -21,7 +21,28 @@
         <input class="buttons" type="submit" value="DO IT!"/>
     </form></div>
 
+<h1>Welcome!</h1>
+<div>
+    <form action="login" method="POST">
+        Username: <input name="userName" type="text"/>
+        Password: <input name="password" type="password"/>
+        <input type="submit" value="Login"/>
+    </form>
+</div>
 
+<a href="../Adam">
+    <div>SignUp</div>
+</a>
+
+
+
+<div id="panel">
+    <input id="address" type="textbox"/>
+    <input id="submit" type="button" value="Hitta address"/>
+</div>
+<div id="map"></div>
+<script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
+<script type="text/javascript" src="/app.js"></script>
 
 </body>
 </html>

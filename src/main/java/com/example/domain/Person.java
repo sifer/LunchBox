@@ -1,13 +1,20 @@
 package com.example.domain;
 
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
 /**
  * Created by Administrator on 2017-03-09.
  */
 
 public class Person {
     private int PersonID;
+    @Size(min = 1, max = 80)
     private String firstName;
+    @Size(min = 1, max = 120)
     private String lastName;
+    @Size(min = 1, max = 15)
+    @Pattern(regexp = "^[0-9]+$")
     private String phoneNumber;
 
 
