@@ -3,12 +3,15 @@ package com.example.domain;
 /**
  * Created by Administrator on 2017-03-09.
  */
-public class Person { //
-    public String firstName;
-    public String lastName;
-    public String phoneNumber;
+public class Person {
+    //
+    private int personId;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
 
-    public Person(String firstName, String lastName, String phoneNumber) {
+    public Person(int personId, String firstName, String lastName, String phoneNumber) {
+        this.personId = personId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -17,6 +20,7 @@ public class Person { //
     public Person() {
 
     }
+    public int getPersonId() {return personId;}
 
     public String getFirstName() {
         return firstName;
@@ -26,9 +30,7 @@ public class Person { //
         return lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+    public String getPhoneNumber() {return phoneNumber;}
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;

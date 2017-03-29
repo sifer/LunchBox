@@ -66,6 +66,23 @@ public class Repository {
 
     }
 
+    public List<Person> getPersons() {
+        try(Connection conn = dataSource.getConnection();
+            Statement statement = conn.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM [dbo].[Person]")) {
+            ArrayList<Person> persons = new ArrayList<>();
+            while(resultSet.next()) {
+                persons.add(rsPerson(resultSet));
+            }
+            return persons;
+        }
+        catch(SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+
+    }
+
 
 
     public User rsUser (ResultSet resultset) throws SQLException {
@@ -73,6 +90,14 @@ public class Repository {
                 resultset.getString(2),
                 resultset.getString(3),
                 resultset.getString(4));
+    }
+
+    private Person rsPerson(ResultSet resultSet) throws SQLException {
+        return new Person(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4));
     }
 
 }
