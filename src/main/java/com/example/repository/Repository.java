@@ -72,16 +72,6 @@ public class Repository {
 
     }
 
-
-
-    public User rsUser (ResultSet resultset) throws SQLException {
-        return new User(
-                resultset.getInt(1),
-                resultset.getString(2),
-                resultset.getString(3),
-                resultset.getString(4));
-    }
-
     public List<Person> getPersons() {
         try(Connection conn = dataSource.getConnection();
             Statement statement = conn.createStatement();
@@ -98,7 +88,6 @@ public class Repository {
         return null;
 
     }
-
     private Person rsPerson(ResultSet resultSet) throws SQLException {
         return new Person(
                 resultSet.getInt(1),
@@ -107,6 +96,16 @@ public class Repository {
                 resultSet.getString(4));
     }
 
+
+
+
+    public User rsUser (ResultSet resultset) throws SQLException {
+        return new User(
+                resultset.getInt(1),
+                resultset.getString(2),
+                resultset.getString(3),
+                resultset.getString(4));
+    }
     public List<LunchBox> getLunchBoxes() {
         try(Connection conn = dataSource.getConnection();
             Statement statement = conn.createStatement();

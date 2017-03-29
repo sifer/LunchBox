@@ -3,7 +3,8 @@ package com.example.domain;
 /**
  * Created by Administrator on 2017-03-09.
  */
-public class Person { //
+
+public class Person {
     private int PersonID;
     private String firstName;
     private String lastName;
@@ -16,7 +17,7 @@ public class Person { //
         this.phoneNumber = phoneNumber;
     }
     public Person(int personID, String firstName, String lastName, String phoneNumber) {
-        PersonID = personID;
+        this.PersonID = personID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.phoneNumber = phoneNumber;
@@ -42,9 +43,7 @@ public class Person { //
         return lastName;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
+    public String getPhoneNumber() {return phoneNumber;}
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
