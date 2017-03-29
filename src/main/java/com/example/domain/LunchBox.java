@@ -1,5 +1,7 @@
 package com.example.domain;
 
+import java.math.BigDecimal;
+
 /**
  * Created by Administrator on 2017-03-27.
  */
@@ -7,8 +9,8 @@ public class LunchBox {
     private int LunchBoxID;
     private String description;
     private String ingridiences;
-    private long longitud;
-    private long latitud;
+    private BigDecimal longitud;
+    private BigDecimal latitud;
     private boolean vego;
     private boolean vegan;
     private boolean laktos;
@@ -17,14 +19,14 @@ public class LunchBox {
     private boolean fläsk;
     private boolean nöt;
     private boolean fisk;
-    private int image;
+    private byte[] image;
     private int Person_ID;
 
     public LunchBox() {
 
     }
 
-    public LunchBox(int lunchBoxID, String description, String ingridiences, long longitud, long latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean fläsk, boolean nöt, boolean fisk, int image, int person_ID) {
+    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean fläsk, boolean nöt, boolean fisk, byte[] image, int person_ID) {
         this.LunchBoxID = lunchBoxID;
         this.description = description;
         this.ingridiences = ingridiences;
@@ -66,19 +68,19 @@ public class LunchBox {
         this.ingridiences = ingridiences;
     }
 
-    public long getLongitud() {
+    public BigDecimal getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(long longitud) {
+    public void setLongitud(BigDecimal longitud) {
         this.longitud = longitud;
     }
 
-    public long getLatitud() {
+    public BigDecimal getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(long latitud) {
+    public void setLatitud(BigDecimal latitud) {
         this.latitud = latitud;
     }
 
@@ -146,11 +148,11 @@ public class LunchBox {
         this.fisk = fisk;
     }
 
-    public int getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

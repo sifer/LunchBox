@@ -34,9 +34,8 @@ function codeAddress() {
             map.setCenter(results[0].geometry.location);
             var marker = new google.maps.Marker({
                 map: map,
-                position: results[0].geometry.location,
-                animation: google.maps.Animation.BOUNCE,
-                label: "Hej"
+                position: results[0].geometry.location
+
             });
             //Om ingen träff på addressen
         } else {
@@ -44,3 +43,4 @@ function codeAddress() {
         }
     });
 }
+
