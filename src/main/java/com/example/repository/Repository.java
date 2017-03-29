@@ -127,8 +127,8 @@ public class Repository {
                 resultSet.getInt(1),
                 resultSet.getString(2),
                 resultSet.getString(3),
-                resultSet.getLong(4),
-                resultSet.getLong(5),
+                resultSet.getBigDecimal(4),
+                resultSet.getBigDecimal(5),
                 resultSet.getBoolean(6),
                 resultSet.getBoolean(7),
                 resultSet.getBoolean(8),
@@ -137,10 +137,9 @@ public class Repository {
                 resultSet.getBoolean(11),
                 resultSet.getBoolean(12),
                 resultSet.getBoolean(13),
-                resultSet.getInt(14),
+                resultSet.getBytes(14),
                 resultSet.getInt(15)
         );
-
     }
 }
 

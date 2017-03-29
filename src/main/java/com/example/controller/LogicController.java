@@ -5,6 +5,10 @@ import com.example.domain.Person;
 import com.example.domain.User;
 import com.example.repository.Repository;
 
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -18,6 +22,7 @@ import javax.annotation.PostConstruct;
 import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -29,6 +34,9 @@ public class LogicController {
     ArrayList<User> users;
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
+    String lunchBoxesJson;
+
+
 
     @Autowired
     Repository repository;
@@ -42,9 +50,12 @@ public class LogicController {
         persons = (ArrayList<Person>) repository.getPersons();
     }
     @PostConstruct
-    public void RefreshLunchBoxes() {
+    public void RefresshLunchBoxes() {
         lunchBoxes = (ArrayList<LunchBox>) repository.getLunchBoxes();
+        lunchBoxesJson = objectToJSON(lunchBoxes);
+
     }
+
 
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
@@ -66,6 +77,7 @@ public class LogicController {
         ModelAndView mv = new ModelAndView("signUp");
         mv.addObject("user",user);
         mv.addObject("person",person);
+        mv.addObject("lunchBoxes", lunchBoxesJson);
 
         return mv;
 }
@@ -85,8 +97,6 @@ public class LogicController {
     }
 
 
-
-
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;
 
@@ -96,6 +106,29 @@ public class LogicController {
                 return duplicate;
             }
         }return duplicate;
+    }
+
+
+    public String objectToJSON(ArrayList<LunchBox> array) {
+        ObjectMapper mapper  = new ObjectMapper();
+        String jsonInString = "[";
+            for(int i = 0; i<array.size(); i++) {
+                try {
+                    jsonInString += mapper.writeValueAsString(array.get(i));
+                    if(i<array.size()-1) {
+                        jsonInString += ",";
+                    }
+
+                }
+                catch(JsonGenerationException e) {
+                    e.printStackTrace();
+                }
+                catch(JsonProcessingException e) {
+                    e.printStackTrace();
+                }
+            }
+            jsonInString += "]";
+        return jsonInString;
     }
 
 

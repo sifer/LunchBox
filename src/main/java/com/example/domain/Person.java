@@ -17,7 +17,6 @@ public class Person {
     @Pattern(regexp = "^[0-9]+$")
     private String phoneNumber;
 
-
     public Person(String firstName, String lastName, String phoneNumber) {
         this.firstName = firstName;
         this.lastName = lastName;
