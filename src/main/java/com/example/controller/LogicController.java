@@ -37,6 +37,14 @@ public class LogicController {
     public void RefreshUsers() {
         users = (ArrayList<User>) repository.getUsers();
     }
+    @PostConstruct
+    public void RefreshPersons() {
+        persons = (ArrayList<Person>) repository.getPersons();
+    }
+    @PostConstruct
+    public void RefreshLunchBoxes() {
+        lunchBoxes = (ArrayList<LunchBox>) repository.getLunchBoxes();
+    }
 
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
@@ -65,14 +73,19 @@ public class LogicController {
     @PostMapping("/newUser")
     public ModelAndView newUser(@Valid User user, BindingResult br, @ModelAttribute Person person) throws Exception {
 
-        if(br.hasErrors() || userNameDuplicate(user)){
+        System.out.println(person.getFirstName());
+        if (br.hasErrors() || userNameDuplicate(user)) {
             return new ModelAndView("signUp");
         }
-        repository.addUser(user, person);
-        users.add(user);
-        //persons.add(person);
+
+        int key = Integer.parseInt(repository.addUser(user, person));
+        users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
+        persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
         return new ModelAndView("Adam");
     }
+
+
+
 
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;

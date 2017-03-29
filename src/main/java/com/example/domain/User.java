@@ -6,6 +6,8 @@ import javax.validation.constraints.Size;
 
 public class User {
 
+    private int UserID;
+
     @Size(min = 1)
     private String userName;
     private String password;
@@ -15,11 +17,26 @@ public class User {
     public User() {
 
     }
-
     public User(String userName, String password, String mail) {
         this.userName = userName;
         this.password = password;
         this.mail = mail;
+    }
+
+    public User(int userID, String userName, String password, String mail) {
+        UserID = userID;
+        this.userName = userName;
+        this.password = password;
+        this.mail = mail;
+    }
+
+
+    public int getUserID() {
+        return UserID;
+    }
+
+    public void setUserID(int userID) {
+        UserID = userID;
     }
 
     public String getUserName() {
@@ -33,6 +50,7 @@ public class User {
     public String getMail() {
         return mail;
     }
+
 
     public void setUserName(String userName) {
         this.userName = userName;
