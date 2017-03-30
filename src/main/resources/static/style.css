@@ -5,11 +5,24 @@ body {
     background-color: #5fcf80;
     margin: 0;
 }
+@font-face {
+    font-family: mySecondFont;
+    src: url(SCRIPTINA.ttf);
+}
+@font-face {
+    font-family: mySecondFont;
+    src: url(BebasNeue.otf);
+}
 h2 {
     margin: 0;
-    font-family: ;
+    font-family: mySecondFont;
+    color: darkgray;
 }
-
+#brodtext {
+    font-family: mySecondFont;
+    color: darkgrey;
+    font-size: 25px;
+}
 #adress {
     margin: 0% 1% 10% 36%;
 }
@@ -18,7 +31,7 @@ h2 {
     height: 200px;
     text-align: center;
     overflow: hidden;
-    background: url("lunchin.png") repeat;
+    background: url("background-lada.png") repeat;
     background-position-x: 562px;
 }
 
@@ -33,23 +46,20 @@ h2 {
     z-index: 50;
 }
 
-
-#formular { width: 75%;
+/*
+#formular {
+    width: 100%;
     height: 100%;
     background-color: #fff;
     text-align: center;
     align-content: center;
-    margin: auto auto;
+    margin: auto auto;*/
 
-}
-#brodtext {
-    color:darkgrey;
-    font-family: 'Open Sans',Arial,sans-serif;
-}
+
 #text1 {
     color:darkgrey;
     text-align: center;
-    font-family: 'Open Sans',Arial,sans-serif;
+    font-family: mySecondFont;
 }
 
 #copyright {
@@ -70,7 +80,7 @@ h2 {
 
 #map {
     height: 300px;
-    width: 60%;
+    width: 350px;
     margin: 0 auto;
 }
 
@@ -87,33 +97,56 @@ h1 {
     font-variant: small-caps;
     margin: 0% 1% 10% -0.7%;
 }
-.knapp {
-    color: white;
-    padding: 8px 16px;
+/*Här börjar CSSen för knapparna*/
+.knappstorloggain {
+    /*padding: 12px 90px;*/
     background-color: rgba(57, 49, 49, 0.78);
-    font-family: sans-serif;
-    font-weight: bold;
-    font-variant: small-caps;
+    font-family: mySecondFont;
+    font-size: 25px;
+    /*font-weight: bold;*/
+    background: white;
+    color: #66CC99;
+    height: 60px;
+    width: 150px;
+    line-height: 60px;
+    margin: 15px 60px;
+    text-align: center;
+    border: 0px;
+    /* transition: all 0.3s ease 0s;*/
+    border-right: #66CC99;
 }
-.knappstor {
+.knappstorloggain:hover {
+    background-color:#66CC99;
     color: white;
-    padding: 12px 90px;
-    background-color: rgba(57, 49, 49, 0.78);
-    font-family: sans-serif;
-    font-weight: bold;
-    font-variant: small-caps;
-}
-.knapp:hover {
-    background-color: #90c2c7;
-}
-.knappstor:hover {
-    background-color: #90c2c7;
+    cursor: pointer;
 }
 
-.kjgabejb {
-    color:deeppink;
-    font-family: 'Open Sans',Arial,sans-serif;
+.knappstornyanv {
+    /*padding: 12px 90px;*/
+    background-color: rgba(57, 49, 49, 0.78);
+    font-family: mySecondFont;
+    font-size: 25px;
+    /*font-weight: bold;*/
+    background: white;
+    color: #66CC99;
+    height: 60px;
+    width: 150px;
+    line-height: 60px;
+    margin: 15px 60px;
+    text-align: center;
+    border: 0;
+    /* transition: all 0.3s ease 0s;*/
 }
+
+.knappstornyanv:hover {
+    background-color:#66CC99;
+    color: white;
+    cursor: pointer;
+}
+#mittenstreck {
+    border-right:3px solid lightgrey;
+}
+/*Här slutar CSSen för knapparna */
 
 
 /*CSS FÖR ALLA FORMULÄR */ /*CSS FÖR ALLA FORMULÄR */ /*CSS FÖR ALLA FORMULÄR */
@@ -349,4 +382,71 @@ label.light {
 .button:hover{
     background:#80b438;
 
+}
+
+#sidebar {
+
+    float: left;
+    width: 40%;
+    height: 450px;
+    background-color: white;
+    text-align: center;
+}
+
+#main {
+    float:right;
+    width: 60%;
+    height: 450px;
+    background-color: white;
+    text-align: center;
+
+}
+
+#footer {
+    clear: left;
+    background-color: #21484C;
+    height: 200px;
+    width: 100%;
+    font-size: 0;
+}
+
+#footer > section:nth-child(1) > img{
+    size: 20px;
+    width: 150px;
+    width: 150px;
+    color: white;
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left
+}
+#footer > section:nth-child(2) > img {
+    size: 20px;
+    width: 150px;
+    width: 150px;
+    color: white;
+    margin-top: 30px;
+    float: left;
+
+}
+#footer > section:nth-child(1) {
+    display: inline-block;
+    width: 50%;
+}
+#footer > section:nth-child(2) {
+    display: inline-block;
+    width: 49%;
+}
+h3 {
+    font-family: mySecondFont;
+    font-size: medium;
+    color: white;
+}
+.close {
+    position: absolute;
+    padding: 0;
+    border:none;
+    top: 0;
+    right: 0px;
+    width: 25px;
+    background-color: #a5b076;
 }

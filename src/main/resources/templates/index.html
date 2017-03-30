@@ -10,28 +10,58 @@
 </head>
 <body>
 <header id="header">
-    <img src="/lunchlogga.png" class="headerimg"/>
+    <img src="/lunchboxloga.png" class="headerimg"/>
 </header>
-<div id="formular">
-    <div>
-        <h2 id="text1"> Är du trött på att förbereda mat?</h2>
-        <h3 id="brodtext">Via vår app kan någon annan göra jobbet åt dig. Du sparar tid, energi och pengar.
-        </h3>
-        <div>
+
+<!--<div id="formular">-->
+    <article id="sidebar">
+        <header>
+            <h2 id="text1"> Är du trött på att förbereda mat?</h2>
+        </header>
+        <section>
+            <p id="brodtext">Via vår app kan någon annan göra jobbet åt dig. Du sparar tid, energi och pengar.</p>
+        </section>
+        <section>
             <form id="form" action="login" method="POST">
-                <input onclick="fa()" class="knappstor" value="LOGGA IN"/>
-                <input onclick="fn()" class="knappstor" value="NY ANVÄNDARE"/>
+                <a id="mittenstreck">
+                <input onclick="fa()" class="knappstorloggain" value="LOGGA IN"/></a>
+                <input onclick="fn()" class="knappstornyanv" value="NY ANVÄNDARE"/>
             </form>
-        </div>
-        <div id="map"></div>
-        <script async="async" defer="defer"
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
-        <div>
+        </section>
+    </article>
+
+    <aside id="main">
+        <h2>Leta rätt på postkod?</h2>
+        <section>
+            <div id="map"></div>
+            <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
+        </section>
+        <section>
             <input id="address" type="textbox"/>
             <input class="knappliten" id="submit" type="button" value="Hitta adress"/>
-        </div>
-    </div>
-</div>
+        </section>
+
+    </aside>
+
+    <footer id="footer">
+        <section>
+            <img src="Kristoffer.png"/>
+            <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa spännande och god mat!</p></h3>
+        </section>
+        <section>
+            <img src="Sandra.png"/>
+            <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p></h3>
+        </section>
+
+    </footer>
+
+
+
+
+
+
+
+<!--</div>-->
 <!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
 <div id="annons">
     <form action="index.html" method="post">
@@ -59,6 +89,7 @@
         </fieldset>
         <button type="submit">Sign Up</button>
     </form>
+    <button class="close" onclick="closeFn();" value="Close">X</button>
 
 </div>
     <!--HÄR BÖRJAR NY LOGINEN  -->
@@ -75,6 +106,7 @@
                 <input type="text" placeholder="Lösenord" class="textbox"/>
                 <input type="button" value="Logga in" class="button"/>
             </form>
+            <button class="close" onclick="closeFa();" value="Close">X</button>
         </div>
     </div>
 <script type="text/javascript" src="/app.js"></script>
