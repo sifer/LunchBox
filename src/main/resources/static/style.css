@@ -6,7 +6,7 @@ body {
     margin: 0;
 }
 @font-face {
-    font-family: mySecondFont;
+    font-family: myFirstFont;
     src: url(SCRIPTINA.ttf);
 }
 @font-face {
@@ -15,7 +15,8 @@ body {
 }
 h2 {
     margin: 0;
-    font-family: mySecondFont;
+    font-size: large;
+    font-family: myFirstFont;
     color: darkgray;
 }
 #brodtext {
@@ -60,7 +61,8 @@ h2 {
 #text1 {
     color:darkgrey;
     text-align: center;
-    font-family: mySecondFont;
+    font-family: myFirstFont;
+    font-size: x-large;
 }
 
 #copyright {
@@ -165,7 +167,7 @@ h1 {
     width: 550px;
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 55%;
     transform: translate(-50%, -50%);
 }
 
@@ -449,5 +451,5 @@ h3 {
     top: 0;
     right: 0px;
     width: 25px;
-    background-color: #a5b076;
+    background-color: #80b438;
 }
