@@ -81,5 +81,7 @@
 <script type="text/javascript" src="/app.js"></script>
 <script type="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>
+<p th:text="${showNewUser}"></p>
+<script type="text/javascript" th:if="${showNewUser != null}">fn()</script>
 </body>
 </html>

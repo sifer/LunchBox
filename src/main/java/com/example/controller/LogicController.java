@@ -37,6 +37,7 @@ public class LogicController {
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
     String lunchBoxesJson;
+    boolean showNewUser = false;
 
 
 
@@ -90,9 +91,12 @@ public class LogicController {
     @PostMapping("/newUser")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
-        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
+        if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
             attr.addFlashAttribute("errors", bru);
-            return new ModelAndView("redirect:/");
+            showNewUser = true;
+            System.out.println(showNewUser);
+            return new ModelAndView("redirect:/").addObject("showNewUser", "hejhopp");
+
         }
 
         int key = Integer.parseInt(repository.addUser(user, person));
