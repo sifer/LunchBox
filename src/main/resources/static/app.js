@@ -21,23 +21,24 @@ function initMap() {
     document.getElementById('submit').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
-    function createMarker(pos, t) {
+    function createMarker(pos) {
         var marker = new google.maps.Marker({
-            position: pos,
+            position: {lat: pos.latitud, lng: pos.longitud},
             map: map,  // google.maps.Map
-            title: t
+            title: pos.description
         });
-        google.maps.event.addListener(marker, 'click', function() {
-            alert("I am marker " + marker.title);
+
+        var infowindow = new google.maps.InfoWindow({
+            content: '<div>'+pos.description+'</div>'
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
-        })
+        });
         return marker;
     }
     function createMarkers() {
         for (var i = 0; i < lunchBoxes.length; i++) {
-            createMarker({lat: lunchBoxes[i].latitud, lng: lunchBoxes[i].longitud}, lunchBoxes[i].description);
+            createMarker(lunchBoxes[i]);
         }
     }
     createMarkers();
