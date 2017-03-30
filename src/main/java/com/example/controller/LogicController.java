@@ -37,7 +37,6 @@ public class LogicController {
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
     String lunchBoxesJson;
-    boolean showNewUser = false;
 
 
 
@@ -67,6 +66,7 @@ public class LogicController {
                 session.setAttribute("user", index);
                 session.setAttribute("person", persons.get(index.getUserID()) );
 
+
                 return new ModelAndView("Adam").addObject("session", session);
 
             }
@@ -85,17 +85,17 @@ public class LogicController {
         mv.addObject("person",person);
         mv.addObject("lunchBoxes", lunchBoxesJson);
 
+
         return mv;
 }
 
-    @PostMapping("/newUser")
+    @PostMapping("/")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
             attr.addFlashAttribute("errors", bru);
-            showNewUser = true;
-            System.out.println(showNewUser);
-            return new ModelAndView("redirect:/").addObject("showNewUser", "hejhopp");
+            boolean showNewUser = true;
+            return new ModelAndView("index").addObject("showNewUser", showNewUser);
 
         }
 
