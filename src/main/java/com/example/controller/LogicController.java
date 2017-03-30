@@ -69,12 +69,12 @@ public class LogicController {
         return null;
     }
 
-    @GetMapping("/newUser")
+    @GetMapping("/")
     public ModelAndView form() {
 
         User user = new User("", "", "");
         Person person = new Person("", "", "");
-        ModelAndView mv = new ModelAndView("signUp");
+        ModelAndView mv = new ModelAndView("index");
         mv.addObject("user",user);
         mv.addObject("person",person);
         mv.addObject("lunchBoxes", lunchBoxesJson);
@@ -83,10 +83,10 @@ public class LogicController {
 }
 
     @PostMapping("/newUser")
-    public ModelAndView newUser(@Valid User user, BindingResult br, @ModelAttribute Person person) throws Exception {
+    public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp) throws Exception {
 
         System.out.println(person.getFirstName());
-        if (br.hasErrors() || userNameDuplicate(user)) {
+        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
             return new ModelAndView("signUp");
         }
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+
+    <link type="text/css" rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<header id="header">
+    <img src="/lunchlogga.png" class="headerimg"/>
+</header>
+<div id="formular">
+    <div>
+        <h2 id="text1"> Är du trött på att förbereda mat?</h2>
+        <h3 id="brodtext">Via vår app kan någon annan göra jobbet åt dig. Du sparar tid, energi och pengar.
+        </h3>
+        <div>
+            <form id="form" action="login" method="POST">
+                <input onclick="fa()" class="knappstor" value="LOGGA IN"/>
+                <input onclick="fn()" class="knappstor" value="NY ANVÄNDARE"/>
+            </form>
+        </div>
+        <div id="map"></div>
+        <script async="async" defer="defer"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
+        <div>
+            <input id="address" type="textbox"/>
+            <input class="knappliten" id="submit" type="button" value="Hitta adress"/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/app.js"></script>
+
+<script type="text/javascript" src="/lightbox.js"></script>
+
+
+<!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
+<div id="annons">
+    <form action="index.html" method="post">
+        <h1>Skapa en ny användare</h1>
+        <fieldset>
+            <legend><span class="number">1</span>Fyll i din information nedan!</legend>
+            <label for="name">Namn:</label>
+            <input type="text" id="name" name="user_name"/>
+
+            <label for="lastname">Efternamn:</label>
+            <input type="text" id="lastname" name="user_name"/>
+
+            <label for="phonenumber">Telefonnummer:</label>
+            <input type="number" id="phonenumber" name="user_email"/>
+
+            <label for="mail">Email:</label>
+            <input type="email" id="mail" name="user_email"/>
+
+            <label for="username">Email:</label>
+            <input type="text" id="username" name="user_email"/>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="user_password"/>
+
+        </fieldset>
+        <button type="submit">Sign Up</button>
+    </form>
+
+</div>
+    <!--HÄR BÖRJAR NY LOGINEN  -->
+    <!--<div class="black_overlay"></div>-->
+    <div id="bg">
+        <div class="module">
+            <ul>
+                <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
+                <!--                <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>-->
+            </ul>
+
+            <form class="form">
+                <input type="text" placeholder="Användernamn" class="textbox"/>
+                <input type="text" placeholder="Lösenord" class="textbox"/>
+                <input type="button" value="Logga in" class="button"/>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
