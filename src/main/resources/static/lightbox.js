@@ -15,7 +15,6 @@ function fn() {
     element2.style.visibility = 'visible';*/
 }
 
-
 function hej(fa) {
     if (document.readyState != 'loading') {
         fa();
@@ -27,8 +26,8 @@ function hej(fa) {
 function fa() {
     var elementt =  document.querySelector("#bg");
     elementt.style.visibility = 'visible';
-    var elementt2 =  document.querySelector("#black_overlay");
-    elementt2.style.visibility = 'visible';
+/*    var elementt2 =  document.querySelector("#black_overlay");
+    elementt2.style.visibility = 'visible';*/
 }
 
 

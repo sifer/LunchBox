@@ -21,7 +21,27 @@ function initMap() {
     document.getElementById('submit').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
+    function createMarker(pos) {
+        var marker = new google.maps.Marker({
+            position: {lat: pos.latitud, lng: pos.longitud},
+            map: map,  // google.maps.Map
+            title: pos.description
+        });
 
+        var infowindow = new google.maps.InfoWindow({
+            content: '<div>'+pos.description+'</div>'
+        });
+        marker.addListener('click', function() {
+            infowindow.open(map, marker);
+        });
+        return marker;
+    }
+    function createMarkers() {
+        for (var i = 0; i < lunchBoxes.length; i++) {
+            createMarker(lunchBoxes[i]);
+        }
+    }
+    createMarkers();
 }
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
@@ -39,6 +59,7 @@ function codeAddress() {
                 animation: google.maps.Animation.BOUNCE,
                 label: "Hej"
             });
+
             //Om ingen träff på addressen
         } else {
             alert("Geocode not successful because: " + status);
