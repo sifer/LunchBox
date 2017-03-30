@@ -96,9 +96,9 @@ public class LogicController {
         if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
             attr.addFlashAttribute("errors", bru);
             boolean showNewUser = true;
-            String error = bru.getFieldError().getDefaultMessage();
-            bru.getFieldError().getField();
-            return new ModelAndView("index").addObject("showNewUser", showNewUser).addObject("error", bru);
+            String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
+
+            return new ModelAndView("index").addObject("showNewUser", showNewUser).addObject("error", error);
 
         }
 
