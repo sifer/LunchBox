@@ -11,8 +11,8 @@ function ready(fn) {
 function fn() {
     var element =  document.querySelector("#annons");
     element.style.visibility = 'visible';
-    var element2 =  document.querySelector("#black_overlay");
-    element2.style.visibility = 'visible';
+ /*   var element2 =  document.querySelector("#black_overlay");
+    element2.style.visibility = 'visible';*/
 }
 
 function hej(fa) {
@@ -28,4 +28,14 @@ function fa() {
     elementt.style.visibility = 'visible';
 /*    var elementt2 =  document.querySelector("#black_overlay");
     elementt2.style.visibility = 'visible';*/
+}
+
+
+function closeFn(){
+    var element =  document.querySelector("#annons");
+    element.style.visibility = 'hidden';
+}
+function closeFa(){
+    var element =  document.querySelector("#bg");
+    element.style.visibility = 'hidden';
 }
