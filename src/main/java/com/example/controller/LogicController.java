@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.PostConstruct;
 import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
+import javax.swing.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -61,7 +63,10 @@ public class LogicController {
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
-                return new ModelAndView("Adam");
+                session.setAttribute("user", index);
+                session.setAttribute("person", persons.get(index.getUserID()) );
+
+                return new ModelAndView("Adam").addObject("session", session);
 
             }
 
@@ -83,11 +88,11 @@ public class LogicController {
 }
 
     @PostMapping("/newUser")
-    public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp) throws Exception {
+    public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
-        System.out.println(person.getFirstName());
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
-            return new ModelAndView("signUp");
+            attr.addFlashAttribute("errors", bru);
+            return new ModelAndView("redirect:/");
         }
 
         int key = Integer.parseInt(repository.addUser(user, person));
