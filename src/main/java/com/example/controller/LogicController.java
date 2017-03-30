@@ -12,6 +12,7 @@ import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -95,7 +96,9 @@ public class LogicController {
         if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
             attr.addFlashAttribute("errors", bru);
             boolean showNewUser = true;
-            return new ModelAndView("index").addObject("showNewUser", showNewUser);
+            String error = bru.getFieldError().getDefaultMessage();
+            bru.getFieldError().getField();
+            return new ModelAndView("index").addObject("showNewUser", showNewUser).addObject("error", bru);
 
         }
 
