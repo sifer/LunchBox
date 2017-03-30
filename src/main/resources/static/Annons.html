@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nya användare</title>
+    <link href="/cssfil.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Nunito:400,300' rel='stylesheet' type='text/css'>
+    <link type="text/css" rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<form  id=annons action="index.html" method="post">
+    <h1>Lägg upp din matlåda</h1>
+    <fieldset>
+        <legend><span class="number">1</span>Berätta om din matlåda</legend>
+
+        <label for="name">Vad heter din rätt?</label>
+        <input type="text" id="name" name="user_name">
+
+        <label for="lastname">Lägg upp en bild</label>
+        <input type="text" id="lastname" name="user_name">
+
+        <label for="matlada">Skriv en rad om vad du lagat:</label>
+        <textarea id="matlada" name="user_bio"></textarea>
+
+        <label for="password">Vart kommer försäljningen att ske?</label>
+        <input type="password" id="password" name="user_password">
+
+        <select>
+            <optgroup label="Typ av rätt">
+                <option value="frontend_developer">Kyckling</option>
+                <option value="php_developor">Kött</option>
+                <option value="python_developer">Fisk</option>
+                <option value="rails_developer">Vegetariskt</option>
+                <option value="web_designer">Veganskt</option>
+            </optgroup>
+        </select>
+
+        <label>Allergivänlig:</label>
+        <input type="checkbox" id="laktosfritt" value="interest_development" name="user_interest"><label class="light" for="laktosfritt">Laktosfritt</label><br>
+        <input type="checkbox" id="glutenfritt" value="interest_design" name="user_interest"><label class="light" for="glutenfritt">Glutenfritt</label><br>
+        <input type="checkbox" id="nötfri" value="interest_business" name="user_interest"><label class="light" for="nötfri">Nötfri</label>
+
+    </fieldset>
+    <button type="submit">Lägg upp din matlåda</button>
+</form>
+
+</body>
+</html>
