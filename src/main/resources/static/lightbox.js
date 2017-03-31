@@ -39,3 +39,18 @@ function closeFa(){
     var element =  document.querySelector("#bg");
     element.style.visibility = 'hidden';
 }
+
+
+
+function hej(popup) {
+    if (document.readyState != 'loading') {
+        popup();
+    } else {
+        document.addEventListener('DOMContentLoaded', popup)
+    }
+}
+
+function popup() {
+    var elementt = document.querySelector("#Popup");
+    elementt.style.visibility = 'visible';
+}
