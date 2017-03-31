@@ -37,6 +37,18 @@ function closeFa(){
     element.style.visibility = 'hidden';
 }
 
+function hej(popup) {
+    if (document.readyState != 'loading') {
+        popup();
+    } else {
+        document.addEventListener('DOMContentLoaded', popup)
+    }
+}
+
+function popup() {
+    var elementt = document.querySelector("#Popup");
+    elementt.style.visibility = 'visible';
+}
 function ready(showSalesForm) {
     if (document.readyState != 'loading') {
         showSalesForm();
@@ -54,6 +66,3 @@ function closeSalesForm(){
     var element =  document.querySelector(".annons");
     element.style.visibility = 'hidden';
 }
-
-
-
