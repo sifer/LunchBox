@@ -57,14 +57,10 @@
 
 
 
-
-
-
-
 <!--</div>-->
 <!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
-<div id="annons">
-    <form class="form" action="" method="POST">
+<div class="annons">
+    <form class="form" th:action="user" method="POST">
         <h1>Skapa en ny användare</h1>
         <fieldset>
             <legend><span class="number">1</span>Fyll i din information nedan!</legend>
@@ -103,10 +99,12 @@
                 <!--                <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>-->
             </ul>
 
-            <form class="form" action="login" method="POST">
-                <input type="text" name="userName" placeholder="Användernamn" class="textbox"/>
-                <input type="text" name="password" placeholder="Lösenord" class="textbox"/>
-                <input type="submit" value="Logga in" class="button"/>
+            <form th:action="@{/login}" class="form" method="POST">
+                <input type="text" name="userName" placeholder="Användernamn" class="textbox" th:value="${user.userName}"/>
+                <input type="text" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
+                <button type="submit">Logga in</button>
+
+                <p th:text="${incorrLogin}"></p>
             </form>
             <button class="close" onclick="closeFa();" value="Close">X</button>
         </div>

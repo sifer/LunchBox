@@ -64,3 +64,7 @@ function codeAddress() {
         }
     });
 }
+
+function showUserSession() {
+
+}

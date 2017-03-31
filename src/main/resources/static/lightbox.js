@@ -9,10 +9,14 @@ function ready(fn) {
     }
 }
 function fn() {
-    var element =  document.querySelector("#annons");
+    var element =  document.querySelector(".annons");
     element.style.visibility = 'visible';
  /*   var element2 =  document.querySelector("#black_overlay");
     element2.style.visibility = 'visible';*/
+}
+function closeFn(){
+    var element =  document.querySelector(".annons");
+    element.style.visibility = 'hidden';
 }
 
 function hej(fa) {
@@ -22,20 +26,35 @@ function hej(fa) {
         document.addEventListener('DOMContentLoaded', fa)
     }
 }
-
 function fa() {
     var elementt =  document.querySelector("#bg");
     elementt.style.visibility = 'visible';
 /*    var elementt2 =  document.querySelector("#black_overlay");
     elementt2.style.visibility = 'visible';*/
 }
-
-
-function closeFn(){
-    var element =  document.querySelector("#annons");
-    element.style.visibility = 'hidden';
-}
 function closeFa(){
     var element =  document.querySelector("#bg");
     element.style.visibility = 'hidden';
 }
+
+function ready(showSalesForm) {
+    if (document.readyState != 'loading') {
+        showSalesForm();
+    } else {
+        document.addEventListener('DOMContentLoaded', showSalesForm)
+    }
+}
+function showSalesForm() {
+    var elementt =  document.querySelector(".annons");
+    elementt.style.visibility = 'visible';
+    load_Annons();
+    /*    var elementt2 =  document.querySelector("#black_overlay");
+     elementt2.style.visibility = 'visible';*/
+}
+function closeSalesForm(){
+    var element =  document.querySelector(".annons");
+    element.style.visibility = 'hidden';
+}
+
+
+

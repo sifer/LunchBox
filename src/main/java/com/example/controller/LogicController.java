@@ -38,6 +38,8 @@ public class LogicController {
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
     String lunchBoxesJson;
+    boolean showNewUser = false;
+    boolean showLogin = false;
 
 
 
@@ -64,19 +66,29 @@ public class LogicController {
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
+                User user = index;
                 session.setAttribute("user", index);
                 session.setAttribute("person", persons.get(index.getUserID()) );
 
-
-                return new ModelAndView("Adam").addObject("session", session);
+                return new ModelAndView("userSession")
+                        .addObject("userSession", session)
+                        .addObject("user", user)
+                        .addObject("person", persons.get(index.getUserID()) );
 
             }
 
         }
+        showLogin = true;
+        User user = new User(userName, password, "");
+        Person person = new Person("", "", "");
+        String incorr = "Username or password is incorrect.";
         return new ModelAndView("index")
-                .addObject("showNewUser", showNewUser)
-                .addObject("error", error)
-                .addObject("lunchBoxes", lunchBoxesJson);
+                .addObject("showLogin", showLogin)
+                .addObject("incorrLogin", incorr)
+                .addObject("lunchBoxes", lunchBoxesJson)
+                .addObject("user", user)
+                .addObject("person", person);
+
     }
 
     @GetMapping("/")
@@ -94,12 +106,12 @@ public class LogicController {
         return mv;
 }
 
-    @PostMapping("/")
+    @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
-            attr.addFlashAttribute("errors", bru);
-            boolean showNewUser = true;
+
+            showNewUser = true;
             String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
 
             return new ModelAndView("index")
