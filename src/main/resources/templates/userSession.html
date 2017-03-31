@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="eng" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0"/>
+    <meta charset="utf-8"/>
+
+    <link type="text/css" rel="stylesheet" th:href="@{/style.css}"/>
+</head>
+<body>
+<header id="header">
+    <img src="/lunchboxlogga.png" class="headerimg"/>
+</header>
+
+<!--<div id="formular">-->
+<article id="sidebar">
+    <header>
+        <h2 id="text1" th:inline="text">Hej, [[${session.person.firstName}]]!</h2>
+    </header>
+    <section>
+        <p id="brodtext">Vad vill du göra idag?</p>
+    </section>
+    <section>
+        <form id="form" action="login" method="POST">
+                <input onclick="showSalesForm()" class="knappstornyanv" value="Sälja mat"/>
+        </form>
+    </section>
+</article>
+
+<aside id="main">
+    <h2>Leta rätt på postkod?</h2>
+    <section>
+        <div id="map"></div>
+    </section>
+    <section>
+
+        <input class="address" type="textbox"/>
+        <input class="knappliten submit" type="button" value="Hitta adress"/>
+    </section>
+
+</aside>
+
+<footer id="footer">
+    <section>
+        <img src="Kristoffer.png"/>
+        <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa spännande och god mat!</p></h3>
+    </section>
+    <section>
+        <img src="Sandra.png"/>
+        <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p></h3>
+    </section>
+
+</footer>
+
+
+
+<!--</div>-->
+<!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
+<div class="annons">
+
+    <form class="form" th:action="lunchbox" method="post">
+        <h1>Lägg upp din matlåda</h1>
+        <fieldset>
+            <legend><span class="number">1</span>Berätta om din matlåda</legend>
+
+            <label for="name">Vad heter din rätt?</label>
+            <input type="text" id="name" name="name
+"/>
+
+            <label for="image">Lägg upp en bild</label>
+            <input type="text" id="image" name="lunchbox_image"/>
+
+            <label for="matlada">Skriv en rad om vad du lagat:</label>
+            <textarea id="matlada" th:field="${lunchbox.description}" name="description"></textarea>
+
+            <label for="location">Vart kommer försäljningen att ske?</label>
+            <input type="text" class="address" id="location" name="lunchbox_location"/>
+
+            <select>
+                <optgroup label="Typ av rätt">
+                    <option value="kyckling">Kyckling</option>
+                    <option value="nöt">Kött</option>
+                    <option value="fisk">Fisk</option>
+                    <option value="vego">Vegetariskt</option>
+                    <option value="vegan">Veganskt</option>
+                </optgroup>
+            </select>
+
+            <label>Allergivänlig:</label>
+            <input type="checkbox" id="laktosfritt" value="laktos" name="lunchbox_laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
+            <input type="checkbox" id="glutenfritt" value="gluten" name="lunchbox_gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
+            <input type="checkbox" id="nötfri" value="nöt" name="lunchbox_nöt"/><label class="light" for="nötfri">Nötfri</label>
+
+        </fieldset>
+        <button class="newLoc" type="submit">Lägg upp din matlåda</button>
+    </form>
+    <button class="close" onclick="closeSalesForm();" value="Close">X</button>
+
+</div>
+
+
+<script type="text/javascript" ype="text/javascript" src="/mapstyle.js"></script>
+<script type="text/javascript" src="/lightbox.js"></script>
+<script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
+<script type="text/javascript" th:utext="'var newLunchBox =' + ${lunchBox}"></script>
+<script type="text/javascript" src="/app.js"></script>
+<script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
+<script type="text/javascript" th:if="${showNewUser}">fn()</script>
+<script type="text/javascript" th:if="${showLogin}">fa()</script>
+</body>
+</html>
