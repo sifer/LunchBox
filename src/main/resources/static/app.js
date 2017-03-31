@@ -4,17 +4,15 @@ var map;
 
 //initMap körs automatiskt när sidan laddas med hjälp av "async defer" i .html
 function initMap() {
-    console.log("InitMap");
-    var uluru = {lat: 59.3293235, lng: 18.0685808};
-    console.log(uluru);
+    var stockholm = {lat: 59.3293235, lng: 18.0685808};
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
-        center: uluru,
+        center: stockholm,
         styles: mapStyle
     });
     var marker = new google.maps.Marker({
         animation: google.maps.Animation.DROP,
-        position: uluru,
+        position: stockholm,
         map: map
     });
 

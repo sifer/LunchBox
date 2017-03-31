@@ -73,11 +73,15 @@ public class LogicController {
             }
 
         }
-        return null;
+        return new ModelAndView("index")
+                .addObject("showNewUser", showNewUser)
+                .addObject("error", error)
+                .addObject("lunchBoxes", lunchBoxesJson);
     }
 
     @GetMapping("/")
     public ModelAndView form() {
+
 
         User user = new User("", "", "");
         Person person = new Person("", "", "");
@@ -98,7 +102,10 @@ public class LogicController {
             boolean showNewUser = true;
             String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
 
-            return new ModelAndView("index").addObject("showNewUser", showNewUser).addObject("error", error);
+            return new ModelAndView("index")
+                    .addObject("showNewUser", showNewUser)
+                    .addObject("error", error)
+                    .addObject("lunchBoxes", lunchBoxesJson);
 
         }
 
