@@ -35,8 +35,8 @@
     </section>
     <section>
 
-        <input id="address" type="textbox"/>
-        <input class="knappliten" id="submit" type="button" value="Hitta adress"/>
+        <input class="address" type="textbox"/>
+        <input class="knappliten submit" type="button" value="Hitta adress"/>
     </section>
 
 </aside>
@@ -59,67 +59,51 @@
 <!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
 <div class="annons">
 
-    <form  class="form" action="" method="post">
+    <form class="form" th:action="lunchbox" method="post">
         <h1>Lägg upp din matlåda</h1>
         <fieldset>
             <legend><span class="number">1</span>Berätta om din matlåda</legend>
 
             <label for="name">Vad heter din rätt?</label>
-            <input type="text" id="name" name="user_name"/>
+            <input type="text" id="name" name="name
+"/>
 
-            <label for="lastname">Lägg upp en bild</label>
-            <input type="text" id="lastname" name="user_name"/>
+            <label for="image">Lägg upp en bild</label>
+            <input type="text" id="image" name="lunchbox_image"/>
 
             <label for="matlada">Skriv en rad om vad du lagat:</label>
-            <textarea id="matlada" name="user_bio"></textarea>
+            <textarea id="matlada" th:field="${lunchbox.description}" name="description"></textarea>
 
-            <label for="password">Vart kommer försäljningen att ske?</label>
-            <input type="password" id="password" name="user_password"/>
+            <label for="location">Vart kommer försäljningen att ske?</label>
+            <input type="text" class="address" id="location" name="lunchbox_location"/>
 
             <select>
                 <optgroup label="Typ av rätt">
-                    <option value="frontend_developer">Kyckling</option>
-                    <option value="php_developor">Kött</option>
-                    <option value="python_developer">Fisk</option>
-                    <option value="rails_developer">Vegetariskt</option>
-                    <option value="web_designer">Veganskt</option>
+                    <option value="kyckling">Kyckling</option>
+                    <option value="nöt">Kött</option>
+                    <option value="fisk">Fisk</option>
+                    <option value="vego">Vegetariskt</option>
+                    <option value="vegan">Veganskt</option>
                 </optgroup>
             </select>
 
             <label>Allergivänlig:</label>
-            <input type="checkbox" id="laktosfritt" value="interest_development" name="user_interest"/><label class="light" for="laktosfritt">Laktosfritt</label>
-            <input type="checkbox" id="glutenfritt" value="interest_design" name="user_interest"/><label class="light" for="glutenfritt">Glutenfritt</label>
-            <input type="checkbox" id="nötfri" value="interest_business" name="user_interest"/><label class="light" for="nötfri">Nötfri</label>
+            <input type="checkbox" id="laktosfritt" value="laktos" name="lunchbox_laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
+            <input type="checkbox" id="glutenfritt" value="gluten" name="lunchbox_gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
+            <input type="checkbox" id="nötfri" value="nöt" name="lunchbox_nöt"/><label class="light" for="nötfri">Nötfri</label>
 
         </fieldset>
-        <button type="submit">Lägg upp din matlåda</button>
+        <button class="newLoc" type="submit">Lägg upp din matlåda</button>
     </form>
     <button class="close" onclick="closeSalesForm();" value="Close">X</button>
 
 </div>
-<!--HÄR BÖRJAR NY LOGINEN  -->
-<!--<div class="black_overlay"></div>-->
-<div id="bg">
-    <div class="module">
-        <ul>
-            <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
-            <!--                <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>-->
-        </ul>
 
-        <form th:action="@{/login}" class="form" method="POST">
-            <input type="text" name="userName" placeholder="Användernamn" class="textbox" th:value="${user.userName}"/>
-            <input type="text" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
-            <button type="submit">Logga in</button>
-
-            <p th:text="${incorrLogin}"></p>
-        </form>
-        <button class="close" onclick="closeFa();" value="Close">X</button>
-    </div>
-</div>
 
 <script type="text/javascript" ype="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
+<script type="text/javascript" th:utext="'var newLunchBox =' + ${lunchBox}"></script>
 <script type="text/javascript" src="/app.js"></script>
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>

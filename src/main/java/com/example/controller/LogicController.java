@@ -8,6 +8,7 @@ import com.example.repository.Repository;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.maps.model.GeocodingResult;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,6 +28,7 @@ import javax.swing.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -69,11 +71,15 @@ public class LogicController {
                 User user = index;
                 session.setAttribute("user", index);
                 session.setAttribute("person", persons.get(index.getUserID()) );
+                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
-                        .addObject("user", user)
-                        .addObject("person", persons.get(index.getUserID()) );
+                        .addObject("user", index)
+                        .addObject("person", persons.get(index.getUserID()) )
+                        .addObject("lunchBoxes", lunchBoxesJson)
+                        .addObject("lunchbox", lunchbox);
+
 
             }
 
@@ -106,6 +112,11 @@ public class LogicController {
         return mv;
 }
 
+    @GetMapping("/userSession")
+    public ModelAndView userSession() {
+        return null;
+    }
+
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
@@ -127,6 +138,17 @@ public class LogicController {
         return new ModelAndView("Adam");
     }
 
+
+    @PostMapping("/lunchbox")
+    public ModelAndView newLunchBox(LunchBox lunchbox) throws SQLException {
+        
+        repository.addLunchBox(lunchbox);
+        lunchBoxes.add(lunchbox);
+
+        return new ModelAndView("userSession")
+                .addObject("lunchBoxes", lunchBoxesJson)
+                .addObject("lunchbox", lunchbox);
+    }
 
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;

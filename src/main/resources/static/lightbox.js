@@ -47,7 +47,6 @@ function ready(showSalesForm) {
 function showSalesForm() {
     var elementt =  document.querySelector(".annons");
     elementt.style.visibility = 'visible';
-    load_Annons();
     /*    var elementt2 =  document.querySelector("#black_overlay");
      elementt2.style.visibility = 'visible';*/
 }
