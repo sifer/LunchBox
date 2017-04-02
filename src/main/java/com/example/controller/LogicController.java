@@ -9,6 +9,7 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.internal.org.xml.sax.SAXException;
+//import com.google.maps.model.GeocodingResult;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -35,6 +36,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -47,6 +49,8 @@ public class LogicController {
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
     String lunchBoxesJson;
+    boolean showNewUser = false;
+    boolean showLogin = false;
 
     @Autowired
     Repository repository;
@@ -71,22 +75,24 @@ public class LogicController {
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password, User user, Person person) throws Exception {
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
+                User user = index;
                 session.setAttribute("user", index);
                 session.setAttribute("person", persons.get(index.getUserID()) );
-
-                return new ModelAndView("Adam").addObject("session", session);
+                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
             }
 
         }
-        String error = "Wrong username or password";
-        boolean showLogin = true;
+        showLogin = true;
+        User user1 = new User(userName, password, "");
+        Person person1 = new Person("", "", "");
+        String incorr = "Username or password is incorrect.";
         return new ModelAndView("index")
                 .addObject("showLogin", showLogin)
-                .addObject("error", error)
-                .addObject("user", user)
-                .addObject("person", person)
-                .addObject("lunchBoxes", lunchBoxesJson);
+                .addObject("incorrLogin", incorr)
+                .addObject("lunchBoxes", lunchBoxesJson)
+                .addObject("user", user1)
+                .addObject("person", person1);
     }
 
     @GetMapping("/")
@@ -102,12 +108,17 @@ public class LogicController {
         return mv;
 }
 
-    @PostMapping("/")
+    @GetMapping("/userSession")
+    public ModelAndView userSession() {
+        return null;
+    }
+
+    @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
-            attr.addFlashAttribute("errors", bru);
-            boolean showNewUser = true;
+
+            showNewUser = true;
             String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
 
             return new ModelAndView("index")
@@ -146,6 +157,17 @@ public class LogicController {
 
     }
 
+
+    @PostMapping("/lunchbox")
+    public ModelAndView newLunchBox(LunchBox lunchbox) throws SQLException {
+        
+        repository.addLunchBox(lunchbox);
+        lunchBoxes.add(lunchbox);
+
+        return new ModelAndView("userSession")
+                .addObject("lunchBoxes", lunchBoxesJson)
+                .addObject("lunchbox", lunchbox);
+    }
 
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;
