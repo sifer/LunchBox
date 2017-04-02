@@ -64,3 +64,10 @@ function codeAddress() {
         }
     });
 }
+
+//funktion som mekar med mat-apit'
+function foodApi() {
+    var ingridients;
+    ingridients.push(ingridientInfo);
+    console.log(ingridients);
+}
