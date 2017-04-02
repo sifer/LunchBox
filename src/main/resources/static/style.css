@@ -2,11 +2,11 @@ body {
     width: 100%;
     height: 100%;
     background-size: cover;
-    background-color: #5fcf80;
+    background-color: beige;
     margin: 0;
 }
 @font-face {
-    font-family: mySecondFont;
+    font-family: myFirstFont;
     src: url(SCRIPTINA.ttf);
 }
 @font-face {
@@ -15,26 +15,73 @@ body {
 }
 h2 {
     margin: 0;
-    font-family: mySecondFont;
+    text-align: center;
+    font-size: large;
+    font-family: myFirstFont;
     color: darkgray;
 }
-#brodtext {
+body >  header {
+    text-align: center;
+}
+body > header:nth-child(1) > div:nth-child(1) {
+    margin-bottom: -71px;
+    text-align: right;
+}
+.knappstor {
+    /*padding: 12px 90px;*/
+    background-color: rgba(57, 49, 49, 0.78);
     font-family: mySecondFont;
-    color: darkgrey;
     font-size: 25px;
-
+    /*font-weight: bold;*/
+    background: white;
+    color: #66CC99;
+    height: 60px;
+    width: 150px;
+    line-height: 60px;
+    margin: 15px 15px;
+    text-align: center;
+    border: 0;
+    /* transition: all 0.3s ease 0s;*/
 }
-#adress {
-    margin: 0% 1% 10% 36%;
+.knappstor:hover {
+    background-color:#66CC99;
+    color: white;
+    cursor: pointer;
 }
-#header {
+body > header:nth-child(1) > div:nth-child(2) {
+    padding-bottom: 10px;
+}
+#banner {
     width: 100%;
     height: 200px;
     text-align: center;
     overflow: hidden;
     background: url("background-lada.png") repeat;
-    background-position-x: 562px;
 }
+body > section:nth-child(1){
+    text-align: center;
+}
+body > footer:nth-child(1) {
+    overflow: auto;
+    background-color: white;
+}
+body > footer:nth-child(1) > section{
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+}
+body > footer:nth-child(1) > section:nth-child(1){
+    float:left;
+}
+body > footer:nth-child(1) > section:nth-child(2){
+    float:right;
+}
+#brodtext {
+    font-family: mySecondFont;
+    color: darkgrey;
+    font-size: 25px;
+}
+
 
 
 .black_overlay {
@@ -60,13 +107,8 @@ h2 {
 #text1 {
     color:darkgrey;
     text-align: center;
-    font-family: mySecondFont;
-}
-
-#copyright {
-    font-family: 'Open Sans',Arial,sans-serif;
-    text-align: right;
-    font-size: smaller;
+    font-family: myFirstFont;
+    font-size: x-large;
 }
 
 #text1:hover {
@@ -80,8 +122,8 @@ h2 {
 }
 
 #map {
-    height: 300px;
-    width: 350px;
+    height: 360px;
+    width: 650px;
     margin: 0 auto;
 }
 
@@ -99,51 +141,7 @@ h1 {
     margin: 0% 1% 10% -0.7%;
 }
 /*Här börjar CSSen för knapparna*/
-.knappstorloggain {
-    /*padding: 12px 90px;*/
-    background-color: rgba(57, 49, 49, 0.78);
-    font-family: mySecondFont;
-    font-size: 25px;
-    /*font-weight: bold;*/
-    background: white;
-    color: #66CC99;
-    height: 60px;
-    width: 150px;
-    line-height: 60px;
-    margin: 15px 60px;
-    text-align: center;
-    border: 0px;
-    /* transition: all 0.3s ease 0s;*/
-    border-right: #66CC99;
-}
-.knappstorloggain:hover {
-    background-color:#66CC99;
-    color: white;
-    cursor: pointer;
-}
 
-.knappstornyanv {
-    /*padding: 12px 90px;*/
-    background-color: rgba(57, 49, 49, 0.78);
-    font-family: mySecondFont;
-    font-size: 25px;
-    /*font-weight: bold;*/
-    background: white;
-    color: #66CC99;
-    height: 60px;
-    width: 150px;
-    line-height: 60px;
-    margin: 15px 60px;
-    text-align: center;
-    border: 0;
-    /* transition: all 0.3s ease 0s;*/
-}
-
-.knappstornyanv:hover {
-    background-color:#66CC99;
-    color: white;
-    cursor: pointer;
-}
 #mittenstreck {
     border-right:3px solid lightgrey;
 }
@@ -153,7 +151,7 @@ h1 {
 /*CSS FÖR ALLA FORMULÄR */ /*CSS FÖR ALLA FORMULÄR */ /*CSS FÖR ALLA FORMULÄR */
 
 
-#annons {
+.annons {
     color:#fff;
     padding: 10px 20px;
     border-radius: 8px;
@@ -165,7 +163,7 @@ h1 {
     width: 550px;
     position: fixed;
     left: 50%;
-    top: 50%;
+    top: 55%;
     transform: translate(-50%, -50%);
 }
 
@@ -403,40 +401,7 @@ label.light {
 
 }
 
-#footer {
-    clear: left;
-    background-color: #21484C;
-    height: 200px;
-    width: 100%;
-    font-size: 0;
-}
 
-#footer > section:nth-child(1) > img{
-    size: 20px;
-    width: 150px;
-    width: 150px;
-    color: white;
-    margin-top: 30px;
-    margin-left: 20px;
-    float: left
-}
-#footer > section:nth-child(2) > img {
-    size: 20px;
-    width: 150px;
-    width: 150px;
-    color: white;
-    margin-top: 30px;
-    float: left;
-
-}
-#footer > section:nth-child(1) {
-    display: inline-block;
-    width: 50%;
-}
-#footer > section:nth-child(2) {
-    display: inline-block;
-    width: 49%;
-}
 h3 {
     font-family: mySecondFont;
     font-size: medium;
@@ -449,5 +414,37 @@ h3 {
     top: 0;
     right: 0px;
     width: 25px;
-    background-color: #a5b076;
+    background-color: #80b438;
+}
+
+#Popup {
+    position: fixed;
+    height: 200px;
+    width: 200px;
+    visibility: hidden;
+    background-color: white;
+    z-index: 100;
+}
+.left{
+    padding: 10px;
+    text-align: center;
+    float:left;
+    width:33%;
+}
+.right{
+    float:right;
+    text-align: center;
+    width:30%;
+    padding: 10px;
+}
+.centered{
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    width:30%;
+    padding: 10px;
+}
+
+.imgen {
+   width: 80px;
 }
