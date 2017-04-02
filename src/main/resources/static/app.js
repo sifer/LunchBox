@@ -12,20 +12,35 @@ function initMap() {
         center: uluru,
         styles: mapStyle
     });
-    var marker = new google.maps.Marker({
-        animation: google.maps.Animation.DROP,
-        position: uluru,
-        map: map
-    });
 
     document.getElementById('submit').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
+        var icon = {url: 'icon/standard.jpg', scaledSize: new google.maps.Size(48, 48)};
+        if(pos.vego){
+            icon.url = 'icon/vego.png';
+        };
+        if(pos.vegan){
+            icon.url = 'icon/vegan.png';
+        };
+        if(pos.kyckling){
+            icon.url = 'icon/kyckling.png';
+        };
+        if(pos.nöt){
+            icon.url = 'icon/kött.png';
+        };
+        if(pos.fläsk){
+            icon.url = 'icon/fläsk.png';
+        };
+        if(pos.fisk){
+            icon.url = 'icon/fisk.png';
+        };
         var marker = new google.maps.Marker({
             position: {lat: pos.latitud, lng: pos.longitud},
             map: map,  // google.maps.Map
-            title: pos.description
+            title: pos.description,
+            icon: icon
         });
 
         var infowindow = new google.maps.InfoWindow({
@@ -66,3 +81,24 @@ function codeAddress() {
         }
     });
 }
+//Hämta nuvarande position
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 30000
+};
+function success(pos) {
+    var crd = pos.coords;
+    uluru = { lat: crd.latitude, lng: crd.longitude };
+    map.setCenter(uluru);
+    console.log('Your current position is:');
+    console.log('Latitude: '+crd.latitude);
+    console.log('Longitude: '+crd.longitude);
+    console.log('More or less '+crd.accuracy+' meters.');
+};
+
+function error(err) {
+    console.warn('ERROR(${err.code}): ${err.message}');
+};
+navigator.geolocation.getCurrentPosition(success, error, options);
+
