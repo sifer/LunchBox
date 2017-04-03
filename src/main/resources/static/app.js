@@ -11,28 +11,35 @@ function initMap() {
         styles: mapStyle
     });
 
-    document.querySelector('.newLoc').addEventListener('click', function() {
+    document.querySelector('#address').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
         var icon = {url: 'icon/standard.jpg', scaledSize: new google.maps.Size(48, 48)};
+        var iconDesc = "";
         if(pos.vego){
             icon.url = 'icon/vego.png';
+            iconDesc = 'Vegetarisk';
         };
         if(pos.vegan){
             icon.url = 'icon/vegan.png';
+            iconDesc = 'Vegansk';
         };
         if(pos.kyckling){
             icon.url = 'icon/kyckling.png';
+            iconDesc = 'Kyckling';
         };
         if(pos.nöt){
             icon.url = 'icon/kött.png';
+            iconDesc = 'Nötkött';
         };
         if(pos.fläsk){
             icon.url = 'icon/fläsk.png';
+            iconDesc = 'Fläsk';
         };
         if(pos.fisk){
             icon.url = 'icon/fisk.png';
+            iconDesc = 'Fisk';
         };
         var marker = new google.maps.Marker({
             position: {lat: pos.latitud, lng: pos.longitud},
@@ -42,7 +49,10 @@ function initMap() {
         });
 
         var infowindow = new google.maps.InfoWindow({
-            content: '<div>'+pos.description+'</div>'
+            content: '<div class="infoWindow"><h1>'+pos.description+'</h1>' +
+            '<p>'+iconDesc+'</p>' +
+            '<p>Ingredienser'+pos.ingridiences+'</p>' +
+            '<img src="'+icon.url+'"></div>'
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);

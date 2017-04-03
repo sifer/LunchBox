@@ -448,3 +448,16 @@ h3 {
 .imgen {
    width: 80px;
 }
+.infoWindow {
+    position: relative;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.infoWindow img{
+    position: absolute;
+    display: block;
+    top: 5px;
+    right: 5px;
+    height: 120px;
+    width: 120px;
+}
