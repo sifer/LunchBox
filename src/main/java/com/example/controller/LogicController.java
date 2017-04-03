@@ -87,6 +87,8 @@ public class LogicController {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
                 LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                String location = "";
+
 
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
@@ -189,9 +191,6 @@ public class LogicController {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
 
-        Object person = session.getAttribute("person");
-
-
         GeocodingResult[] results = req.awaitIgnoreError();
         for(GeocodingResult result : results) {
             BigDecimal lat = new BigDecimal(result.geometry.location.lat);
@@ -202,6 +201,9 @@ public class LogicController {
             lng = lng.setScale(6, RoundingMode.FLOOR);
             lunchbox.setLongitud(lng);
         }
+
+        Person person = ((Person)session.getAttribute("person"));
+        lunchbox.setPerson_ID(person.getPersonID());
 
         repository.addLunchBox(lunchbox);
         lunchBoxes.add(lunchbox);
