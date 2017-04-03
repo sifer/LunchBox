@@ -480,22 +480,31 @@ h4 {
 
 /* Max hemliga dokument */
 .infoWindow {
+    display: inline-block;
+    min-width: 400px;
     position: relative;
-    overflow-x: hidden;
     overflow-y: auto;
 }
-.infoWindow img{
+.infoWindow > div{
+    width: 72%;
+}
+.infoWindow > img{
     position: absolute;
     display: block;
+    width: 20%;
+    right: 27px;
     top: 5px;
-    right: 5px;
-    height: 120px;
-    width: 120px;
 }
-.gm-style-iw {
-    min-width: 350px !important;
+/*style the box*/
+.gm-style .gm-style-iw {
+    background-color: white;
     top: 0 !important;
     left: 0 !important;
-    border-radius: 2px 2px 0 0;
+    width: 84% !important;
+    height: 100% !important;
+    min-height: 120px !important;
+    padding: 5px;
+    display: block !important;
 }
+
 /* Slut på Max hemliga dokument */
