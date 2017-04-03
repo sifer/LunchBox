@@ -228,11 +228,13 @@ public class LogicController {
         lunchBoxes.add(lunchbox);
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
+        System.out.println(lunchbox.getImage());
+
+
         return new ModelAndView("userSession")
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("lunchbox", lunchbox)
-                .addObject("location", location)
-                .addObject("updateMarker", updateMarker);
+                .addObject("location", location);
     }
 
     public boolean userNameDuplicate(User user) {
