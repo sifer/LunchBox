@@ -86,9 +86,8 @@ public class LogicController {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
-                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
                 String location = "";
-
 
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
@@ -97,7 +96,6 @@ public class LogicController {
                         .addObject("lunchBoxes", lunchBoxesJson)
                         .addObject("lunchbox", lunchbox)
                         .addObject("location", location);
-
             }
 
         }
@@ -188,6 +186,8 @@ public class LogicController {
     @PostMapping("/lunchbox")
     public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
 
+
+        System.out.println(lunchbox.isKyckling());
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
 

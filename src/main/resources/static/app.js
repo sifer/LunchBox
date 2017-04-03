@@ -15,7 +15,7 @@ function initMap() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
-        var icon = {url: 'icon/standard.jpg', scaledSize: new google.maps.Size(48, 48)};
+        var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
         var iconDesc = "";
         if(pos.vego){
             icon.url = 'icon/vego.png';
