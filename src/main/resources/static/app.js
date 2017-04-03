@@ -11,7 +11,7 @@ function initMap() {
         styles: mapStyle
     });
 
-    document.querySelector('#address').addEventListener('click', function() {
+    document.querySelector('.newLoc').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
@@ -29,11 +29,11 @@ function initMap() {
             icon.url = 'icon/kyckling.png';
             iconDesc = 'Kyckling';
         };
-        if(pos.nöt){
+        if(pos.not){
             icon.url = 'icon/kött.png';
             iconDesc = 'Nötkött';
         };
-        if(pos.fläsk){
+        if(pos.flask){
             icon.url = 'icon/fläsk.png';
             iconDesc = 'Fläsk';
         };
