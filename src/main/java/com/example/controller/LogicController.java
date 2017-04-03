@@ -72,27 +72,33 @@ public class LogicController {
 
 
     @PostMapping("/login")
-    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password, User user, Person person) throws Exception {
+    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
+        System.out.println(userName + " " + password);
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
-                User user = index;
                 session.setAttribute("user", index);
-                session.setAttribute("person", persons.get(index.getUserID()) );
+                session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
                 LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                return new ModelAndView("userSession")
+                        .addObject("userSession", session)
+                        .addObject("user", index)
+                        .addObject("person", returnCorrectPerson(index.getUserID()) )
+                        .addObject("lunchBoxes", lunchBoxesJson)
+                        .addObject("lunchbox", lunchbox);
 
             }
 
         }
         showLogin = true;
-        User user1 = new User(userName, password, "");
-        Person person1 = new Person("", "", "");
+        User user = new User(userName, password, "");
+        Person person = new Person("", "", "");
         String incorr = "Username or password is incorrect.";
         return new ModelAndView("index")
                 .addObject("showLogin", showLogin)
                 .addObject("incorrLogin", incorr)
                 .addObject("lunchBoxes", lunchBoxesJson)
-                .addObject("user", user1)
-                .addObject("person", person1);
+                .addObject("user", user)
+                .addObject("person", person);
     }
 
     @GetMapping("/")
@@ -134,16 +140,16 @@ public class LogicController {
         return new ModelAndView("Adam");
     }
 
+    //Playing around with matApi.se
     @GetMapping("/test")
     public ModelAndView foodApi() {
 
-
         ModelAndView mv = new ModelAndView("test");
-
 
         return mv;
     }
 
+    //Playing around with matApi.se
     @PostMapping("/test")
     public ModelAndView getApi(@RequestParam String ingredient) throws Exception{
         String url = "https://maps.googleapis.com/maps/api/geocode/json?address=10+Tulegatan,+Stockholm,+Sweden&key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw";
@@ -203,6 +209,7 @@ public class LogicController {
         return jsonInString;
     }
 
+    //Built if we want to use matapi.se
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
         try {
@@ -219,6 +226,14 @@ public class LogicController {
             if (reader != null)
                 reader.close();
         }
+    }
+
+    private Person returnCorrectPerson(int userId) {
+        for(Person person : persons){
+            if (person.getPersonID() == userId) {
+                return person;
+            }
+        }return null;
     }
 
 
