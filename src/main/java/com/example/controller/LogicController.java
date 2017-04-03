@@ -112,8 +112,17 @@ public class LogicController {
     }
 
     @GetMapping("/")
-    public ModelAndView form() {
+    public ModelAndView form(HttpSession session) {
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("userSession")
+                    .addObject("userSession", session)
+                    .addObject("user", session.getAttribute("user"))
+                    .addObject("person", returnCorrectPerson(((User)session.getAttribute("user")).getUserID()) )
+                    .addObject("lunchBoxes", lunchBoxesJson)
+                    .addObject("lunchbox", lunchbox);
+        }
         User user = new User("", "", "");
         Person person = new Person("", "", "");
         ModelAndView mv = new ModelAndView("index");
