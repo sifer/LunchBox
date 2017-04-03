@@ -9,7 +9,14 @@ import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jdk.internal.org.xml.sax.SAXException;
-//import com.google.maps.model.GeocodingResult;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.GeocodingApiRequest;
+import com.google.maps.PendingResult;
+import com.google.maps.model.AddressComponent;
+import com.google.maps.model.AddressComponentType;
+import com.google.maps.model.GeocodingResult;
+
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +43,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 import java.lang.reflect.Array;
 import java.net.URL;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,12 +88,14 @@ public class LogicController {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
                 LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
                         .addObject("user", index)
                         .addObject("person", returnCorrectPerson(index.getUserID()) )
                         .addObject("lunchBoxes", lunchBoxesJson)
-                        .addObject("lunchbox", lunchbox);
+                        .addObject("lunchbox", lunchbox)
+                        .addObject("location", location);
 
             }
 
@@ -165,14 +176,32 @@ public class LogicController {
 
 
     @PostMapping("/lunchbox")
-    public ModelAndView newLunchBox(LunchBox lunchbox) throws SQLException {
-        
+    public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
+
+        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
+        GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
+
+        Object person = session.getAttribute("person");
+
+
+        GeocodingResult[] results = req.awaitIgnoreError();
+        for(GeocodingResult result : results) {
+            BigDecimal lat = new BigDecimal(result.geometry.location.lat);
+            lat = lat.setScale(6, RoundingMode.FLOOR);
+            lunchbox.setLatitud(lat);
+
+            BigDecimal lng = new BigDecimal(result.geometry.location.lng);
+            lng = lng.setScale(6, RoundingMode.FLOOR);
+            lunchbox.setLongitud(lng);
+        }
+
         repository.addLunchBox(lunchbox);
         lunchBoxes.add(lunchbox);
 
         return new ModelAndView("userSession")
                 .addObject("lunchBoxes", lunchBoxesJson)
-                .addObject("lunchbox", lunchbox);
+                .addObject("lunchbox", lunchbox)
+                .addObject("location", location);
     }
 
     public boolean userNameDuplicate(User user) {
