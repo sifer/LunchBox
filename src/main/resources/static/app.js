@@ -11,7 +11,7 @@ function initMap() {
         styles: mapStyle
     });
 
-    document.querySelector('#address').addEventListener('click', function() {
+    document.querySelector('.newLoc').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
@@ -71,7 +71,7 @@ function initMap() {
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 function codeAddress() {
     geocoder = new google.maps.Geocoder();
-
+    console.log("codeAddress körs");
     var address = document.querySelector('.address').value;
     geocoder.geocode( {"address": address}, function(results, status) {
 
@@ -89,6 +89,10 @@ function codeAddress() {
             alert("Geocode not successful because: " + status);
         }
     });
+}
+
+function logout() {
+
 }
 
 

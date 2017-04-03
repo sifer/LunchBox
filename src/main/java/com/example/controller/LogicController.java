@@ -33,6 +33,8 @@ import org.w3c.dom.NodeList;
 
 import javax.annotation.PostConstruct;
 import javax.naming.Binding;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import javax.validation.Valid;
@@ -146,10 +148,10 @@ public class LogicController {
             showNewUser = true;
             String error = "";
             if (brp.hasErrors()){
-                error = /*brp.getFieldError().getField() + " " + */brp.getFieldError().getDefaultMessage();
+                error = brp.getFieldError().getDefaultMessage();
             }
             else if(bru.hasErrors()){
-                error = /*bru.getFieldError().getField() + " " + */bru.getFieldError().getDefaultMessage();
+                error = bru.getFieldError().getDefaultMessage();
             }
             if(userNameDuplicate(user)){
                 error = "Användarnament är upptaget, vänligen välj ett nytt";
@@ -166,6 +168,16 @@ public class LogicController {
         users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
         persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
         return new ModelAndView("Adam");
+    }
+
+    @PostMapping("/logout")
+    public ModelAndView logout(HttpSession session, HttpServletRequest request) {
+
+        session.removeAttribute("user");
+        session.removeAttribute("person");
+        request.getSession().invalidate();
+
+        return new ModelAndView("redirect:/");
     }
 
     //Playing around with matApi.se
@@ -195,8 +207,6 @@ public class LogicController {
     @PostMapping("/lunchbox")
     public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
 
-
-        System.out.println(lunchbox.isKyckling());
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
 
