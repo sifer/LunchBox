@@ -448,6 +448,9 @@ h3 {
 .imgen {
    width: 80px;
 }
+
+
+/* Max hemliga dokument */
 .infoWindow {
     position: relative;
     overflow-x: hidden;
@@ -461,3 +464,10 @@ h3 {
     height: 120px;
     width: 120px;
 }
+.gm-style-iw {
+    min-width: 350px !important;
+    top: 0 !important;
+    left: 0 !important;
+    border-radius: 2px 2px 0 0;
+}
+/* Slut på Max hemliga dokument */
