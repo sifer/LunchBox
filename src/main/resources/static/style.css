@@ -506,5 +506,19 @@ h4 {
     padding: 5px;
     display: block !important;
 }
-
+#filter::-webkit-input-placeholder {
+    text-align: center;
+}
+#filter:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+#filter::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+}
+#filter:-ms-input-placeholder {
+    text-align: center;
+}
+#filter{
+    text-align: center;
+}
 /* Slut på Max hemliga dokument */

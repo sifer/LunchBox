@@ -2,6 +2,8 @@
 var geocoder;
 var map;
 var activeInfoWindow;
+var markerList = [];
+var infoWindowList = [];
 
 //initMap körs automatiskt när sidan laddas med hjälp av "async defer" i .html
 function initMap() {
@@ -113,7 +115,8 @@ function initMap() {
         marker.addListener('click', function() {
             infowindow.open(map, marker);
         });
-
+        infoWindowList.push(infowindow);
+        markerList.push(marker);
         return marker;
     }
     function createMarkers() {
@@ -177,6 +180,17 @@ function success(pos) {
 function error(err) {
     console.warn('ERROR(${err.code}): ${err.message}');
 };
+function filterMap(input){
+    for(var i=0; i<markerList.length; i++){
+        console.log(input.length);
+        if(infoWindowList[i].content.toLowerCase().includes(input.toLowerCase()) || input.length === 0){
+            markerList[i].setVisible(true);
+        }
+        else{
+            markerList[i].setVisible(false);
+        }
+    }
+}
 
 
 
