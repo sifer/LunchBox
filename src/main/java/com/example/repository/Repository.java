@@ -110,7 +110,7 @@ public class Repository {
     public void addLunchBox(LunchBox lunchbox) throws SQLException {
 
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image, Person_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
             ps.setString(1, lunchbox.getDescription());
             ps.setString(2, lunchbox.getIngridiences());
@@ -121,10 +121,11 @@ public class Repository {
             ps.setBoolean(7, lunchbox.isLaktos());
             ps.setBoolean(8, lunchbox.isGluten());
             ps.setBoolean(9, lunchbox.isKyckling());
-            ps.setBoolean(10, lunchbox.isFläsk());
-            ps.setBoolean(11, lunchbox.isNöt());
+            ps.setBoolean(10, lunchbox.isFlask());
+            ps.setBoolean(11, lunchbox.isNot());
             ps.setBoolean(12, lunchbox.isFisk());
             ps.setBytes(13, lunchbox.getImage());
+            ps.setInt(14, lunchbox.getPerson_ID());
 
             ps.executeUpdate();
         } catch(SQLException e) {

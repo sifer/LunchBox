@@ -40,7 +40,7 @@ function initMap() {
         }
     }
     createMarkers();
-    console.log(lunchBox);
+
 }
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
