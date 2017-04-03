@@ -1,16 +1,18 @@
 package com.example.domain;
 
 import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
 
 public class User {
 
     private int UserID;
-    @Size(min = 1, max = 25)
+    @Size(min = 1, max = 25, message = "Vänligen skriv ett användarnamn med 1 till 25 tecken.")
     private String userName;
-    @Size(min = 1, max = 20)
+    @Size(min = 1, max = 20, message = "Vänligen skriv ett lösenord med 1 till 25 tecken.")
     private String password;
+    @NotEmpty(message = "Vänligen fyll i e-postadress härvid.")
     @Email
     private String mail;
 

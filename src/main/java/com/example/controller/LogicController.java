@@ -131,7 +131,7 @@ public class LogicController {
         mv.addObject("lunchBoxes", lunchBoxesJson);
 
         return mv;
-}
+    }
 
     @GetMapping("/userSession")
     public ModelAndView userSession() {
@@ -141,10 +141,19 @@ public class LogicController {
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
-        if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
+        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
 
             showNewUser = true;
-            String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
+            String error = "";
+            if (brp.hasErrors()){
+                error = /*brp.getFieldError().getField() + " " + */brp.getFieldError().getDefaultMessage();
+            }
+            else if(bru.hasErrors()){
+                error = /*bru.getFieldError().getField() + " " + */bru.getFieldError().getDefaultMessage();
+            }
+            if(userNameDuplicate(user)){
+                error = "Användarnament är upptaget, vänligen välj ett nytt";
+            }
 
             return new ModelAndView("index")
                     .addObject("showNewUser", showNewUser)
