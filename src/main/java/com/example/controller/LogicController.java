@@ -132,7 +132,7 @@ public class LogicController {
         mv.addObject("lunchBoxes", lunchBoxesJson);
 
         return mv;
-}
+    }
 
     @GetMapping("/userSession")
     public ModelAndView userSession() {
