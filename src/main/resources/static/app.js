@@ -11,9 +11,9 @@ function initMap() {
         styles: mapStyle
     });
 
-    document.querySelector('.newLoc').addEventListener('click', function() {
+/*    document.querySelector('.newLoc').addEventListener('click', function() {
         codeAddress(geocoder, map);
-    });
+    });*/
     function createMarker(pos) {
         var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
         var iconDesc = "";
@@ -64,14 +64,16 @@ function initMap() {
             createMarker(lunchBoxes[i]);
         }
     }
-    createMarkers();
 
+    createMarkers();
 }
+
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 function codeAddress() {
+
     geocoder = new google.maps.Geocoder();
-    console.log("codeAddress körs");
+
     var address = document.querySelector('.address').value;
     geocoder.geocode( {"address": address}, function(results, status) {
 
@@ -89,10 +91,6 @@ function codeAddress() {
             alert("Geocode not successful because: " + status);
         }
     });
-}
-
-function logout() {
-
 }
 
 
@@ -122,5 +120,5 @@ function success(pos) {
 function error(err) {
     console.warn('ERROR(${err.code}): ${err.message}');
 };
-navigator.geolocation.getCurrentPosition(success, error, options);
+
 
