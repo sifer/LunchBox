@@ -16,8 +16,8 @@ public class LunchBox {
     private boolean laktos;
     private boolean gluten;
     private boolean kyckling;
-    private boolean fläsk;
-    private boolean nöt;
+    private boolean flask;
+    private boolean not;
     private boolean fisk;
     private byte[] image;
     private int Person_ID;
@@ -26,7 +26,7 @@ public class LunchBox {
 
     }
 
-    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean fläsk, boolean nöt, boolean fisk, byte[] image, int person_ID) {
+    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean flask, boolean not, boolean fisk, byte[] image, int person_ID) {
         this.LunchBoxID = lunchBoxID;
         this.description = description;
         this.ingridiences = ingridiences;
@@ -37,8 +37,8 @@ public class LunchBox {
         this.laktos = laktos;
         this.gluten = gluten;
         this.kyckling = kyckling;
-        this.fläsk = fläsk;
-        this.nöt = nöt;
+        this.flask = flask;
+        this.not = not;
         this.fisk = fisk;
         this.image = image;
         this.Person_ID = person_ID;
@@ -124,20 +124,20 @@ public class LunchBox {
         this.kyckling = kyckling;
     }
 
-    public boolean isFläsk() {
-        return fläsk;
+    public boolean isFlask() {
+        return flask;
     }
 
-    public void setFläsk(boolean fläsk) {
-        this.fläsk = fläsk;
+    public void setFlask(boolean flask) {
+        this.flask = flask;
     }
 
-    public boolean isNöt() {
-        return nöt;
+    public boolean isNot() {
+        return not;
     }
 
-    public void setNöt(boolean nöt) {
-        this.nöt = nöt;
+    public void setNot(boolean not) {
+        this.not = not;
     }
 
     public boolean isFisk() {

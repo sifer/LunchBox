@@ -65,32 +65,31 @@
             <legend><span class="number">1</span>Berätta om din matlåda</legend>
 
             <label for="name">Vad heter din rätt?</label>
-            <input type="text" id="name" name="name
-"/>
+            <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
             <label for="image">Lägg upp en bild</label>
-            <input type="text" id="image" name="lunchbox_image"/>
+            <input type="text" id="image" name="image" th:value="${lunchbox.image}"/>
 
-            <label for="matlada">Skriv en rad om vad du lagat:</label>
-            <textarea id="matlada" th:field="${lunchbox.description}" name="description"></textarea>
+            <label for="matlada">Finns det några nämnvärda ingredienser din rätt innehåller?</label>
+            <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea>
 
             <label for="location">Vart kommer försäljningen att ske?</label>
-            <input type="text" class="address" id="location" name="lunchbox_location"/>
+            <input type="text" class="address" th:value="${location}" id="location" name="location"/>
 
             <select>
                 <optgroup label="Typ av rätt">
-                    <option value="kyckling">Kyckling</option>
-                    <option value="nöt">Kött</option>
-                    <option value="fisk">Fisk</option>
-                    <option value="vego">Vegetariskt</option>
-                    <option value="vegan">Veganskt</option>
+                    <option value="kyckling" th:value="${lunchbox.kyckling}" name="kyckling">Kyckling</option>
+                    <option value="flask" th:value="${lunchbox.flask}" name="flask">Kött</option>
+                    <option value="fisk" th:value="${lunchbox.fisk}">Fisk</option>
+                    <option value="vego" th:value="${lunchbox.vego}">Vegetariskt</option>
+                    <option value="vegan" th:value="${lunchbox.vegan}">Veganskt</option>
                 </optgroup>
             </select>
 
             <label>Allergivänlig:</label>
-            <input type="checkbox" id="laktosfritt" value="laktos" name="lunchbox_laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
-            <input type="checkbox" id="glutenfritt" value="gluten" name="lunchbox_gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
-            <input type="checkbox" id="nötfri" value="nöt" name="lunchbox_nöt"/><label class="light" for="nötfri">Nötfri</label>
+            <input type="checkbox" id="laktosfritt" value="laktos" th:value="${lunchbox.laktos}" name="lunchbox_laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
+            <input type="checkbox" id="glutenfritt" value="gluten" th:value="${lunchbox.gluten}" name="lunchbox_gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
+            <input type="checkbox" id="nötfri" value="not" th:value="${lunchbox.not}" name="lunchbox_not"/><label class="light" for="nötfri">Nötfri</label>
 
         </fieldset>
         <button class="newLoc" type="submit">Lägg upp din matlåda</button>

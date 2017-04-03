@@ -65,7 +65,7 @@ function initMap() {
         }
     }
     createMarkers();
-    console.log(lunchBox);
+
 }
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
@@ -90,6 +90,15 @@ function codeAddress() {
         }
     });
 }
+
+
+//funktion som mekar med mat-apit'
+function foodApi() {
+    var ingridients;
+    ingridients.push(ingridientInfo);
+    console.log(ingridients);
+}
+
 //Hämta nuvarande position
 var options = {
     enableHighAccuracy: true,
@@ -110,3 +119,4 @@ function error(err) {
     console.warn('ERROR(${err.code}): ${err.message}');
 };
 navigator.geolocation.getCurrentPosition(success, error, options);
+
