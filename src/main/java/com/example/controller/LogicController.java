@@ -8,6 +8,14 @@ import com.example.repository.Repository;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jdk.internal.org.xml.sax.SAXException;
+import com.google.maps.GeoApiContext;
+import com.google.maps.GeocodingApi;
+import com.google.maps.GeocodingApiRequest;
+import com.google.maps.PendingResult;
+import com.google.maps.model.AddressComponent;
+import com.google.maps.model.AddressComponentType;
+import com.google.maps.model.GeocodingResult;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,16 +27,26 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import javax.annotation.PostConstruct;
 import javax.naming.Binding;
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
 import javax.validation.Valid;
-import java.io.IOException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.*;
 import java.lang.reflect.Array;
+import java.net.URL;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,8 +59,6 @@ public class LogicController {
     String lunchBoxesJson;
     boolean showNewUser = false;
     boolean showLogin = false;
-
-
 
     @Autowired
     Repository repository;
@@ -65,21 +81,21 @@ public class LogicController {
 
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
+        System.out.println(userName + " " + password);
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
-                User user = index;
                 session.setAttribute("user", index);
-                session.setAttribute("person", persons.get(index.getUserID()) );
-                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
+                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                String location = "";
 
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
                         .addObject("user", index)
-                        .addObject("person", persons.get(index.getUserID()) )
+                        .addObject("person", returnCorrectPerson(index.getUserID()) )
                         .addObject("lunchBoxes", lunchBoxesJson)
-                        .addObject("lunchbox", lunchbox);
-
-
+                        .addObject("lunchbox", lunchbox)
+                        .addObject("location", location);
             }
 
         }
@@ -93,13 +109,20 @@ public class LogicController {
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("user", user)
                 .addObject("person", person);
-
     }
 
     @GetMapping("/")
-    public ModelAndView form() {
+    public ModelAndView form(HttpSession session) {
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
-
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("userSession")
+                    .addObject("userSession", session)
+                    .addObject("user", session.getAttribute("user"))
+                    .addObject("person", returnCorrectPerson(((User)session.getAttribute("user")).getUserID()) )
+                    .addObject("lunchBoxes", lunchBoxesJson)
+                    .addObject("lunchbox", lunchbox);
+        }
         User user = new User("", "", "");
         Person person = new Person("", "", "");
         ModelAndView mv = new ModelAndView("index");
@@ -107,9 +130,8 @@ public class LogicController {
         mv.addObject("person",person);
         mv.addObject("lunchBoxes", lunchBoxesJson);
 
-
         return mv;
-}
+    }
 
     @GetMapping("/userSession")
     public ModelAndView userSession() {
@@ -119,10 +141,19 @@ public class LogicController {
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr) throws Exception {
 
-        if (bru.hasErrors() || brp.hasErrors() ||   userNameDuplicate(user)) {
+        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
 
             showNewUser = true;
-            String error = bru.getFieldError().getField() + " " + bru.getFieldError().getDefaultMessage();
+            String error = "";
+            if (brp.hasErrors()){
+                error = /*brp.getFieldError().getField() + " " + */brp.getFieldError().getDefaultMessage();
+            }
+            else if(bru.hasErrors()){
+                error = /*bru.getFieldError().getField() + " " + */bru.getFieldError().getDefaultMessage();
+            }
+            if(userNameDuplicate(user)){
+                error = "Användarnament är upptaget, vänligen välj ett nytt";
+            }
 
             return new ModelAndView("index")
                     .addObject("showNewUser", showNewUser)
@@ -137,16 +168,59 @@ public class LogicController {
         return new ModelAndView("Adam");
     }
 
+    //Playing around with matApi.se
+    @GetMapping("/test")
+    public ModelAndView foodApi() {
+
+        ModelAndView mv = new ModelAndView("test");
+
+        return mv;
+    }
+
+    //Playing around with matApi.se
+    @PostMapping("/test")
+    public ModelAndView getApi(@RequestParam String ingredient) throws Exception{
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=10+Tulegatan,+Stockholm,+Sweden&key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw";
+        String ingredientInfo = readUrl(url);
+        System.out.println(ingredientInfo);
+        boolean searchedForIngredient = true;
+
+        return new ModelAndView("test")
+                .addObject("ingridient", ingredientInfo)
+                .addObject("searchedForIngredient", searchedForIngredient);
+
+    }
+
 
     @PostMapping("/lunchbox")
-    public ModelAndView newLunchBox(LunchBox lunchbox) throws SQLException {
-        
+    public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
+
+
+        System.out.println(lunchbox.isKyckling());
+        GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
+        GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
+
+        GeocodingResult[] results = req.awaitIgnoreError();
+        for(GeocodingResult result : results) {
+            BigDecimal lat = new BigDecimal(result.geometry.location.lat);
+            lat = lat.setScale(6, RoundingMode.FLOOR);
+            lunchbox.setLatitud(lat);
+
+            BigDecimal lng = new BigDecimal(result.geometry.location.lng);
+            lng = lng.setScale(6, RoundingMode.FLOOR);
+            lunchbox.setLongitud(lng);
+        }
+
+        Person person = ((Person)session.getAttribute("person"));
+        lunchbox.setPerson_ID(person.getPersonID());
+
         repository.addLunchBox(lunchbox);
         lunchBoxes.add(lunchbox);
 
         return new ModelAndView("userSession")
                 .addObject("lunchBoxes", lunchBoxesJson)
-                .addObject("lunchbox", lunchbox);
+                .addObject("lunchbox", lunchbox)
+                .addObject("location", location);
     }
 
     public boolean userNameDuplicate(User user) {
@@ -181,6 +255,33 @@ public class LogicController {
             }
             jsonInString += "]";
         return jsonInString;
+    }
+
+    //Built if we want to use matapi.se
+    private static String readUrl(String urlString) throws Exception {
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(urlString);
+            reader = new BufferedReader(new InputStreamReader(url.openStream()));
+            StringBuffer buffer = new StringBuffer();
+            int read;
+            char[] chars = new char[1024];
+            while ((read = reader.read(chars)) != -1)
+                buffer.append(chars, 0, read);
+
+            return buffer.toString();
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
+    }
+
+    private Person returnCorrectPerson(int userId) {
+        for(Person person : persons){
+            if (person.getPersonID() == userId) {
+                return person;
+            }
+        }return null;
     }
 
 

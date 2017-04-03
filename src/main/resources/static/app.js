@@ -15,24 +15,31 @@ function initMap() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
-        var icon = {url: 'icon/standard.jpg', scaledSize: new google.maps.Size(48, 48)};
+        var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
+        var iconDesc = "";
         if(pos.vego){
             icon.url = 'icon/vego.png';
+            iconDesc = 'Vegetarisk';
         };
         if(pos.vegan){
             icon.url = 'icon/vegan.png';
+            iconDesc = 'Vegansk';
         };
         if(pos.kyckling){
             icon.url = 'icon/kyckling.png';
+            iconDesc = 'Kyckling';
         };
-        if(pos.nöt){
+        if(pos.not){
             icon.url = 'icon/kött.png';
+            iconDesc = 'Nötkött';
         };
-        if(pos.fläsk){
+        if(pos.flask){
             icon.url = 'icon/fläsk.png';
+            iconDesc = 'Fläsk';
         };
         if(pos.fisk){
             icon.url = 'icon/fisk.png';
+            iconDesc = 'Fisk';
         };
         var marker = new google.maps.Marker({
             position: {lat: pos.latitud, lng: pos.longitud},
@@ -42,7 +49,10 @@ function initMap() {
         });
 
         var infowindow = new google.maps.InfoWindow({
-            content: '<div>'+pos.description+'</div>'
+            content: '<div class="infoWindow"><h1>'+pos.description+'</h1>' +
+            '<p>'+iconDesc+'</p>' +
+            '<p>Ingredienser'+pos.ingridiences+'</p>' +
+            '<img src="'+icon.url+'"></div>'
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
@@ -55,7 +65,7 @@ function initMap() {
         }
     }
     createMarkers();
-    console.log(lunchBox);
+
 }
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
@@ -80,6 +90,15 @@ function codeAddress() {
         }
     });
 }
+
+
+//funktion som mekar med mat-apit'
+function foodApi() {
+    var ingridients;
+    ingridients.push(ingridientInfo);
+    console.log(ingridients);
+}
+
 //Hämta nuvarande position
 var options = {
     enableHighAccuracy: true,
@@ -100,3 +119,4 @@ function error(err) {
     console.warn('ERROR(${err.code}): ${err.message}');
 };
 navigator.geolocation.getCurrentPosition(success, error, options);
+

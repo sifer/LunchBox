@@ -9,12 +9,12 @@ import javax.validation.constraints.Size;
 
 public class Person {
     private int PersonID;
-    @Size(min = 1, max = 80)
+    @Size(min = 1, max = 80, message = "Vänligen fyll i ditt förnamn.")
     private String firstName;
-    @Size(min = 1, max = 120)
+    @Size(min = 1, max = 120, message = "Vänligen fyll i ditt efternamn.")
     private String lastName;
-    @Size(min = 1, max = 15)
-    @Pattern(regexp = "^[0-9]+$")
+    @Size(min = 1, max = 15, message = "Vänligen fyll i ditt telefonnummer med siffror.")
+    @Pattern(regexp = "^[0-9]+$", message = "Vänligen fyll i ditt telefonnummer med siffror.")
     private String phoneNumber;
 
     public Person(String firstName, String lastName, String phoneNumber) {
