@@ -11,12 +11,15 @@ function ready(fn) {
 function fn() {
     var element =  document.querySelector(".annons");
     element.style.visibility = 'visible';
- /*   var element2 =  document.querySelector("#black_overlay");
-    element2.style.visibility = 'visible';*/
+    var element2 =  document.querySelector('.black_overlay');
+    element2.style.visibility = 'visible';
 }
 function closeFn(){
     var element =  document.querySelector(".annons");
     element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
+
+
 }
 
 function hej(fa) {
@@ -29,12 +32,13 @@ function hej(fa) {
 function fa() {
     var elementt =  document.querySelector("#bg");
     elementt.style.visibility = 'visible';
-/*    var elementt2 =  document.querySelector("#black_overlay");
-    elementt2.style.visibility = 'visible';*/
+  var elementt2 =  document.querySelector(".black_overlay");
+    elementt2.style.visibility = 'visible';
 }
 function closeFa(){
     var element =  document.querySelector("#bg");
     element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
 }
 
 function hej(popup) {
@@ -59,10 +63,11 @@ function ready(showSalesForm) {
 function showSalesForm() {
     var elementt =  document.querySelector(".annons");
     elementt.style.visibility = 'visible';
-    /*    var elementt2 =  document.querySelector("#black_overlay");
+    /*    var elementt2 =  document.querySelector(".black_overlay");
      elementt2.style.visibility = 'visible';*/
 }
 function closeSalesForm(){
     var element =  document.querySelector(".annons");
     element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
 }
