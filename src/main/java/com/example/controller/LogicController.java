@@ -87,6 +87,8 @@ public class LogicController {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
                 LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "PANNKAKA", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+                String location = "";
+
 
                 return new ModelAndView("userSession")
                         .addObject("userSession", session)
@@ -112,8 +114,17 @@ public class LogicController {
     }
 
     @GetMapping("/")
-    public ModelAndView form() {
+    public ModelAndView form(HttpSession session) {
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("userSession")
+                    .addObject("userSession", session)
+                    .addObject("user", session.getAttribute("user"))
+                    .addObject("person", returnCorrectPerson(((User)session.getAttribute("user")).getUserID()) )
+                    .addObject("lunchBoxes", lunchBoxesJson)
+                    .addObject("lunchbox", lunchbox);
+        }
         User user = new User("", "", "");
         Person person = new Person("", "", "");
         ModelAndView mv = new ModelAndView("index");
@@ -180,9 +191,6 @@ public class LogicController {
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
 
-        Object person = session.getAttribute("person");
-
-
         GeocodingResult[] results = req.awaitIgnoreError();
         for(GeocodingResult result : results) {
             BigDecimal lat = new BigDecimal(result.geometry.location.lat);
@@ -193,6 +201,9 @@ public class LogicController {
             lng = lng.setScale(6, RoundingMode.FLOOR);
             lunchbox.setLongitud(lng);
         }
+
+        Person person = ((Person)session.getAttribute("person"));
+        lunchbox.setPerson_ID(person.getPersonID());
 
         repository.addLunchBox(lunchbox);
         lunchBoxes.add(lunchbox);
