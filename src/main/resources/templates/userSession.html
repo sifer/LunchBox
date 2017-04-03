@@ -23,7 +23,10 @@
     </section>
     <section>
         <form id="form" action="login" method="POST">
-                <input onclick="showSalesForm()" class="knappstornyanv" value="Sälja mat"/>
+                <input onclick="showSalesForm()" class="knappstor" value="Sälja mat"/>
+        </form>
+        <form action="logout" method="post">
+            <input type="submit" class="knappstor" value="Logga ut"/>
         </form>
     </section>
 </article>
@@ -76,20 +79,20 @@
             <label for="location">Vart kommer försäljningen att ske?</label>
             <input type="text" class="address" th:value="${location}" id="location" name="location"/>
 
-            <select>
-                <optgroup label="Typ av rätt">
-                    <option th:value="${lunchbox.kyckling}" name="kyckling">Kyckling</option>
-                    <option value="flask" th:value="${lunchbox.flask}" name="flask">Kött</option>
-                    <option value="fisk" th:value="${lunchbox.fisk}">Fisk</option>
-                    <option value="vego" th:value="${lunchbox.vego}">Vegetariskt</option>
-                    <option value="vegan" th:value="${lunchbox.vegan}">Veganskt</option>
-                </optgroup>
-            </select>
+
+        <label>Typ av rätt:</label>
+            <input type="checkbox" th:checked="${lunchbox.kyckling}" name="kyckling">Kyckling</input>
+            <input type="checkbox" th:checked="${lunchbox.not}" name="not">Nötkött</input>
+            <input type="checkbox" th:checked="${lunchbox.flask}" name="flask">Fläsk</input>
+            <input type="checkbox" th:checked="${lunchbox.fisk}" name="fisk">Fisk</input>
+            <input type="checkbox" th:checked="${lunchbox.vego}" name="vego">Vegetariskt</input>
+            <input type="checkbox" th:checked="${lunchbox.vegan}" name="vegan">Veganskt</input>
+
 
             <label>Allergivänlig:</label>
-            <input type="checkbox" id="laktosfritt" value="laktos" th:value="${lunchbox.laktos}" name="lunchbox_laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
-            <input type="checkbox" id="glutenfritt" value="gluten" th:value="${lunchbox.gluten}" name="lunchbox_gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
-            <input type="checkbox" id="nötfri" value="not" th:value="${lunchbox.not}" name="lunchbox_not"/><label class="light" for="nötfri">Nötfri</label>
+            <input type="checkbox" id="laktosfritt" th:checked="${lunchbox.laktos}" name="laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
+            <input type="checkbox" id="glutenfritt" th:checked="${lunchbox.gluten}" name="gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
+
 
         </fieldset>
         <button class="newLoc" type="submit">Lägg upp din matlåda</button>
@@ -102,7 +105,6 @@
 <script type="text/javascript" ype="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
-<script type="text/javascript" th:utext="'var newLunchBox =' + ${lunchBox}"></script>
 <script type="text/javascript" src="/app.js"></script>
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>
