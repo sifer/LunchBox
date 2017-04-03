@@ -33,7 +33,7 @@ body > header:nth-child(1) > div:nth-child(1) {
     font-family: mySecondFont;
     font-size: 25px;
     /*font-weight: bold;*/
-    background: white;
+    background: beige;
     color: #66CC99;
     height: 60px;
     width: 150px;
@@ -61,33 +61,48 @@ body > header:nth-child(1) > div:nth-child(2) {
 body > section:nth-child(1){
     text-align: center;
 }
-body > footer:nth-child(1) {
-    overflow: auto;
+body > section:nth-of-type(2){
     background-color: white;
+    padding: 8% 0% 8% 0%;
 }
-body > footer:nth-child(1) > section{
+
+body > footer:nth-of-type(1) {
+    overflow: hidden;
+    padding: 25px;
+}
+body > footer > section{
     width: 50%;
     text-align: center;
     display: inline-block;
 }
-body > footer:nth-child(1) > section:nth-child(1){
+body> footer:nth-of-type(1) > section:nth-of-type(1){
     float:left;
 }
-body > footer:nth-child(1) > section:nth-child(2){
-    float:right;
+body > footer:nth-of-type(1)> section:nth-of-type(2) {
+    float: right;
 }
+body  > footer:nth-of-type(1)> section:nth-of-type(2) > img {
+    width: 20%;
+}
+body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
+    width: 20%;
+}
+
+
 #brodtext {
     font-family: mySecondFont;
     color: darkgrey;
     font-size: 25px;
+    text-align: center;
 }
 
 
-
 .black_overlay {
-    background-color: #333;
+    background-color: white;
+    width: 100%;
+    height: 100%;
     left: 0;
-    opacity: 0.8;
+    opacity: 0.7;
     position: absolute;
     top: 0;
     visibility: hidden;
@@ -138,8 +153,13 @@ h1 {
     font-family: sans-serif;
     font-weight: bold;
     font-variant: small-caps;
-    margin: 0% 1% 10% -0.7%;
+    margin: 0.1% 1% 4% 0%;
 }
+
+body > section:nth-of-type(1)> p:nth-of-type(2){
+text-align: center;
+}
+
 /*Här börjar CSSen för knapparna*/
 
 #mittenstreck {
@@ -152,10 +172,10 @@ h1 {
 
 
 .annons {
-    color:#fff;
+    color:dimgrey;
     padding: 10px 20px;
     border-radius: 8px;
-    background-color:rgba(57, 49, 49, 0.78);
+    background-color:white;
     text-align: center;
     align-content: center;
     visibility: hidden;
@@ -269,16 +289,19 @@ label.light {
 
 
 #bg{
-    position: relative;
-    top: -700px;
-    height: 500px;
-    width: 600px;
-    background: url(http://i.imgur.com/3eP9Z4O.png) center no-repeat;
-    background-size: cover;
-    margin-right: 50%;
-    border: #fff;
+    color:#fff;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color:white;
+    text-align: center;
+    align-content: center;
     visibility: hidden;
     z-index:999;
+    width: 550px;
+    position: fixed;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
 
 }
 
@@ -404,8 +427,13 @@ label.light {
 
 h3 {
     font-family: mySecondFont;
-    font-size: medium;
-    color: white;
+    font-size: 22px;
+    color: #373838;
+}
+
+h4 {
+    font-family: mySecondFont;
+    color: #373838;
 }
 .close {
     position: absolute;

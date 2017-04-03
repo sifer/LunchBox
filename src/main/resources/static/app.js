@@ -11,7 +11,7 @@ function initMap() {
         styles: mapStyle
     });
 
-    document.querySelector('.newLoc').addEventListener('click', function() {
+    document.querySelector('#address').addEventListener('click', function() {
         codeAddress(geocoder, map);
     });
     function createMarker(pos) {
