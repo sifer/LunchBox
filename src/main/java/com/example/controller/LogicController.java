@@ -80,13 +80,12 @@ public class LogicController {
 
 
     @PostMapping("/login")
-    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
+    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password, LunchBox lunchBox) throws Exception {
         System.out.println(userName + " " + password);
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
-                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
                 String location = "";
 
                 return new ModelAndView("userSession")
@@ -94,7 +93,7 @@ public class LogicController {
                         .addObject("user", index)
                         .addObject("person", returnCorrectPerson(index.getUserID()) )
                         .addObject("lunchBoxes", lunchBoxesJson)
-                        .addObject("lunchbox", lunchbox)
+                        .addObject("lunchbox", lunchBox)
                         .addObject("location", location);
             }
 
@@ -139,17 +138,17 @@ public class LogicController {
     }
 
     @PostMapping("/user")
-    public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr, HttpSession session) throws Exception {
+    public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, LunchBox lunchBox, RedirectAttributes attr, HttpSession session) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
 
             showNewUser = true;
             String error = "";
             if (brp.hasErrors()){
-                error = /*brp.getFieldError().getField() + " " + */brp.getFieldError().getDefaultMessage();
+                error = brp.getFieldError().getDefaultMessage();
             }
             else if(bru.hasErrors()){
-                error = /*bru.getFieldError().getField() + " " + */bru.getFieldError().getDefaultMessage();
+                error = bru.getFieldError().getDefaultMessage();
             }
             if(userNameDuplicate(user)){
                 error = "Användarnament är upptaget, vänligen välj ett nytt";
@@ -161,7 +160,6 @@ public class LogicController {
                     .addObject("lunchBoxes", lunchBoxesJson);
 
         }
-        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
         int key = Integer.parseInt(repository.addUser(user, person));
         users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
         persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
@@ -172,7 +170,7 @@ public class LogicController {
                 .addObject("user", user)
                 .addObject("person", person)
                 .addObject("lunchBoxes", lunchBoxesJson)
-                .addObject("lunchbox", lunchbox);
+                .addObject("lunchbox", lunchBox);
     }
 
     //Playing around with matApi.se
