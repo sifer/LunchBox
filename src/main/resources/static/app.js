@@ -60,7 +60,7 @@ function initMap() {
             iconDesc = 'Fisk';
             bgColor = '#3399ff';
         };
-        if(pos.image.length > 0){
+        if(pos.image.length > 80){
             imageurl = 'data:image/png;base64,'+pos.image;
         }
         var marker = new google.maps.Marker({
@@ -136,6 +136,8 @@ function initMap() {
     }
     createMarkers();
 }
+//Hämta nuvarande position
+navigator.geolocation.getCurrentPosition(success, error, options);
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 function codeAddress() {
@@ -173,7 +175,7 @@ function foodApi() {
 var options = {
     enableHighAccuracy: true,
     timeout: 5000,
-    maximumAge: 30000
+    maximumAge: 5000
 };
 function success(pos) {
     var crd = pos.coords;
