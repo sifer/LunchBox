@@ -55,6 +55,33 @@ public class Repository {
         }
     }
 
+    public void updateUser(User user, Person person) throws Exception {
+        System.out.println(person.getFirstName());
+
+        try (Connection conn = dataSource.getConnection();
+             PreparedStatement psPerson = conn.prepareStatement("UPDATE [dbo].[Person] SET FirstName = ?, LastName = ?, PhoneNumber = ? WHERE PersonID = ?");
+             PreparedStatement ps = conn.prepareStatement("UPDATE [dbo].[User] SET Password = ?, Mail = ? WHERE UserID = ?");
+        ){
+
+            psPerson.setString(1, person.getFirstName());
+            psPerson.setString(2, person.getLastName());
+            psPerson.setString(3, person.getPhoneNumber());
+            psPerson.setInt(4, person.getPersonID());
+
+            psPerson.executeUpdate();
+
+            ps.setString(1, user.getPassword());
+            ps.setString(2, user.getMail());
+            ps.setInt(3, user.getUserID());
+
+            ps.executeUpdate();
+
+
+        } catch (SQLException e) {
+            throw new Exception(e);
+        }
+    }
+
     public List<User> getUsers() {
         try(Connection conn = dataSource.getConnection();
             Statement statement = conn.createStatement();
