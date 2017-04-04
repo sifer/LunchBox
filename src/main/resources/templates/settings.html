@@ -6,7 +6,7 @@
     <link type="text/css" rel="stylesheet" th:href="@{/style.css}"/>
 </head>
 <body>
-<div class="settings">
+<div class="annons settings">
     <form class="form" th:action="settings" method="POST">
         <h1>Uppdatera användaruppgifter</h1>
         <fieldset>
@@ -33,6 +33,9 @@
 
         </fieldset>
         <button type="submit">Sign Up</button>
+    </form>
+    <form action="/" method="get">
+        <button type="submit">Tillbaka</button>
     </form>
 </div>
 </body>

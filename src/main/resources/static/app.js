@@ -11,7 +11,9 @@ function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 12,
         center: stockholm,
-        styles: mapStyle
+        styles: mapStyle,
+        disableDefaultUI: true,
+        zoomControl: true
     });
 
 /*    document.querySelector('.newLoc').addEventListener('click', function() {
