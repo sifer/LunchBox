@@ -141,9 +141,7 @@ public class LogicController {
 
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, LunchBox lunchBox, RedirectAttributes attr, HttpSession session) throws Exception {
-
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
-
             showNewUser = true;
             String error = "";
             if (brp.hasErrors()){
@@ -151,16 +149,12 @@ public class LogicController {
             }
             else if(bru.hasErrors()){
                 error = bru.getFieldError().getDefaultMessage();
-            }
-            if(userNameDuplicate(user)){
+            }if(userNameDuplicate(user)){
                 error = "Användarnament är upptaget, vänligen välj ett nytt";
-            }
-
-            return new ModelAndView("index")
+            }return new ModelAndView("index")
                     .addObject("showNewUser", showNewUser)
                     .addObject("error", error)
                     .addObject("lunchBoxes", lunchBoxesJson);
-
         }
         int key = Integer.parseInt(repository.addUser(user, person));
         users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
@@ -238,6 +232,46 @@ public class LogicController {
                 .addObject("location", location);
     }
 
+    @GetMapping("/settings")
+    public ModelAndView settings(HttpSession session) {
+        User user = (User)session.getAttribute("user");
+        Person person = (Person)session.getAttribute("person");
+        return new ModelAndView("settings")
+                .addObject("userSession", session);
+
+    }
+    @PostMapping("/settings")
+    public ModelAndView changeSettings(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, @RequestParam String repeatedPassword, HttpSession session) {
+
+        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user) || confirmPassword(user.getPassword(), repeatedPassword) == false) {
+            String error = "";
+            if (brp.hasErrors()) {
+                error = brp.getFieldError().getDefaultMessage();
+            } else if (bru.hasErrors()) {
+                error = bru.getFieldError().getDefaultMessage();
+            }
+            else if(confirmPassword(user.getPassword(), repeatedPassword) == false){
+                error = "Lösenorden stämmer inte överrens";
+            }
+            return new ModelAndView("settings")
+                    .addObject("error", error);
+        }
+
+        user.setUserName(((User)session.getAttribute("user")).getUserName());
+        user.setUserID(((User)session.getAttribute("user")).getUserID());
+        person.setPersonID(((Person)session.getAttribute("person")).getPersonID());
+
+        session.removeAttribute("user");
+        session.removeAttribute("person");
+        session.setAttribute("user", user);
+        session.setAttribute("person", person);
+        updateUserList(user);
+        updatePersonList(person);
+
+        return new ModelAndView("settings")
+                .addObject("userSession", session);
+    }
+
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;
 
@@ -299,5 +333,30 @@ public class LogicController {
         }return null;
     }
 
+    private boolean confirmPassword(String password, String repeatPassword) {
+        boolean confirmPassword = false;
+        if(password.equals(repeatPassword)) {
+            confirmPassword = true;
+        }
+        return confirmPassword;
+    }
 
+    private void updateUserList(User updatedUser){
+        for(User user : users){
+            if(updatedUser.getUserID() == user.getUserID()){
+                user.setPassword(updatedUser.getPassword());
+                user.setMail(updatedUser.getMail());
+            }
+        }
+    }
+
+    private void updatePersonList(Person updatedPerson){
+        for(Person person : persons){
+            if(updatedPerson.getPersonID() == person.getPersonID()){
+                person.setFirstName(updatedPerson.getFirstName());
+                person.setLastName(updatedPerson.getLastName());
+                person.setPhoneNumber(updatedPerson.getPhoneNumber());
+            }
+        }
+    }
 }
