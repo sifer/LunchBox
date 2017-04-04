@@ -135,6 +135,19 @@ public class Repository {
 
     }
 
+    public void removeLunchBox(int lunchboxid) throws SQLException {
+
+        try(Connection conn = dataSource.getConnection();
+            PreparedStatement ps = conn.prepareStatement("DELETE FROM [dbo].[LunchBox]WHERE LunchBoxID = ?")) {
+
+            ps.setInt(1, lunchboxid);
+
+            ps.executeUpdate();
+        } catch(SQLException e) {
+            e.printStackTrace();
+        }
+        }
+
     public List<LunchBox> getLunchBoxes() {
         try(Connection conn = dataSource.getConnection();
             Statement statement = conn.createStatement();

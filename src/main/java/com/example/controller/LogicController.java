@@ -65,6 +65,7 @@ public class LogicController {
     @Autowired
     Repository repository;
 
+
     @PostConstruct
     public void RefreshUsers() {
         users = (ArrayList<User>) repository.getUsers();
@@ -135,11 +136,6 @@ public class LogicController {
         return mv;
     }
 
-    @GetMapping("/userSession")
-    public ModelAndView userSession() {
-        return null;
-    }
-
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr, HttpSession session) throws Exception {
 
@@ -187,29 +183,50 @@ public class LogicController {
         return new ModelAndView("redirect:/");
     }
 
-    //Playing around with matApi.se
-    @GetMapping("/test")
-    public ModelAndView foodApi() {
+    @PostMapping("/updateLunchBoxes")
+    public ModelAndView update(HttpSession session, LunchBox lunchbox) {
+        System.out.println("UpdateLunchBoxes körs");
 
-        ModelAndView mv = new ModelAndView("test");
+        lunchbox = new LunchBox(0, "test", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
-        return mv;
-    }
+        Person person = (Person)session.getAttribute("person");
+        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
 
-    //Playing around with matApi.se
-    @PostMapping("/test")
-    public ModelAndView getApi(@RequestParam String ingredient) throws Exception{
-        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=10+Tulegatan,+Stockholm,+Sweden&key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw";
-        String ingredientInfo = readUrl(url);
-        System.out.println(ingredientInfo);
-        boolean searchedForIngredient = true;
+        for (int i = 0; i<lunchBoxes.size(); i++) {
+            if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                personLunchBoxes.add(lunchBoxes.get(i));
+        }
 
-        return new ModelAndView("test")
-                .addObject("ingridient", ingredientInfo)
-                .addObject("searchedForIngredient", searchedForIngredient);
+        return new ModelAndView("userLunchBoxes")
+                .addObject("userSession", session)
+                .addObject("personLunchBoxes", personLunchBoxes)
+                .addObject("lunchbox", lunchbox);
 
     }
+    @PostMapping("/remove")
+    public ModelAndView removeLunchBox(@RequestParam int lunchboxid, HttpSession session) throws SQLException{
 
+        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
+        Person person =(Person)session.getAttribute("person");
+
+        if(lunchboxid > 0) {
+            repository.removeLunchBox(lunchboxid);
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if(lunchBoxes.get(i).getLunchBoxID() == lunchboxid) {
+                    lunchBoxes.remove(i);
+                }
+            }
+
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                personLunchBoxes.add(lunchBoxes.get(i));
+            }
+        }
+
+        return new ModelAndView("userLunchBoxes")
+                .addObject("userSession", session)
+                .addObject("personLunchBoxes", personLunchBoxes);
+    }
 
     @PostMapping("/lunchbox")
     public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
@@ -278,6 +295,34 @@ public class LogicController {
         return jsonInString;
     }
 
+    private Person returnCorrectPerson(int userId) {
+        for(Person person : persons){
+            if (person.getPersonID() == userId) {
+                return person;
+            }
+        }return null;
+    }
+
+    //Playing around with matApi.se
+    @GetMapping("/test")
+    public ModelAndView update() {
+        return null;
+    }
+
+    //Playing around with matApi.se
+    @PostMapping("/test")
+    public ModelAndView getApi(@RequestParam String ingredient) throws Exception{
+        String url = "https://maps.googleapis.com/maps/api/geocode/json?address=10+Tulegatan,+Stockholm,+Sweden&key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw";
+        String ingredientInfo = readUrl(url);
+        System.out.println(ingredientInfo);
+        boolean searchedForIngredient = true;
+
+        return new ModelAndView("test")
+                .addObject("ingridient", ingredientInfo)
+                .addObject("searchedForIngredient", searchedForIngredient);
+
+    }
+
     //Built if we want to use matapi.se
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
@@ -296,14 +341,6 @@ public class LogicController {
                 reader.close();
         }
     }
-
-    private Person returnCorrectPerson(int userId) {
-        for(Person person : persons){
-            if (person.getPersonID() == userId) {
-                return person;
-            }
-        }return null;
-    }
-
-
 }
+
+
