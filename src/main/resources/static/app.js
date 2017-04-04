@@ -111,8 +111,6 @@ function initMap() {
             iwOuter.parentElement.children[3].style.top = '-7%';
             iwOuter.parentElement.children[3].style.right = '8%';
 
-
-
         });
         marker.addListener('click', function() {
             infowindow.open(map, marker);
@@ -126,10 +124,8 @@ function initMap() {
             createMarker(lunchBoxes[i]);
         }
     }
-
     createMarkers();
 }
-
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 function codeAddress() {
