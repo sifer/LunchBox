@@ -80,8 +80,29 @@ public class LogicController {
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
     }
+// Om någon redan är inloggad skickas direkt till "userSession", annars visas startsidan
+    @GetMapping("/")
+    public ModelAndView form(HttpSession session) {
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
+        if (session.getAttribute("user") != null) {
+            return new ModelAndView("userSession")
+                    .addObject("userSession", session)
+                    .addObject("user", session.getAttribute("user"))
+                    .addObject("person", returnCorrectPerson(((User)session.getAttribute("user")).getUserID()) )
+                    .addObject("lunchBoxes", lunchBoxesJson)
+                    .addObject("lunchbox", lunchbox);
+        }
+        User user = new User("", "", "");
+        Person person = new Person("", "", "");
 
+        return new ModelAndView("index")
+        .addObject("user",user)
+        .addObject("person",person)
+        .addObject("lunchBoxes", lunchBoxesJson);
+    }
+//Login-funktion. Om användaren loggar in med befintligt username och password skickas till "userSession", annars visas loginrutan
+    //igen och felmeddelande visas
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
         System.out.println(userName + " " + password);
@@ -114,28 +135,9 @@ public class LogicController {
                 .addObject("person", person);
     }
 
-    @GetMapping("/")
-    public ModelAndView form(HttpSession session) {
-        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
 
-        if (session.getAttribute("user") != null) {
-            return new ModelAndView("userSession")
-                    .addObject("userSession", session)
-                    .addObject("user", session.getAttribute("user"))
-                    .addObject("person", returnCorrectPerson(((User)session.getAttribute("user")).getUserID()) )
-                    .addObject("lunchBoxes", lunchBoxesJson)
-                    .addObject("lunchbox", lunchbox);
-        }
-        User user = new User("", "", "");
-        Person person = new Person("", "", "");
-        ModelAndView mv = new ModelAndView("index");
-        mv.addObject("user",user);
-        mv.addObject("person",person);
-        mv.addObject("lunchBoxes", lunchBoxesJson);
-
-        return mv;
-    }
-
+//Vid skapande av ny user visas felmeddelande om validation fails eller om username redan finns. Annars skapas ny user och
+    //användaren redirectas till startsidan + loggas in automatiskt.
     @PostMapping("/user")
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr, HttpSession session) throws Exception {
 
@@ -172,7 +174,7 @@ public class LogicController {
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("lunchbox", lunchbox);
     }
-
+//Logout-funktion.
     @PostMapping("/logout")
     public ModelAndView logout(HttpSession session, HttpServletRequest request) {
 
@@ -183,51 +185,7 @@ public class LogicController {
         return new ModelAndView("redirect:/");
     }
 
-    @PostMapping("/updateLunchBoxes")
-    public ModelAndView update(HttpSession session, LunchBox lunchbox) {
-        System.out.println("UpdateLunchBoxes körs");
-
-        lunchbox = new LunchBox(0, "test", "", null, null, false, false, false, false, false, false, false, false, null, 0);
-
-        Person person = (Person)session.getAttribute("person");
-        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
-
-        for (int i = 0; i<lunchBoxes.size(); i++) {
-            if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
-                personLunchBoxes.add(lunchBoxes.get(i));
-        }
-
-        return new ModelAndView("userLunchBoxes")
-                .addObject("userSession", session)
-                .addObject("personLunchBoxes", personLunchBoxes)
-                .addObject("lunchbox", lunchbox);
-
-    }
-    @PostMapping("/remove")
-    public ModelAndView removeLunchBox(@RequestParam int lunchboxid, HttpSession session) throws SQLException{
-
-        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
-        Person person =(Person)session.getAttribute("person");
-
-        if(lunchboxid > 0) {
-            repository.removeLunchBox(lunchboxid);
-            for (int i = 0; i<lunchBoxes.size(); i++) {
-                if(lunchBoxes.get(i).getLunchBoxID() == lunchboxid) {
-                    lunchBoxes.remove(i);
-                }
-            }
-
-            for (int i = 0; i<lunchBoxes.size(); i++) {
-                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
-                personLunchBoxes.add(lunchBoxes.get(i));
-            }
-        }
-
-        return new ModelAndView("userLunchBoxes")
-                .addObject("userSession", session)
-                .addObject("personLunchBoxes", personLunchBoxes);
-    }
-
+//Skapa ny lunchbox utefter formulärets information
     @PostMapping("/lunchbox")
     public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
 
@@ -252,14 +210,66 @@ public class LogicController {
         lunchBoxes.add(lunchbox);
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
-        System.out.println(lunchbox.getImage());
-
 
         return new ModelAndView("userSession")
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("lunchbox", lunchbox)
                 .addObject("location", location);
     }
+
+
+    //Visa alla lunchboxes tillhörande inloggad person
+    @PostMapping("/updateLunchBoxes")
+    public ModelAndView update(HttpSession session, LunchBox lunchbox) {
+        System.out.println("UpdateLunchBoxes körs");
+
+        lunchbox = new LunchBox(0, "test", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+
+        Person person = (Person)session.getAttribute("person");
+        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
+
+        for (int i = 0; i<lunchBoxes.size(); i++) {
+            if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                personLunchBoxes.add(lunchBoxes.get(i));
+        }
+
+        return new ModelAndView("userLunchBoxes")
+                .addObject("userSession", session)
+                .addObject("personLunchBoxes", personLunchBoxes)
+                .addObject("lunchbox", lunchbox);
+
+    }
+
+//Ta bort markerad lunchbox för inloggad person
+    @PostMapping("/remove")
+    public ModelAndView removeLunchBox(@RequestParam int lunchboxid, HttpSession session) throws SQLException{
+
+        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
+        Person person =(Person)session.getAttribute("person");
+
+        if(lunchboxid > 0) {
+            repository.removeLunchBox(lunchboxid);
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if(lunchBoxes.get(i).getLunchBoxID() == lunchboxid) {
+                    lunchBoxes.remove(i);
+                }
+            }
+
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                personLunchBoxes.add(lunchBoxes.get(i));
+            }
+        }
+        lunchBoxesJson = objectToJSON(lunchBoxes);
+
+        return new ModelAndView("userLunchBoxes")
+                .addObject("userSession", session)
+                .addObject("personLunchBoxes", personLunchBoxes)
+                .addObject("lunchBoxes", lunchBoxesJson);
+    }
+
+// Funktioner
+
 
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;
