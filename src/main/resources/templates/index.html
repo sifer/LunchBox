@@ -5,6 +5,9 @@
     <meta name="viewport" content="initial-scale=1.0"/>
     <meta charset="utf-8"/>
     <link type="text/css" rel="stylesheet" th:href="@{/style.css}"/>
+    <!--de nya filerna för slides-->
+    <link type="text/css" rel="stylesheet" th:href="@{/js-image-slider.css}"/>
+    <script type="text/javascript" src="/js-image-slider.js"></script>
 </head>
 <body>
     <header>
@@ -19,8 +22,20 @@
             <img src="/lunchboxlogga.png" class="headerimg"/>
         </div>
     </header >
-    <header id="banner">
+    <header class="banner">
+
+        <div id ="slider">
+            <img src="/matladasista.png" alt="" />
+            <img src="/mealprep4.jpg" alt="" />
+
+        </div>
+        <div id="htmlcaption" style="display: none;">
+
+        </div>
         <!--Banner-->
+        <div class="div2">
+
+        </div>
     </header>
     <section>
         <!--Textcontent + Karta-->
@@ -55,17 +70,52 @@
         <!--Recensioner-->
         <section>
             <img src="Kristoffer.png"/>
-            <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa
-                spännande och god mat!</p>
+            <h3>Kristoffer Schmidt<p> "LunchBox har hjälpt min vardag till det bättre! Jag har även fått chansen att smaka massa
+                spännande och god mat!"</p>
             </h3>
         </section>
         <section>
             <img src="Sandra.png"/>
-            <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p>
+            <h3>Sandra Kjellström<p> "Det är så otrolig smidigt. Skulle nog vilja säga att det är det bästa som hänt mig på länge!" </p>
             </h3>
         </section>
     </footer>
-    <footer><!--Copyright--></footer>
+    <footer>
+            <section>
+                <img src="/lunchboxlogga.png" class="headerimg"/>
+            </section>
+            <section>
+                <input onclick="fa()" class="knappfooter" value="Om oss"/>
+                <input onclick="fa()" class="knappfooter" value="Så fungerar det"/>
+                <input onclick="fa()" class="knappfooter" value="Få inspiration"/>
+            </section>
+            <section>
+                <input onclick="fa()" class="knappfooter" value="Aktuellt just nu"/>
+                <input onclick="fa()" class="knappfooter" value="FAQ"/>
+                <input onclick="fa()" class="knappfooter" value="Kontakta oss"/>
+            </section>
+            <section>
+                <h3 class="foljoss">Följ oss</h3>
+                <div>
+                    <a href="[full link to your Twitter]">
+                        <img title="Twitter" alt="Twitter" src="https://socialmediawidgets.files.wordpress.com/2014/03/01_twitter.png" width="35" height="35" />
+                    </a>
+                    <a href="[full link to your Pinterest]">
+                        <img title="Pinterest" alt="Pinterest" src="https://socialmediawidgets.files.wordpress.com/2014/03/13_pinterest.png" width="35" height="35" />
+                    </a>
+                    <a href="[full link to your Facebook page]">
+                        <img title="Facebook" alt="Facebook" src="https://socialmediawidgets.files.wordpress.com/2014/03/02_facebook.png" width="35" height="35" />
+                    </a>
+                    <a href="[full link to your LinkedIn]">
+                        <img title="LinkedIn" alt="LinkedIn" src="https://socialmediawidgets.files.wordpress.com/2014/03/07_linkedin.png" width="35" height="35" />
+                    </a>
+                    <a href="[full link to your Instagram]">
+                        <img title="Instagram" alt="RSS" src="https://socialmediawidgets.files.wordpress.com/2014/03/10_instagram.png" width="35" height="35" />
+                    </a>
+                </div>
+                <h3 class="foljoss">Tack!</h3>
+            </section>
+    </footer>
 
 
 
