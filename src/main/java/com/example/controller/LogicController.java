@@ -107,7 +107,6 @@ public class LogicController {
     @PostMapping("/login")
 
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password, LunchBox lunchBox) throws Exception {
-        System.out.println(userName + " " + password);
 
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
@@ -387,7 +386,7 @@ public class LogicController {
                 reader.close();
         }
     }
-}
+
 
     private boolean confirmPassword(String password, String repeatPassword) {
         boolean confirmPassword = false;
