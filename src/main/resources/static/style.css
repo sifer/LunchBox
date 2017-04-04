@@ -41,9 +41,7 @@ body > header:nth-child(1) > div:nth-child(1) {
     color: white;
     cursor: pointer;
 }
-.navBulletsWrapper {
-    display: none;
-}
+
 
 .knappstor2 {
     /*padding: 12px 90px;*/
