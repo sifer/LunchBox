@@ -105,7 +105,7 @@ public class LogicController {
     //igen och felmeddelande visas
     @PostMapping("/login")
     public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
-        System.out.println(userName + " " + password);
+
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
                 session.setAttribute("user", index);
@@ -221,10 +221,7 @@ public class LogicController {
     //Visa alla lunchboxes tillhörande inloggad person
     @PostMapping("/updateLunchBoxes")
     public ModelAndView update(HttpSession session, LunchBox lunchbox) {
-        System.out.println("UpdateLunchBoxes körs");
-
-        lunchbox = new LunchBox(0, "test", "", null, null, false, false, false, false, false, false, false, false, null, 0);
-
+        
         Person person = (Person)session.getAttribute("person");
         ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
 

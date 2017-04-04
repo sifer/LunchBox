@@ -37,7 +37,7 @@
             <form action="remove" method="post" th:object="${lunchbox}">
                 <input type="hidden" th:value="*{LunchBoxID}" name="lunchboxid"/>
                 <td th:text="*{description}"></td>
-                <input type="submit" class="knappstor" value="Ta bort matlåda"/>
+                <input type="submit" class="knappliten" value="Ta bort matlåda"/>
             </form>
         </section>
     </tr>
@@ -57,16 +57,10 @@
 </footer>
 
 
-
-
-
 <script type="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
 <script type="text/javascript" src="/app.js"></script>
-<script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
-<script type="text/javascript" th:if="${showNewUser}">fn()</script>
-<script type="text/javascript" th:if="${showLogin}">fa()</script>
 
 </body>
 </html>
