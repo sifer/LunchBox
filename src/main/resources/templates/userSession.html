@@ -28,6 +28,9 @@
         <form action="logout" method="post">
             <input type="submit" class="knappstor" value="Logga ut"/>
         </form>
+        <form action="updateLunchBoxes" method="post">
+            <input type="submit" class="knappstor" value="Hantera matlådor"/>
+        </form>
     </section>
 </article>
 
@@ -37,7 +40,6 @@
         <div id="map"></div>
     </section>
     <section>
-
         <input class="address" type="textbox"/>
         <input class="knappliten submit" type="button" value="Hitta adress"/>
     </section>
@@ -71,7 +73,7 @@
             <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
             <label for="image">Lägg upp en bild</label>
-            <input type="text" id="image" name="image" th:value="${lunchbox.image}"/>
+            <input type="file" id="image" name="image" accept="image/*" th:value="${lunchbox.image}"/>
 
             <label for="matlada">Finns det några nämnvärda ingredienser din rätt innehåller?</label>
             <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea>
@@ -102,12 +104,13 @@
 </div>
 
 
-<script type="text/javascript" ype="text/javascript" src="/mapstyle.js"></script>
+<script type="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
 <script type="text/javascript" src="/app.js"></script>
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>
 <script type="text/javascript" th:if="${showLogin}">fa()</script>
+
 </body>
 </html>

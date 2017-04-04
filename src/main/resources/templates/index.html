@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="eng" xmlns:th="http://www.w3.org/1999/xhtml">
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
 <head>
     <title>Simple Map</title>
     <meta name="viewport" content="initial-scale=1.0"/>
@@ -28,6 +30,7 @@
         <p id="brodtext">Via vår app kan någon annan göra jobbet åt dig. Du sparar tid, energi och pengar.</p>
         <div id="map"></div>
         <p>
+            <input id="filter" placeholder="Filter..." type="text" value="" onkeyup="filterMap(this.value)"/>
             <input id="address" type="textbox"/>
             <input class="knappliten newLoc" id="submit" type="button" value="Hitta adress"/>
        </p>
@@ -55,46 +58,63 @@
         <!--Recensioner-->
         <section>
             <img src="Kristoffer.png"/>
-            <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa
-                spännande och god mat!</p>
+            <h3>Kristoffer Schmidt<h4> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa
+                spännande och god mat!</h4>
             </h3>
         </section>
         <section>
             <img src="Sandra.png"/>
-            <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p>
+            <h3>Sandra Kjellström<h4> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </h4>
             </h3>
         </section>
     </footer>
-    <footer><!--Copyright--></footer>
+
+    <footer>
+        <section>
+            <img src="/lunchboxlogga.png" class="headerimg"/>
+        </section>
+        <section>
+            <h3 class="footer">Om oss</h3>
+            <h4></h4>
+        </section>
+        <section>
+            <h3 class="footer">Aktuellt just nu</h3>
+            <h4></h4>
+        </section>
+        <section>
+            <h3 class="footer">
+            <ul>
+                <li><a href="http://facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                <li><a href="http://linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                <li><a href="http://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="http://plus.google.com/"><i class="fa fa-google-plus"></i> </a></li>
+            </ul></h3>
+            <h4></h4>
+        </section>
+    </footer>
 
 
 
 <div id="formular">
-
-<!--</div>-->
-<!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
+    <div class="black_overlay"></div>
 <div class="annons">
     <form class="form" th:action="user" method="POST">
         <h1>Skapa en ny användare</h1>
         <fieldset>
             <legend><span class="number">1</span>Fyll i din information nedan!</legend>
-            <label for="name">Namn:</label>
-            <input type="text" id="name" th:value="${person.firstName}" name="firstName"/>
 
-            <label for="lastname">Efternamn:</label>
-            <input type="text" id="lastname" th:value="${person.lastName}" name="lastName"/>
+            <input type="text" id="name" th:value="${person.firstName}" name="firstName" placeholder="Namn" />
 
-            <label for="phonenumber">Telefonnummer:</label>
-            <input type="number" id="phonenumber" th:value="${person.phoneNumber}" name="phoneNumber"/>
+            <input type="text" id="lastname" th:value="${person.lastName}" name="lastName" placeholder="Efternamn"/>
 
-            <label for="mail">Email:</label>
-            <input type="email" id="mail" th:value="${user.mail}" name="mail"/>
+            <input type="number" id="phonenumber" th:value="${person.phoneNumber}" name="phoneNumber" placeholder="Telefonnummer"/>
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" th:value="${user.userName}" name="userName"/>
+            <!--<label for="mail">Email:</label>-->
+            <input type="email" id="mail" th:value="${user.mail}" name="mail" placeholder="Email"/>
 
-            <label for="password">Password:</label>
-            <input type="password" id="password" th:value="${user.password}" name="password"/>
+            <input type="text" id="username" th:value="${user.userName}" name="userName" placeholder="Användarnamn"/>
+
+            <input type="password" id="password" th:value="${user.password}" name="password" placeholder="Lösenord"/>
 
             <p th:text="${error}"></p>
 
@@ -113,7 +133,7 @@
                 <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
                 <!--                <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>-->
             </ul>
-
+            <h4 class="centered">Fyll i din information nedan!</h4>
             <form th:action="@{/login}" class="form" method="POST">
                 <input type="text" name="userName" placeholder="Användernamn" class="textbox" th:value="${user.userName}"/>
                 <input type="text" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
