@@ -104,13 +104,12 @@ public class LogicController {
 //Login-funktion. Om användaren loggar in med befintligt username och password skickas till "userSession", annars visas loginrutan
     //igen och felmeddelande visas
     @PostMapping("/login")
-    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password) throws Exception {
+    public ModelAndView getUserLogin(@RequestParam String userName, HttpSession session, @RequestParam String password, LunchBox lunchBox) throws Exception {
         System.out.println(userName + " " + password);
         for (User index : users) {
             if((userName.equals(index.getUserName()) && (password.equals(index.getPassword())))) {
                 session.setAttribute("user", index);
                 session.setAttribute("person", returnCorrectPerson(index.getUserID()) );
-                LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
                 String location = "";
 
                 return new ModelAndView("userSession")
@@ -118,7 +117,7 @@ public class LogicController {
                         .addObject("user", index)
                         .addObject("person", returnCorrectPerson(index.getUserID()) )
                         .addObject("lunchBoxes", lunchBoxesJson)
-                        .addObject("lunchbox", lunchbox)
+                        .addObject("lunchbox", lunchBox)
                         .addObject("location", location);
             }
 
@@ -139,10 +138,10 @@ public class LogicController {
 //Vid skapande av ny user visas felmeddelande om validation fails eller om username redan finns. Annars skapas ny user och
     //användaren redirectas till startsidan + loggas in automatiskt.
     @PostMapping("/user")
+
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr, HttpSession session) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
-
             showNewUser = true;
             String error = "";
             if (brp.hasErrors()){
@@ -150,18 +149,16 @@ public class LogicController {
             }
             else if(bru.hasErrors()){
                 error = bru.getFieldError().getDefaultMessage();
-            }
-            if(userNameDuplicate(user)){
+            }if(userNameDuplicate(user)){
                 error = "Användarnament är upptaget, vänligen välj ett nytt";
-            }
-
-            return new ModelAndView("index")
+            }return new ModelAndView("index")
                     .addObject("showNewUser", showNewUser)
                     .addObject("error", error)
                     .addObject("lunchBoxes", lunchBoxesJson);
-
         }
+
         LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+
         int key = Integer.parseInt(repository.addUser(user, person));
         users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
         persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
@@ -173,6 +170,7 @@ public class LogicController {
                 .addObject("person", person)
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("lunchbox", lunchbox);
+
     }
 //Logout-funktion.
     @PostMapping("/logout")
@@ -217,6 +215,46 @@ public class LogicController {
                 .addObject("location", location);
     }
 
+
+    @GetMapping("/settings")
+    public ModelAndView settings(HttpSession session) {
+        User user = (User)session.getAttribute("user");
+        Person person = (Person)session.getAttribute("person");
+        return new ModelAndView("settings")
+                .addObject("userSession", session);
+
+    }
+    @PostMapping("/settings")
+    public ModelAndView changeSettings(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, @RequestParam String repeatedPassword, HttpSession session) {
+
+        if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user) || confirmPassword(user.getPassword(), repeatedPassword) == false) {
+            String error = "";
+            if (brp.hasErrors()) {
+                error = brp.getFieldError().getDefaultMessage();
+            } else if (bru.hasErrors()) {
+                error = bru.getFieldError().getDefaultMessage();
+            }
+            else if(confirmPassword(user.getPassword(), repeatedPassword) == false){
+                error = "Lösenorden stämmer inte överrens";
+            }
+            return new ModelAndView("settings")
+                    .addObject("error", error);
+        }
+
+        user.setUserName(((User)session.getAttribute("user")).getUserName());
+        user.setUserID(((User)session.getAttribute("user")).getUserID());
+        person.setPersonID(((Person)session.getAttribute("person")).getPersonID());
+
+        session.removeAttribute("user");
+        session.removeAttribute("person");
+        session.setAttribute("user", user);
+        session.setAttribute("person", person);
+        updateUserList(user);
+        updatePersonList(person);
+
+        return new ModelAndView("settings")
+                .addObject("userSession", session);
+    }
 
     //Visa alla lunchboxes tillhörande inloggad person
     @PostMapping("/updateLunchBoxes")
@@ -269,7 +307,6 @@ public class LogicController {
     }
 
 // Funktioner
-
 
     public boolean userNameDuplicate(User user) {
         boolean duplicate = false;
@@ -353,4 +390,31 @@ public class LogicController {
     }
 }
 
+    private boolean confirmPassword(String password, String repeatPassword) {
+        boolean confirmPassword = false;
+        if(password.equals(repeatPassword)) {
+            confirmPassword = true;
+        }
+        return confirmPassword;
+    }
 
+    private void updateUserList(User updatedUser){
+        for(User user : users){
+            if(updatedUser.getUserID() == user.getUserID()){
+                user.setPassword(updatedUser.getPassword());
+                user.setMail(updatedUser.getMail());
+            }
+        }
+    }
+
+
+    private void updatePersonList(Person updatedPerson){
+        for(Person person : persons){
+            if(updatedPerson.getPersonID() == person.getPersonID()){
+                person.setFirstName(updatedPerson.getFirstName());
+                person.setLastName(updatedPerson.getLastName());
+                person.setPhoneNumber(updatedPerson.getPhoneNumber());
+            }
+        }
+    }
+}
