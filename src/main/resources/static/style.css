@@ -13,13 +13,6 @@ body {
     font-family: mySecondFont;
     src: url(BebasNeue.otf);
 }
-h2 {
-    margin: 0;
-    text-align: center;
-    font-size: large;
-    font-family: myFirstFont;
-    color: darkgray;
-}
 body >  header {
     text-align: center;
 }
@@ -31,12 +24,12 @@ body > header:nth-child(1) > div:nth-child(1) {
     /*padding: 12px 90px;*/
     background-color: rgba(57, 49, 49, 0.78);
     font-family: mySecondFont;
-    font-size: 25px;
+    font-size: 20px;
     /*font-weight: bold;*/
     background: beige;
     color: #66CC99;
     height: 60px;
-    width: 150px;
+    width: 100px;
     line-height: 60px;
     margin: 15px 15px;
     text-align: center;
@@ -58,8 +51,9 @@ body > header:nth-child(1) > div:nth-child(2) {
     overflow: hidden;*/
     /*background: url("matlada4april-644x430.png") repeat;*/
 }
-body > section:nth-child(1){
+body > section:nth-of-type(1){
     text-align: center;
+    padding: 0.5% 0% 0% 0%
 }
 body > section:nth-of-type(2){
     background-color: white;
@@ -111,22 +105,72 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
 }
 /*slutar här */
 
+/*FOOTER NUMMER 2*/
+
+body > footer:nth-of-type(2){
+       display: block;
+       overflow: visible;
+       margin-right: auto;
+       margin-left: auto;
+       padding-top: 40px;
+       padding-bottom: 20px;
+       background-color: #4bc970;
+   }
+body > footer:nth-of-type(2) > section {
+       width: 24.5%;
+       display: inline-block;
+       height: 100%;
+       text-align: center;
+}
+body > footer:nth-of-type(2) > section:nth-of-type(1) {
+background-color:white;
+}
+.footer {
+color:white;
+}
+
+ul {
+	overflow: auto;
+}
+
+ul li {
+	list-style-type: none;
+	float: left;
+}
+
+ul li a i {
+	background:pink;
+	color: #fff;
+	width: 40px;
+	height: 40px;
+	border-radius: 20px;
+	font-size: 25px;
+	text-align: center;
+	margin-right: 10px;
+	padding-top: 15%;
+}
 
 #brodtext {
-    font-family: mySecondFont;
-    color: darkgrey;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-family: Montserrat, sans-serif;
+    color: #4a4a4a;
     font-size: 25px;
+    line-height: 74px;
+    font-weight: 400;
+    text-align: center;
+    text-align: center;
     text-align: center;
 }
 
 
 .black_overlay {
-    background-color: white;
+    background-color: darkgrey;
+    position: fixed;
     width: 100%;
     height: 100%;
     left: 0;
     opacity: 0.7;
-    position: absolute;
     top: 0;
     visibility: hidden;
     z-index: 50;
@@ -143,10 +187,15 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
 
 
 #text1 {
-    color:darkgrey;
+
+    margin-bottom: 10px;
+    font-family: Montserrat, sans-serif;
+    color: #4a4a4a;
+    font-size: 45px;
+    line-height: 74px;
+    font-weight: 400;
     text-align: center;
-    font-family: myFirstFont;
-    font-size: x-large;
+    text-align: center;
 }
 
 #text1:hover {
@@ -157,11 +206,13 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
     position: relative;
     top: 9%;
     height: 160px;
+
 }
 
 #map {
+    border: 20px solid rgba(1, 1, 1, 0.1);
     height: 360px;
-    width: 650px;
+    width: 700px;
     margin: 0 auto;
 }
 
@@ -172,15 +223,11 @@ h1 {
 .knappliten {
     color: white;
     padding: 4px 16px;
-    background-color: rgba(57, 49, 49, 0.78);
+    background-color:#66cb99;
     font-family: sans-serif;
     font-weight: bold;
     font-variant: small-caps;
     margin: 0.1% 1% 4% 0%;
-}
-
-body > section:nth-of-type(1)> p:nth-of-type(2){
-text-align: center;
 }
 
 /*Här börjar CSSen för knapparna*/
@@ -195,13 +242,29 @@ text-align: center;
 
 
 .annons {
+    font-family: Montserrat, sans-serif;
+    color:black;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color:rgba(128, 128, 128, 0.93);
+    text-align: center;
+    align-content: center;
+    visibility: hidden;
+    z-index:999;
+    width: 550px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.settings {
     color:dimgrey;
     padding: 10px 20px;
     border-radius: 8px;
     background-color:white;
     text-align: center;
     align-content: center;
-    visibility: hidden;
     z-index:999;
     width: 550px;
     position: fixed;
@@ -272,7 +335,8 @@ input {
 
 }
 fieldset {
-    margin-bottom: 30px;
+    text-align: left;
+    margin-bottom: 0px;
     border: none;
 }
 
@@ -282,7 +346,6 @@ legend {
 }
 
 label {
-    display: block;
     margin-bottom: 8px;
 }
 
@@ -312,10 +375,12 @@ label.light {
 
 
 #bg{
-    color:#fff;
+    font-family: Montserrat, sans-serif;
+    color:darkgrey;
+    rgba(128, 128, 128, 0.93);
     padding: 10px 20px;
     border-radius: 8px;
-    background-color:white;
+    background-color: rgba(128, 128, 128, 0.93);
     text-align: center;
     align-content: center;
     visibility: hidden;
@@ -336,8 +401,7 @@ label.light {
     margin-left:auto;
     margin-right:auto;
     border-radius:5px;
-    background:white;
-
+    background:#e8eeef;
     -webkit-box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
     box-shadow:  0px 0px 15px 0px rgba(0, 0, 0, .45);
 
@@ -449,14 +513,17 @@ label.light {
 
 
 h3 {
-    font-family: mySecondFont;
+    /*font-family: mySecondFont;*/
+    font-family: Montserrat, sans-serif;
     font-size: 22px;
     color: #373838;
 }
 
 h4 {
-    font-family: mySecondFont;
+ /*   font-family: mySecondFont;*/
+    font-family: Montserrat, sans-serif;
     color: #373838;
+    font-size:15px
 }
 .close {
     position: absolute;
@@ -465,7 +532,7 @@ h4 {
     top: 0;
     right: 0px;
     width: 25px;
-    background-color: #80b438;
+    background-color: #4bc970;
 }
 
 #Popup {
@@ -503,22 +570,63 @@ h4 {
 
 /* Max hemliga dokument */
 .infoWindow {
+    display: inline-block;
+    min-width: 400px;
     position: relative;
-    overflow-x: hidden;
     overflow-y: auto;
 }
-.infoWindow img{
+.infoWindow > div{
+    width: 72%;
+}
+.infoWindow > img{
     position: absolute;
     display: block;
+    width: 20%;
+    right: 27px;
     top: 5px;
-    right: 5px;
-    height: 120px;
-    width: 120px;
 }
-.gm-style-iw {
-    min-width: 350px !important;
+/*style the box*/
+.gm-style .gm-style-iw {
+    background-color: white;
     top: 0 !important;
     left: 0 !important;
-    border-radius: 2px 2px 0 0;
+    width: 84% !important;
+    height: 100% !important;
+    min-height: 120px !important;
+    padding: 5px;
+    display: block !important;
+}
+#filter::-webkit-input-placeholder {
+    text-align: center;
+}
+#filter:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+#filter::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+}
+#filter:-ms-input-placeholder {
+    text-align: center;
+}
+#filter{
+    text-align: center;
 }
 /* Slut på Max hemliga dokument */
+
+/*Johans css*/
+
+.plunchbox {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 1px solid green;
+
+
+}
+#plunchboxwrap {
+    display: block;
+    border: 1px solid green;
+    height: 450px;
+    overflow-y: scroll;
+}
