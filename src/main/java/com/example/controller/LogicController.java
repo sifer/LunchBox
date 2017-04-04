@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.w3c.dom.Document;
@@ -212,11 +213,10 @@ public class LogicController {
 
 
     @PostMapping("/lunchbox")
-    public ModelAndView newLunchBox(LunchBox lunchbox, String location, HttpSession session) throws SQLException {
-
+    public ModelAndView newLunchBox(LunchBox lunchbox, String image, String location, HttpSession session) throws SQLException {
+        System.out.println(image);
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
-
         GeocodingResult[] results = req.awaitIgnoreError();
         for(GeocodingResult result : results) {
             BigDecimal lat = new BigDecimal(result.geometry.location.lat);
