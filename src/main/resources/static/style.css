@@ -147,9 +147,9 @@ body > footer:nth-of-type(2) > section {
        height: 100%;
        text-align: center;
 }
-body > footer:nth-of-type(2) > section:nth-of-type(1) {
+/*body > footer:nth-of-type(2) > section:nth-of-type(1) {
 background-color:white;
-}
+}*/
 .footer {
 color:white;
 }
@@ -231,6 +231,7 @@ ul li a i {
     position: relative;
     top: 9%;
     height: 160px;
+
 
 }
 
