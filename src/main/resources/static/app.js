@@ -2,6 +2,7 @@
 var geocoder;
 var map;
 var activeInfoWindow;
+var activeMarker;
 var markerList = [];
 var infoWindowList = [];
 
@@ -80,8 +81,12 @@ function initMap() {
 
 
         google.maps.event.addListener(infowindow, 'domready', function() {
-            if(activeInfoWindow != null){
-                activeInfoWindow.close();
+            if(activeInfoWindow != null || activeInfoWindow == infowindow){
+                try{
+                    activeInfoWindow.close();
+                }catch(err){
+
+                }
             }
             activeInfoWindow = infowindow;
             // Reference to the DIV which receives the contents of the infowindow using jQuery
@@ -103,8 +108,8 @@ function initMap() {
 
 
             // Fixa stäng-knappen
-            iwOuter.parentElement.children[2].style.top = '-4.3%';
-            iwOuter.parentElement.children[2].style.right = '8.7%';
+            iwOuter.parentElement.children[2].style.top = '24%';
+            iwOuter.parentElement.children[2].style.right = '8.9%';
             iwOuter.parentElement.children[2].style.height = '20px';
             iwOuter.parentElement.children[2].style.lineHeight = '20px';
             iwOuter.parentElement.children[2].style.fontSize = '20px';
@@ -118,12 +123,26 @@ function initMap() {
             // Byta ut till ett kryss
             iwOuter.parentElement.children[2].innerHTML = 'X';
             // Osynlig hitbox
-            iwOuter.parentElement.children[3].style.top = '-7%';
+            iwOuter.parentElement.children[3].style.top = '22%';
             iwOuter.parentElement.children[3].style.right = '8%';
 
         });
+        //Event-listener för on close click
+        google.maps.event.addListener(infowindow,'closeclick',function(){
+            activeMarker = "";
+            activeInfoWindow = "";
+            });
         marker.addListener('click', function() {
-            infowindow.open(map, marker);
+            if(activeMarker == this){
+
+            }
+            else {
+                map.panTo(this.getPosition());
+                activeMarker = this;
+                infowindow.open(map, marker);
+                setTimeout(function() { map.panBy(0,-60)}, 1000);
+
+            }
         });
         infoWindowList.push(infowindow);
         markerList.push(marker);
