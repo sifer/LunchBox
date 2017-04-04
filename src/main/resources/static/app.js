@@ -21,36 +21,46 @@ function initMap() {
         var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
         var iconDesc = "";
         var bgColor = 'grey';
+        var imageurl = "";
         if(pos.vego){
             icon.url = 'icon/vego.png';
+            imageurl = icon.url;
             iconDesc = 'Vegetarisk';
             bgColor = '#009933';
         };
         if(pos.vegan){
             icon.url = 'icon/vegan.png';
+            imageurl = icon.url;
             iconDesc = 'Vegansk';
             bgColor = '#33ff66';
         };
         if(pos.kyckling){
             icon.url = 'icon/kyckling.png';
+            imageurl = icon.url;
             iconDesc = 'Kyckling';
             bgColor = '#ffff4e';
         };
         if(pos.not){
             icon.url = 'icon/kött.png';
+            imageurl = icon.url;
             iconDesc = 'Nötkött';
             bgColor = 'red';
         };
         if(pos.flask){
             icon.url = 'icon/fläsk.png';
+            imageurl = icon.url;
             iconDesc = 'Fläsk';
             bgColor = '#ff9933';
         };
         if(pos.fisk){
             icon.url = 'icon/fisk.png';
+            imageurl = icon.url;
             iconDesc = 'Fisk';
             bgColor = '#3399ff';
         };
+        if(pos.image.length > 0){
+            imageurl = 'data:image/png;base64,'+pos.image;
+        }
         var marker = new google.maps.Marker({
             position: {lat: pos.latitud, lng: pos.longitud},
             map: map,  // google.maps.Map
@@ -62,7 +72,7 @@ function initMap() {
             content: '<div class="infoWindow"><div><h1>'+pos.description+'</h1>' +
             '<p>'+iconDesc+'</p>' +
             '<p>Ingredienser'+pos.ingridiences+'</p>' +
-            '</div><img src="'+icon.url+'"></div>',
+            '</div><img src="'+imageurl+'"></div>',
             bgColor: bgColor
         });
 

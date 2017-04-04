@@ -19,14 +19,14 @@ public class LunchBox {
     private boolean flask;
     private boolean not;
     private boolean fisk;
-    private byte[] image;
+    private String image;
     private int Person_ID;
 
     public LunchBox() {
 
     }
 
-    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean flask, boolean not, boolean fisk, byte[] image, int person_ID) {
+    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean flask, boolean not, boolean fisk, String image, int person_ID) {
         this.LunchBoxID = lunchBoxID;
         this.description = description;
         this.ingridiences = ingridiences;
@@ -148,11 +148,11 @@ public class LunchBox {
         this.fisk = fisk;
     }
 
-    public byte[] getImage() {
+    public String getImage() {
         return image;
     }
 
-    public void setImage(byte[] image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

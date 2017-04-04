@@ -124,7 +124,7 @@ public class Repository {
             ps.setBoolean(10, lunchbox.isFlask());
             ps.setBoolean(11, lunchbox.isNot());
             ps.setBoolean(12, lunchbox.isFisk());
-            ps.setBytes(13, lunchbox.getImage());
+            ps.setBytes(13, lunchbox.getImage().getBytes());
             ps.setInt(14, lunchbox.getPerson_ID());
 
             ps.executeUpdate();
@@ -152,6 +152,23 @@ public class Repository {
     }
 
     private LunchBox rsLunchBox(ResultSet resultSet) throws SQLException {
+        if(resultSet.getString(14) == null || resultSet.getString(14).length()<2){
+            return new LunchBox(resultSet.getInt(1),
+                    resultSet.getString(2),
+                    resultSet.getString(3),
+                    resultSet.getBigDecimal(4),
+                    resultSet.getBigDecimal(5),
+                    resultSet.getBoolean(6),
+                    resultSet.getBoolean(7),
+                    resultSet.getBoolean(8),
+                    resultSet.getBoolean(9),
+                    resultSet.getBoolean(10),
+                    resultSet.getBoolean(11),
+                    resultSet.getBoolean(12),
+                    resultSet.getBoolean(13),
+                    "",
+                    resultSet.getInt(15));
+        }
         return new LunchBox(
                 resultSet.getInt(1),
                 resultSet.getString(2),
@@ -166,9 +183,19 @@ public class Repository {
                 resultSet.getBoolean(11),
                 resultSet.getBoolean(12),
                 resultSet.getBoolean(13),
-                resultSet.getBytes(14),
+                hexToASCII(resultSet.getString(14)),
                 resultSet.getInt(15)
         );
+    }
+    private String hexToASCII(String hexValue)
+    {
+        StringBuilder output = new StringBuilder("");
+        for (int i = 0; i < hexValue.length(); i += 2)
+        {
+            String str = hexValue.substring(i, i + 2);
+            output.append((char) Integer.parseInt(str, 16));
+        }
+        return output.toString();
     }
 }
 
