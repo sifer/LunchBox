@@ -73,8 +73,8 @@
             <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
             <label for="image">Lägg upp en bild</label>
-            <input type="file" id="image" name="image" accept="image/*" th:value="${lunchbox.image}"/>
-
+            <input type="file" id="image"  accept="image/*"/>
+            <input id="hiddenImage" type="hidden" name="image" value="value"/>
             <label for="matlada">Finns det några nämnvärda ingredienser din rätt innehåller?</label>
             <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea>
 
@@ -111,6 +111,7 @@
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>
 <script type="text/javascript" th:if="${showLogin}">fa()</script>
+<script type="text/javascript" src="/fileUpload.js"></script>
 
 </body>
 </html>
