@@ -61,6 +61,7 @@ public class LogicController {
     ArrayList<Person> persons;
     ArrayList<LunchBox> lunchBoxes;
     String lunchBoxesJson;
+    String personJson;
     boolean showNewUser = false;
     boolean showLogin = false;
 
@@ -75,6 +76,7 @@ public class LogicController {
     @PostConstruct
     public void RefreshPersons() {
         persons = (ArrayList<Person>) repository.getPersons();
+        personJson = personToJSON(persons);
     }
     @PostConstruct
     public void RefresshLunchBoxes() {
@@ -101,7 +103,8 @@ public class LogicController {
         return new ModelAndView("index")
         .addObject("user",user)
         .addObject("person",person)
-        .addObject("lunchBoxes", lunchBoxesJson);
+        .addObject("lunchBoxes", lunchBoxesJson)
+        .addObject("persons", personJson);
     }
 //Login-funktion. Om användaren loggar in med befintligt username och password skickas till "userSession", annars visas loginrutan
     //igen och felmeddelande visas
@@ -120,6 +123,7 @@ public class LogicController {
                         .addObject("user", index)
                         .addObject("person", returnCorrectPerson(index.getUserID()) )
                         .addObject("lunchBoxes", lunchBoxesJson)
+                        .addObject("persons", personJson)
                         .addObject("lunchbox", lunchBox)
                         .addObject("location", location);
             }
@@ -211,10 +215,12 @@ public class LogicController {
         repository.addLunchBox(lunchbox);
         lunchBoxes.add(lunchbox);
         lunchBoxesJson = objectToJSON(lunchBoxes);
+        personJson = personToJSON(persons);
 
 
         return new ModelAndView("userSession")
                 .addObject("lunchBoxes", lunchBoxesJson)
+                .addObject("persons", personJson)
                 .addObject("lunchbox", lunchbox)
                 .addObject("location", location);
     }
@@ -350,6 +356,28 @@ public class LogicController {
         }return duplicate;
     }
 
+
+    public String personToJSON(ArrayList<Person> array) {
+        ObjectMapper mapper = new ObjectMapper();
+        String jsonInString = "[";
+
+        for (int i = 0; i<array.size(); i++) {
+            try {
+                jsonInString += mapper.writeValueAsString(array.get(i));
+                if (i<array.size()-1) {
+                    jsonInString += ",";
+                }
+            }
+            catch(JsonGenerationException e) {
+                e.printStackTrace();
+            }
+            catch(JsonProcessingException e) {
+                e.printStackTrace();
+            }
+    }
+    jsonInString += "]";
+        return jsonInString;
+    }
 
     public String objectToJSON(ArrayList<LunchBox> array) {
         ObjectMapper mapper  = new ObjectMapper();
