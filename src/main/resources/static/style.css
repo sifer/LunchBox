@@ -82,6 +82,54 @@ body > section:nth-of-type(2){
     background-color: white;
     padding: 8% 0% 8% 0%;
 }
+.filter::-webkit-input-placeholder {
+     color: #4a4a4a;
+    text-align: center;
+    font-size: 22px;
+    font-family:mySecondFont;
+
+}
+.filter:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+    color: #4a4a4a;
+    font-size: 22px;
+    font-family:mySecondFont;
+}
+.filter::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+    color: #4a4a4a;
+    font-size: 22px;
+    font-family:mySecondFont;
+}
+.filter:-ms-input-placeholder {
+     color: #4a4a4a;
+    text-align: center;
+    font-size: 22px;
+    font-family:mySecondFont;
+}
+.filter{
+    border: 20px solid rgb(221, 221, 199);
+    border-top:0;
+    width:20%
+    text-align: center;
+    background: white;
+    font-size: 22px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 370px;
+    background-color: white;
+    box-sizing: border-box;
+    color: #66CC99;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 3px;
+    font-family:mySecondFont;
+}
+#filterknappar {
+text-align:center;
+margin-top:0;
+}
 
 body > footer:nth-of-type(1) {
     overflow: hidden;
@@ -154,27 +202,6 @@ background-color:white;
 }*/
 .footer {
 color:white;
-}
-
-ul {
-	overflow: auto;
-}
-
-ul li {
-	list-style-type: none;
-	float: left;
-}
-
-ul li a i {
-	background:pink;
-	color: #fff;
-	width: 40px;
-	height: 40px;
-	border-radius: 20px;
-	font-size: 25px;
-	text-align: center;
-	margin-right: 10px;
-	padding-top: 15%;
 }
 
 #brodtext {
@@ -296,18 +323,18 @@ h1 {
     text-align: center;
 }
 
-input[type="text"],
-input[type="password"],
-input[type="date"],
-input[type="datetime"],
-input[type="email"],
-input[type="number"],
-input[type="search"],
-input[type="tel"],
-input[type="time"],
-input[type="url"],
-textarea,
-select {
+.form input[type="text"],
+.form input[type="password"],
+.form input[type="date"],
+.form input[type="datetime"],
+.form input[type="email"],
+.form input[type="number"],
+.form input[type="search"],
+.form input[type="tel"],
+.form input[type="time"],
+.form input[type="url"],
+.form textarea,
+.form select {
     background: rgba(255,255,255,0.1);
     border: none;
     font-size: 16px;
@@ -326,7 +353,7 @@ select {
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0 4px 8px 0;
-}
+}*/
 
 select {
     padding: 6px;
@@ -612,21 +639,7 @@ h4 {
     padding: 5px;
     display: block !important;
 }
-#filter::-webkit-input-placeholder {
-    text-align: center;
-}
-#filter:-moz-placeholder { /* Firefox 18- */
-    text-align: center;
-}
-#filter::-moz-placeholder {  /* Firefox 19+ */
-    text-align: center;
-}
-#filter:-ms-input-placeholder {
-    text-align: center;
-}
-#filter{
-    text-align: center;
-}
+
 /* Slut på Max hemliga dokument */
 
 /*Johans css*/
