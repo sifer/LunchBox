@@ -117,6 +117,10 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
     border: 0;
     font-size: x-large;
 }
+
+a {
+    text-decoration: none;
+}
 .knappfooter:hover {
     background-color:#66CC99;
     color: white;
@@ -174,9 +178,9 @@ ul li a i {
 }
 
 #brodtext {
-    margin-top: 20px;
+    margin-top: 5px;
     margin-bottom: 10px;
-    font-family: Montserrat, sans-serif;
+    font-family: mySecondFont;
     color: #4a4a4a;
     font-size: 25px;
     line-height: 74px;
@@ -212,8 +216,9 @@ ul li a i {
 #text1 {
 
     margin-bottom: 10px;
-    font-family: Montserrat, sans-serif;
-    color: #4a4a4a;
+    font-family: mySecondFont;
+    letter-spacing: 4px;
+    color: #373838;
     font-size: 45px;
     line-height: 74px;
     font-weight: 400;
@@ -222,7 +227,7 @@ ul li a i {
 }
 
 #text1:hover {
-    color: black;
+    color: #ff5c5c;
 }
 
 .headerimg {
@@ -526,15 +531,13 @@ label.light {
 
 
 h3 {
-    /*font-family: mySecondFont;*/
-    font-family: Montserrat, sans-serif;
+    font-family: mySecondFont;
     font-size: 22px;
     color: #373838;
 }
 
 h4 {
- /*   font-family: mySecondFont;*/
-    font-family: Montserrat, sans-serif;
+    font-family: mySecondFont;
     color: #373838;
     font-size:15px
 }
