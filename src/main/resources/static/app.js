@@ -88,7 +88,6 @@ function initMap() {
 
                 }
             }
-            activeInfoWindow = infowindow;
             // Reference to the DIV which receives the contents of the infowindow using jQuery
             var iwOuter = document.querySelector('.gm-style-iw');
 
@@ -125,7 +124,7 @@ function initMap() {
             // Osynlig hitbox
             iwOuter.parentElement.children[3].style.top = '22%';
             iwOuter.parentElement.children[3].style.right = '8%';
-
+            activeInfoWindow = infowindow;
         });
         //Event-listener för on close click
         google.maps.event.addListener(infowindow,'closeclick',function(){
