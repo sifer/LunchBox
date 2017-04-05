@@ -45,7 +45,7 @@
         <p id="brodtext"> Stay Cool. Via vår app kan någon annan göra jobbet åt dig. Du sparar tid, energi och pengar.</p>
         <div id="map"></div>
         <p>
-            <input id="filter" placeholder="Filter..." type="text" value="" onkeyup="filterMap(this.value)"/>
+            <input id="filter" placeholder="Sök maträtt här..." type="text" value="" onkeyup="filterMap(this.value)"/>
             <input class="address" type="textbox"/>
             <input class="knappliten newLoc" id="submit" type="button" value="Hitta adress"/>
        </p>
@@ -155,7 +155,8 @@
     <form class="form" th:action="user" method="POST">
         <h1>Skapa en ny användare</h1>
         <fieldset>
-            <legend><span class="number">1</span>Fyll i din information nedan!</legend>
+            <legend>Fyll i din information nedan</legend>
+            <!--<span class="number">1</span>-->
 
             <input type="text" id="name" th:value="${person.firstName}" name="firstName" placeholder="Namn" />
 
@@ -182,13 +183,11 @@
     <!--HÄR BÖRJAR NY LOGINEN  -->
     <div class="black_overlay"></div>
     <div id="bg">
-        <div class="module">
-            <ul>
-                <li class="tab activeTab"><img src="http://i.imgur.com/Fk1Urva.png" alt="" class="icon"/></li>
-                <!--                <li class="tab" ><img src="http://i.imgur.com/ZsRgIDD.png" alt="" class="icon"/></li>-->
-            </ul>
-            <h4 class="centered">Fyll i din information nedan!</h4>
             <form th:action="@{/login}" class="form" method="POST">
+                <h1>Logga in</h1>
+                <fieldset>
+                     <legend>Fyll i din information nedan</legend>
+                </fieldset>
                 <input type="text" name="userName" placeholder="Användarnamn" class="textbox" th:value="${user.userName}"/>
                 <input type="password" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
                 <button type="submit">Logga in</button>
@@ -198,7 +197,6 @@
             <button class="close" onclick="closeFa();" value="Close">X</button>
         </div>
     </div>
-</div>
 
 <script type="text/javascript" ype="text/javascript" src="/mapstyle.js"></script>
 <script type="text/javascript" src="/lightbox.js"></script>

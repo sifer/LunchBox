@@ -128,7 +128,7 @@ a {
 }
 .foljoss {
     color:white;
-    font-family: Montserrat, sans-serif;
+    font-family: mySecondFont;
 }
 /*slutar här */
 
@@ -215,7 +215,7 @@ ul li a i {
 
 #text1 {
 
-    margin-bottom: 10px;
+    margin-bottom: -16px;
     font-family: mySecondFont;
     letter-spacing: 4px;
     color: #373838;
@@ -246,8 +246,9 @@ ul li a i {
 }
 
 h1 {
-    color: darkgrey;
+    color: white;
     text-align: center;
+    font-family: mySecondFont;
 }
 .knappliten {
     color: white;
@@ -271,8 +272,8 @@ h1 {
 
 
 .annons {
-    font-family: Montserrat, sans-serif;
-    color:black;
+    font-family: mySecondFont;
+    color:white;
     padding: 10px 20px;
     border-radius: 8px;
     background-color:rgba(128, 128, 128, 0.93);
@@ -295,7 +296,11 @@ h1 {
     margin: 0 0 30px 0;
     text-align: center;
 }
-
+legend {
+    text-align: center;
+    font-family: mySecondFont;
+    color: white;
+}
 input[type="text"],
 input[type="password"],
 input[type="date"],
@@ -337,13 +342,13 @@ select {
 button {
     padding: 19px 39px 18px 39px;
     color: #FFF;
-    background-color: #4bc970;
+    background-color: #66CC99;
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #3ac162;
+    border: 1px solid #66CC99;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
@@ -548,7 +553,7 @@ h4 {
     top: 0;
     right: 0px;
     width: 25px;
-    background-color: #4bc970;
+    background-color: #66CC99;
 }
 
 #Popup {
