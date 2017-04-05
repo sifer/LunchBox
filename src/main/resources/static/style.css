@@ -312,11 +312,11 @@ textarea,
 select {
     background: rgba(255,255,255,0.1);
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     height: auto;
     margin: 3px 0px;
     outline: 0;
-    padding: 15px;
+    padding: 8px;
     width: 100%;
     background-color: #e8eeef;
     box-sizing: border-box;
@@ -535,9 +535,10 @@ label.light {
     text-align: center;
     font-family: mySecondFont;
     color: #373838;
-
 }
-
+#removeForm div:nth-of-type(1) {
+    font-size: x-large;
+}
 
 h3 {
     font-family: mySecondFont;
@@ -641,17 +642,21 @@ h4 {
 /*Johans css*/
 
 .plunchbox {
-    width: 100%;
+    width: 49%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 1px 0;
     box-sizing: border-box;
-    border: 1px solid green;
-
-
+    border: 1px #66CC99;
+    display: inline-block;
+    background-color: lightgray;
 }
+    .plunchbutton {
+        font-size: 12px;
+    }
+
 #plunchboxwrap {
     display: block;
-    border: 1px solid green;
+    border: 1px #66CC99;
     height: 450px;
     overflow-y: scroll;
 }
