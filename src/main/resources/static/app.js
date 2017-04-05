@@ -157,9 +157,12 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 
-document.querySelector('.newLoc').addEventListener('click', function() {
-    codeAddress(geocoder, map);
-});
+document.querySelector('.address').addEventListener('keyup', function(event) {
+    if (event.keyCode == 13) {
+
+        codeAddress(geocoder, map);
+    }}
+);
 
 function codeAddress() {
 

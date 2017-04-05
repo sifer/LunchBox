@@ -16,6 +16,7 @@ body {
 body >  header {
     text-align: center;
 }
+
 body > header:nth-child(1) > div:nth-child(1) {
     margin-bottom: -71px;
     text-align: right;
