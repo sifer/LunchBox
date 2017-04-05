@@ -147,7 +147,7 @@ public class LogicController {
     @PostMapping("/user")
 
     public ModelAndView newUser(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, RedirectAttributes attr, HttpSession session) throws Exception {
-
+        personJson = personToJSON(persons);
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user)) {
             showNewUser = true;
             String error = "";
@@ -161,20 +161,24 @@ public class LogicController {
             }return new ModelAndView("index")
                     .addObject("showNewUser", showNewUser)
                     .addObject("error", error)
-                    .addObject("lunchBoxes", lunchBoxesJson);
+                    .addObject("lunchBoxes", lunchBoxesJson)
+                    .addObject("persons", personJson)
+            ;
         }
 
         LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0, 0, 0);
 
         int key = Integer.parseInt(repository.addUser(user, person));
-        users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
-        persons.add(new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber()));
-        session.setAttribute("user", user);
-        session.setAttribute("person", person);
+        User tempUser = new User(key, user.getUserName(), user.getPassword(), user.getMail());
+        Person tempPerson = new Person(key, person.getFirstName(), person.getLastName(), person.getPhoneNumber());
+        users.add(tempUser);
+        persons.add(tempPerson);
+        session.setAttribute("user", tempUser);
+        session.setAttribute("person", tempPerson);
         return new ModelAndView("userSession")
                 .addObject("userSession", session)
-                .addObject("user", user)
-                .addObject("person", person)
+                .addObject("user", tempUser)
+                .addObject("person", tempPerson)
                 .addObject("lunchBoxes", lunchBoxesJson)
                 .addObject("lunchbox", lunchbox);
 
