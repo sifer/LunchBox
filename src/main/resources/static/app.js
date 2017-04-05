@@ -6,7 +6,9 @@ var activeMarker;
 var markerList = [];
 var infoWindowList = [];
 var markerListCluster = [];
-var markerCluster;
+var persons = "";
+var markerCluster
+
 
 //initMap körs automatiskt när sidan laddas med hjälp av "async defer" i .html
 function initMap() {
@@ -22,7 +24,7 @@ function initMap() {
     navigator.geolocation.getCurrentPosition(success, error, options);
 
 
-    function createMarker(pos) {
+    function createMarker(pos, pers) {
         var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
         var iconDesc = "";
         var bgColor = 'grey';
@@ -72,12 +74,16 @@ function initMap() {
             title: pos.description,
             icon: icon
         });
-
+        var loggedIn = "";
+        if(pers != ""){
+            loggedIn = '<p>Säljare: '+pers.firstName+'</p>';
+        }
         var infowindow = new google.maps.InfoWindow({
             content: '<div class="infoWindow"><div><h1>'+pos.description+'</h1>' +
             '<p>'+iconDesc+'</p>' +
             '<p>Beskrivning: '+pos.ingridiences+'</p>' +
-            '</div><img src="'+imageurl+'"></div>',
+            '</div><img src="'+imageurl+'"></div>' +
+            loggedIn,
             bgColor: bgColor
         });
 
@@ -156,9 +162,16 @@ function initMap() {
         return marker;
     }
     function createMarkers() {
-        for (var i = 0; i < lunchBoxes.length; i++) {
-            createMarker(lunchBoxes[i]);
+        if(persons.length > 0) {
+            for (var i = 0; i < lunchBoxes.length; i++) {
+                createMarker(lunchBoxes[i], persons[i]);
+            } }
+        else {
+            for (var i = 0; i < lunchBoxes.length; i++) {
+                createMarker(lunchBoxes[i], persons);
+            }
         }
+
     }
     createMarkers();
     initialize();
