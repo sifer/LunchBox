@@ -190,7 +190,7 @@
             <h4 class="centered">Fyll i din information nedan!</h4>
             <form th:action="@{/login}" class="form" method="POST">
                 <input type="text" name="userName" placeholder="Användarnamn" class="textbox" th:value="${user.userName}"/>
-                <input type="text" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
+                <input type="password" name="password" placeholder="Lösenord" class="textbox" th:value="${user.password}"/>
                 <button type="submit">Logga in</button>
 
                 <p th:text="${incorrLogin}"></p>
