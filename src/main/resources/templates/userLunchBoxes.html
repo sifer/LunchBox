@@ -42,9 +42,9 @@
                 <input type="hidden" th:value="*{LunchBoxID}" name="lunchboxid"/>
                 <div th:text="'Antal matlådor till försäljning: ' + *{amountOfLunchBoxes} + ' st' "></div>
                 <div th:text="'Pris: ' + *{pris} + ' kr' "></div>
-                <button type="submtit">Minska antalet matlådor till försäljning med 1</button>
+                <button class="plunchbutton" type="submtit">Minska antalet matlådor till försäljning med 1</button>
             </form>
-            <button type="submit" form="removeForm">Ta bort matlåda</button>
+            <button class="plunchbutton" type="submit" form="removeForm">Ta bort matlåda</button>
         </section>
     </tr>
     </section>
@@ -53,11 +53,12 @@
 <footer id="footer">
     <section>
         <img src="Kristoffer.png"/>
-        <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa spännande och god mat!</p></h3>
+        <h3>Kristoffer Schmidt<p> "LunchBox har hjälpt min vardag till det bättre! Jag har även fått chansen att smaka massa
+            spännande och god mat!"</p></h3>
     </section>
     <section>
         <img src="Sandra.png"/>
-        <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p></h3>
+        <h3>Sandra Kjellström<p> "Det är så otrolig smidigt. Jag har storkok varje söndag och tjänar massa pengar!" </p></h3>
     </section>
 
 </footer>
