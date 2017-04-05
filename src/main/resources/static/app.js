@@ -1,7 +1,6 @@
 
 var geocoder;
 var map;
-var _map;
 var activeInfoWindow;
 var activeMarker;
 var markerList = [];
@@ -19,7 +18,8 @@ function initMap() {
         disableDefaultUI: true,
         zoomControl: true
     });
-    _map = map;
+    //Hämta nuvarande position
+    navigator.geolocation.getCurrentPosition(success, error, options);
 
 
     function createMarker(pos) {
@@ -76,7 +76,7 @@ function initMap() {
         var infowindow = new google.maps.InfoWindow({
             content: '<div class="infoWindow"><div><h1>'+pos.description+'</h1>' +
             '<p>'+iconDesc+'</p>' +
-            '<p>Ingredienser'+pos.ingridiences+'</p>' +
+            '<p>Beskrivning: '+pos.ingridiences+'</p>' +
             '</div><img src="'+imageurl+'"></div>',
             bgColor: bgColor
         });
@@ -163,8 +163,7 @@ function initMap() {
     createMarkers();
     initialize();
 }
-//Hämta nuvarande position
-navigator.geolocation.getCurrentPosition(success, error, options);
+
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 

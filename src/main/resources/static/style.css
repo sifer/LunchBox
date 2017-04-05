@@ -625,14 +625,33 @@ h4 {
     min-width: 400px;
     position: relative;
     overflow-y: auto;
+    font-family: monospace;
+    font-weight: 600;
+}
+.infoWindow h1{
+    color: black;
+    margin-bottom: 10px;
+}
+.infoWindow p{
+    margin: 2px 0;
+    font-size: 15px;
+}
+.infoWindow p:nth-of-type(1){
+    position: absolute;
+    top: 131px;
+    right: 15px;
+    width: 148px;
+    text-align: center;
 }
 .infoWindow > div{
-    width: 72%;
+    min-height: 202px;
+    margin: 5px;
+    width: 61%;
 }
 .infoWindow > img{
     position: absolute;
     display: block;
-    width: 20%;
+    width: 30%;
     right: 27px;
     top: 5px;
 }
