@@ -10,7 +10,7 @@
 </head>
 <body>
 <header id="header">
-    <img src="/lunchboxlogga.png" class="headerimg"/>
+    <img src="../images/lunchboxlogga.png" class="headerimg"/>
 </header>
 
 <!--<div id="formular">-->
@@ -38,11 +38,11 @@
 </article>
 
 <aside id="main">
-    <h2>Leta rätt på postkod?</h2>
     <section>
         <div id="map"></div>
     </section>
     <section>
+        <input id="filter" placeholder="Filter..." type="text" value="" onkeyup="filterMap(this.value)"/>
         <input class="address" type="textbox"/>
         <input class="knappliten newLoc" type="button" value="Hitta adress"/>
     </section>
@@ -51,12 +51,13 @@
 
 <footer id="footer">
     <section>
-        <img src="Kristoffer.png"/>
-        <h3>Kristoffer Schmidt<p> "LunchBox har hjälp min vardag till det bättre! Även fått chansen att smaka massa spännande och god mat!</p></h3>
+        <img src="../images/Kristoffer.png"/>
+        <h3>Kristoffer Schmidt<p>  "LunchBox har hjälpt min vardag till det bättre! Jag har även fått chansen att smaka massa
+            spännande och god mat!"</p></h3>
     </section>
     <section>
-        <img src="Sandra.png"/>
-        <h3>Sandra Kjellström<p> "FUCK VAD BRAAAAAAAAAAA GREEEEEEEJ." </p></h3>
+        <img src="../images/Sandra.png"/>
+        <h3>Sandra Kjellström<p> "Det är så otrolig smidigt. Jag har storkok varje söndag och tjänar massa pengar!"</p></h3>
     </section>
 
 </footer>
@@ -70,25 +71,26 @@
     <form class="form" th:action="lunchbox" method="post">
         <h1>Lägg upp din matlåda</h1>
         <fieldset>
-            <legend><span class="number">1</span>Berätta om din matlåda</legend>
+            <!--<legend><span class="number">1</span>Berätta om din matlåda</legend>-->
 
             <label for="name">Vad heter din rätt?</label>
             <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
-            <label for="image">Lägg upp en bild</label>
-            <input type="file" id="image"  accept="image/*"/>
-            <input id="hiddenImage" type="hidden" name="image" value="value"/>
-            <label for="matlada">Finns det några nämnvärda ingredienser din rätt innehåller?</label>
-            <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea>
+            <div><label for="image">Lägg upp en bild</label>
+            <input type="file" id="image" accept="image/*"/>
+            <input id="hiddenImage" type="hidden" name="image" value="value"/></div>
+            <div><label for="matlada">Finns några nämnvärda ingredienser din rätt innehåller?</label>
+                <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea></div>
             <label for="amountOfLunchBoxes">Hur många matlådor vill du sälja?</label>
-            <input type="text" id="amountOfLunchBoxes" name="amountOfLunchBoxes" th:value="${lunchbox.amountOfLunchBoxes}"/>
+            <input type="text" id="amountOfLunchBoxes" name="amountOfLunchBoxes"
+                   th:value="${lunchbox.amountOfLunchBoxes}"/>
             <label for="pris">Hur mycket skall varje matlåda kosta?</label>
             <input type="text" id="pris" name="pris" th:value="${lunchbox.pris}"/>
             <label for="location">Var kommer försäljningen att ske?</label>
             <input type="text" class="address" th:value="${location}" id="location" name="location"/>
 
 
-        <label>Typ av rätt:</label>
+            <div><label>Typ av rätt:</label></div>
             <input type="checkbox" th:checked="${lunchbox.kyckling}" name="kyckling">Kyckling</input>
             <input type="checkbox" th:checked="${lunchbox.not}" name="not">Nötkött</input>
             <input type="checkbox" th:checked="${lunchbox.flask}" name="flask">Fläsk</input>
@@ -97,7 +99,7 @@
             <input type="checkbox" th:checked="${lunchbox.vegan}" name="vegan">Veganskt</input>
 
 
-            <label>Allergivänlig:</label>
+            <div><label>Allergivänlig:</label></div>
             <input type="checkbox" id="laktosfritt" th:checked="${lunchbox.laktos}" name="laktos"/><label class="light" for="laktosfritt">Laktosfritt</label>
             <input type="checkbox" id="glutenfritt" th:checked="${lunchbox.gluten}" name="gluten"/><label class="light" for="glutenfritt">Glutenfritt</label>
 
@@ -114,6 +116,7 @@
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
 <script type="text/javascript" src="/app.js"></script>
+<script type="text/javascript" src="/markerclusterer.js"></script>
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>
 <script type="text/javascript" th:if="${showLogin}">fa()</script>

@@ -5,10 +5,7 @@ body {
     background-color: beige;
     margin: 0;
 }
-@font-face {
-    font-family: myFirstFont;
-    src: url(SCRIPTINA.ttf);
-}
+
 @font-face {
     font-family: mySecondFont;
     src: url(BebasNeue.otf);
@@ -16,6 +13,7 @@ body {
 body >  header {
     text-align: center;
 }
+
 body > header:nth-child(1) > div:nth-child(1) {
     margin-bottom: -71px;
     text-align: right;
@@ -176,7 +174,7 @@ a {
 }
 .foljoss {
     color:white;
-    font-family: Montserrat, sans-serif;
+    font-family: mySecondFont;
 }
 /*slutar här */
 
@@ -242,7 +240,7 @@ color:white;
 
 #text1 {
 
-    margin-bottom: 10px;
+    margin-bottom: -16px;
     font-family: mySecondFont;
     letter-spacing: 4px;
     color: #373838;
@@ -273,8 +271,9 @@ color:white;
 }
 
 h1 {
-    color: darkgrey;
+    color: white;
     text-align: center;
+    font-family: mySecondFont;
 }
 .knappliten {
     color: white;
@@ -298,8 +297,8 @@ h1 {
 
 
 .annons {
-    font-family: Montserrat, sans-serif;
-    color:black;
+    font-family: mySecondFont;
+    color:white;
     padding: 10px 20px;
     border-radius: 8px;
     background-color:rgba(128, 128, 128, 0.93);
@@ -335,13 +334,14 @@ h1 {
 .form input[type="url"],
 .form textarea,
 .form select {
+
     background: rgba(255,255,255,0.1);
     border: none;
-    font-size: 16px;
+    font-size: 18px;
     height: auto;
-    margin: 0;
+    margin: 3px 0px;
     outline: 0;
-    padding: 15px;
+    padding: 8px;
     width: 100%;
     background-color: #e8eeef;
     box-sizing: border-box;
@@ -349,7 +349,12 @@ h1 {
     box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
     margin-bottom: 3px;
 }
-
+#name {
+    margin-bottom: 10px;
+}
+#image {
+    margin-bottom: 12px;
+}
 input[type="radio"],
 input[type="checkbox"] {
     margin: 0 4px 8px 0;
@@ -364,13 +369,13 @@ select {
 button {
     padding: 19px 39px 18px 39px;
     color: #FFF;
-    background-color: #4bc970;
+    background-color: #66CC99;
     font-size: 18px;
     text-align: center;
     font-style: normal;
     border-radius: 5px;
     width: 100%;
-    border: 1px solid #3ac162;
+    border: 1px solid #66CC99;
     border-width: 1px 1px 3px;
     box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
     margin-bottom: 10px;
@@ -553,9 +558,12 @@ label.light {
     height: 500px;
     background-color: white;
     text-align: center;
-
+    font-family: mySecondFont;
+    color: #373838;
 }
-
+#removeForm div:nth-of-type(1) {
+    font-size: x-large;
+}
 
 h3 {
     font-family: mySecondFont;
@@ -575,7 +583,7 @@ h4 {
     top: 0;
     right: 0px;
     width: 25px;
-    background-color: #4bc970;
+    background-color: #66CC99;
 }
 
 #Popup {
@@ -645,17 +653,21 @@ h4 {
 /*Johans css*/
 
 .plunchbox {
-    width: 100%;
+    width: 49%;
     padding: 12px 20px;
-    margin: 8px 0;
+    margin: 1px 0;
     box-sizing: border-box;
-    border: 1px solid green;
-
-
+    border: 1px #66CC99;
+    display: inline-block;
+    background-color: lightgray;
 }
+    .plunchbutton {
+        font-size: 12px;
+    }
+
 #plunchboxwrap {
     display: block;
-    border: 1px solid green;
+    border: 1px #66CC99;
     height: 450px;
     overflow-y: scroll;
 }
