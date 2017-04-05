@@ -19,6 +19,7 @@ import com.google.maps.model.GeocodingResult;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -84,7 +85,7 @@ public class LogicController {
 // Om någon redan är inloggad skickas direkt till "userSession", annars visas startsidan
     @GetMapping("/")
     public ModelAndView form(HttpSession session) {
-        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0, 0, 0);
 
         if (session.getAttribute("user") != null) {
             return new ModelAndView("userSession")
@@ -159,7 +160,7 @@ public class LogicController {
                     .addObject("lunchBoxes", lunchBoxesJson);
         }
 
-        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0);
+        LunchBox lunchbox = new LunchBox(lunchBoxes.size()+1, "", "", null, null, false, false, false, false, false, false, false, false, null, 0, 0, 0);
 
         int key = Integer.parseInt(repository.addUser(user, person));
         users.add(new User(key, user.getUserName(), user.getPassword(), user.getMail()));
@@ -188,7 +189,7 @@ public class LogicController {
 //Skapa ny lunchbox utefter formulärets information
     @PostMapping("/lunchbox")
     public ModelAndView newLunchBox(LunchBox lunchbox, String image, String location, HttpSession session) throws SQLException {
-        System.out.println(image);
+
         GeoApiContext context = new GeoApiContext().setApiKey("AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&");
         GeocodingApiRequest req = GeocodingApi.newRequest(context).address(location);
         GeocodingResult[] results = req.awaitIgnoreError();
@@ -291,6 +292,36 @@ public class LogicController {
                 }
             }
 
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                personLunchBoxes.add(lunchBoxes.get(i));
+            }
+        }
+        lunchBoxesJson = objectToJSON(lunchBoxes);
+
+        return new ModelAndView("userLunchBoxes")
+                .addObject("userSession", session)
+                .addObject("personLunchBoxes", personLunchBoxes)
+                .addObject("lunchBoxes", lunchBoxesJson);
+    }
+    @PostMapping("/decrease")
+    public ModelAndView decreaseAmount(@RequestParam int lunchboxid, HttpSession session) throws SQLException {
+        ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
+        Person person =(Person)session.getAttribute("person");
+        int currentAmount = 0;
+
+        if(lunchboxid > 0) {
+            for (int i = 0; i<lunchBoxes.size(); i++) {
+                if(lunchBoxes.get(i).getLunchBoxID() == lunchboxid) {
+                    currentAmount = lunchBoxes.get(i).getAmountOfLunchBoxes();
+                    if(currentAmount>0) {
+                        lunchBoxes.get(i).setAmountOfLunchBoxes(currentAmount - 1);
+                    }
+                }
+            }
+            if (currentAmount>0) {
+                repository.decreaseAmount(lunchboxid, currentAmount);
+            }
             for (int i = 0; i<lunchBoxes.size(); i++) {
                 if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
                 personLunchBoxes.add(lunchBoxes.get(i));

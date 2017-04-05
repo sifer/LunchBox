@@ -34,11 +34,17 @@
 
     <tr th:each="lunchbox : ${personLunchBoxes}">
         <section class="plunchbox">
-            <form action="remove" method="post" th:object="${lunchbox}">
+            <form action="remove" id="removeForm" method="post" th:object="${lunchbox}">
                 <input type="hidden" th:value="*{LunchBoxID}" name="lunchboxid"/>
-                <td th:text="*{description}"></td>
-                <input type="submit" class="knappliten" value="Ta bort matlåda"/>
+                <div th:text="*{description}"></div>
           </form>
+            <form action="decrease" method="post" th:object="${lunchbox}">
+                <input type="hidden" th:value="*{LunchBoxID}" name="lunchboxid"/>
+                <div th:text="'Antal matlådor till försäljning ' + *{amountOfLunchBoxes}"></div>
+                <div th:text="'Pris: ' + *{pris}"></div>
+                <button type="submtit">Minska antalet matlådor till försäljning med 1</button>
+            </form>
+            <button type="submit" form="removeForm">Ta bort matlåda</button>
         </section>
     </tr>
     </section>

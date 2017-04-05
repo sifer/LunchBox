@@ -21,13 +21,17 @@ public class LunchBox {
     private boolean fisk;
     private String image;
     private int Person_ID;
+    private int amountOfLunchBoxes;
+    private int pris;
+
+
 
     public LunchBox() {
 
     }
 
-    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean flask, boolean not, boolean fisk, String image, int person_ID) {
-        this.LunchBoxID = lunchBoxID;
+    public LunchBox(int lunchBoxID, String description, String ingridiences, BigDecimal longitud, BigDecimal latitud, boolean vego, boolean vegan, boolean laktos, boolean gluten, boolean kyckling, boolean flask, boolean not, boolean fisk, String image, int person_ID, int amountOfLunchBoxes, int pris) {
+        LunchBoxID = lunchBoxID;
         this.description = description;
         this.ingridiences = ingridiences;
         this.longitud = longitud;
@@ -41,7 +45,9 @@ public class LunchBox {
         this.not = not;
         this.fisk = fisk;
         this.image = image;
-        this.Person_ID = person_ID;
+        Person_ID = person_ID;
+        this.amountOfLunchBoxes = amountOfLunchBoxes;
+        this.pris = pris;
     }
 
     public int getLunchBoxID() {
@@ -162,6 +168,21 @@ public class LunchBox {
 
     public void setPerson_ID(int person_ID) {
         Person_ID = person_ID;
+    }
+
+    public int getAmountOfLunchBoxes() {
+        return amountOfLunchBoxes;
+    }
+
+    public void setAmountOfLunchBoxes(int amountOfLunchBoxes) {
+        this.amountOfLunchBoxes = amountOfLunchBoxes;
+    }
+    public int getPris() {
+        return pris;
+    }
+
+    public void setPris(int pris) {
+        this.pris = pris;
     }
 }
 

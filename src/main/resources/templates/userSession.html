@@ -80,8 +80,11 @@
             <input id="hiddenImage" type="hidden" name="image" value="value"/>
             <label for="matlada">Finns det några nämnvärda ingredienser din rätt innehåller?</label>
             <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea>
-
-            <label for="location">Vart kommer försäljningen att ske?</label>
+            <label for="amountOfLunchBoxes">Hur många matlådor vill du sälja?</label>
+            <input type="text" id="amountOfLunchBoxes" name="amountOfLunchBoxes" th:value="${lunchbox.amountOfLunchBoxes}"/>
+            <label for="pris">Hur mycket skall varje matlåda kosta?</label>
+            <input type="text" id="pris" name="pris" th:value="${lunchbox.pris}"/>
+            <label for="location">Var kommer försäljningen att ske?</label>
             <input type="text" class="address" th:value="${location}" id="location" name="location"/>
 
 

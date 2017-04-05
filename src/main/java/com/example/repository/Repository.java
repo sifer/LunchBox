@@ -137,7 +137,7 @@ public class Repository {
     public void addLunchBox(LunchBox lunchbox) throws SQLException {
 
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image, Person_ID) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image, Person_ID, AmountOfLunchBoxes, Pris) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
 
             ps.setString(1, lunchbox.getDescription());
             ps.setString(2, lunchbox.getIngridiences());
@@ -153,6 +153,8 @@ public class Repository {
             ps.setBoolean(12, lunchbox.isFisk());
             ps.setBytes(13, lunchbox.getImage().getBytes());
             ps.setInt(14, lunchbox.getPerson_ID());
+            ps.setInt(15, lunchbox.getAmountOfLunchBoxes() );
+            ps.setInt(16, lunchbox.getPris());
 
             ps.executeUpdate();
         } catch(SQLException e) {
@@ -168,12 +170,26 @@ public class Repository {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM [dbo].[LunchBox]WHERE LunchBoxID = ?")) {
 
             ps.setInt(1, lunchboxid);
-    
+
             ps.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();
         }
         }
+
+    public void decreaseAmount (int lunchboxid, int currentAmount) throws SQLException {
+
+        try(Connection conn= dataSource.getConnection();
+            PreparedStatement ps= conn.prepareStatement("UPDATE [dbo].[LunchBox] SET AmountOfLunchBoxes = ? WHERE LunchBoxID = ?")) {
+
+                ps.setInt(1, currentAmount-1);
+                ps.setInt(2, lunchboxid);
+
+                ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public List<LunchBox> getLunchBoxes() {
         try(Connection conn = dataSource.getConnection();
@@ -207,7 +223,9 @@ public class Repository {
                     resultSet.getBoolean(12),
                     resultSet.getBoolean(13),
                     "",
-                    resultSet.getInt(15));
+                    resultSet.getInt(15),
+                    resultSet.getInt(16),
+                    resultSet.getInt(17));
         }
         return new LunchBox(
                 resultSet.getInt(1),
@@ -224,7 +242,9 @@ public class Repository {
                 resultSet.getBoolean(12),
                 resultSet.getBoolean(13),
                 hexToASCII(resultSet.getString(14)),
-                resultSet.getInt(15)
+                resultSet.getInt(15),
+                resultSet.getInt(16),
+                resultSet.getInt(17)
         );
     }
     private String hexToASCII(String hexValue)
