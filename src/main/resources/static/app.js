@@ -1,10 +1,13 @@
 
 var geocoder;
 var map;
+var _map;
 var activeInfoWindow;
 var activeMarker;
 var markerList = [];
 var infoWindowList = [];
+var markerListCluster = [];
+var markerCluster;
 
 //initMap körs automatiskt när sidan laddas med hjälp av "async defer" i .html
 function initMap() {
@@ -16,6 +19,7 @@ function initMap() {
         disableDefaultUI: true,
         zoomControl: true
     });
+    _map = map;
 
 
     function createMarker(pos) {
@@ -77,7 +81,7 @@ function initMap() {
             bgColor: bgColor
         });
 
-
+        //Styling för infowindow
         google.maps.event.addListener(infowindow, 'domready', function() {
             if(activeInfoWindow != null || activeInfoWindow == infowindow){
                 try{
@@ -143,6 +147,12 @@ function initMap() {
         });
         infoWindowList.push(infowindow);
         markerList.push(marker);
+
+        if(markerListCluster.length == 0) {
+            markerListCluster = markerList;
+            console.log("Edited markerListCluser with length: "+markerListCluster.length)
+        }
+        //google.maps.event.addDomListener(window, 'load', initialize);
         return marker;
     }
     function createMarkers() {
@@ -151,15 +161,19 @@ function initMap() {
         }
     }
     createMarkers();
+    initialize();
 }
 //Hämta nuvarande position
 navigator.geolocation.getCurrentPosition(success, error, options);
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
 
-document.querySelector('.newLoc').addEventListener('click', function() {
-    codeAddress(geocoder, map);
-});
+document.querySelector('.address').addEventListener('keyup', function(event) {
+    if (event.keyCode == 13) {
+
+        codeAddress(geocoder, map);
+    }}
+);
 
 function codeAddress() {
 
@@ -206,16 +220,25 @@ function error(err) {
     console.warn('ERROR(${err.code}): ${err.message}');
 };
 function filterMap(input){
+    markerCluster.clearMarkers();
+    markerListCluster=[];
     for(var i=0; i<markerList.length; i++){
-        console.log(input.length);
-        if(infoWindowList[i].content.toLowerCase().includes(input.toLowerCase()) || input.length === 0){
+        if(input.length==0){
+            markerListCluster.push(markerList[i]);
+            markerList[i].setVisible(true);
+        }
+        else if(infoWindowList[i].content.toLowerCase().includes(input.toLowerCase())){
+            markerListCluster.push(markerList[i]);
             markerList[i].setVisible(true);
         }
         else{
             markerList[i].setVisible(false);
         }
     }
+    initialize();
+
 }
-
-
-
+//Grejer för clusterermarker.js
+function initialize(){
+    markerCluster = new MarkerClusterer(map, markerListCluster, {imagePath: 'icon/m'});
+}

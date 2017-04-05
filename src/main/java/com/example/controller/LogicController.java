@@ -196,10 +196,12 @@ public class LogicController {
         for(GeocodingResult result : results) {
             BigDecimal lat = new BigDecimal(result.geometry.location.lat);
             lat = lat.setScale(6, RoundingMode.FLOOR);
+            lat = lat.add(BigDecimal.valueOf( ((int)(Math.random() * (500+500)) -500)/(Math.pow(10,6))));
             lunchbox.setLatitud(lat);
 
             BigDecimal lng = new BigDecimal(result.geometry.location.lng);
             lng = lng.setScale(6, RoundingMode.FLOOR);
+            lng = lng.add(BigDecimal.valueOf( ((int)(Math.random() * (500+500)) -500)/(Math.pow(10,6))));
             lunchbox.setLongitud(lng);
         }
 

@@ -10,7 +10,7 @@
 </head>
 <body>
 <header id="header">
-    <img src="/lunchboxlogga.png" class="headerimg"/>
+    <img src="../images/lunchboxlogga.png" class="headerimg"/>
 </header>
 
 <!--<div id="formular">-->
@@ -42,6 +42,7 @@
         <div id="map"></div>
     </section>
     <section>
+        <input id="filter" placeholder="Filter..." type="text" value="" onkeyup="filterMap(this.value)"/>
         <input class="address" type="textbox"/>
         <input class="knappliten newLoc" type="button" value="Hitta adress"/>
     </section>
@@ -50,13 +51,13 @@
 
 <footer id="footer">
     <section>
-        <img src="Kristoffer.png"/>
-        <h3>Kristoffer Schmidt<p> "LunchBox har hjälpt min vardag till det bättre! Jag har även fått chansen att smaka massa
+        <img src="../images/Kristoffer.png"/>
+        <h3>Kristoffer Schmidt<p>  "LunchBox har hjälpt min vardag till det bättre! Jag har även fått chansen att smaka massa
             spännande och god mat!"</p></h3>
     </section>
     <section>
-        <img src="Sandra.png"/>
-        <h3>Sandra Kjellström<p> "Det är så otrolig smidigt. Jag har storkok varje söndag och tjänar massa pengar!" </p></h3>
+        <img src="../images/Sandra.png"/>
+        <h3>Sandra Kjellström<p> "Det är så otrolig smidigt. Jag har storkok varje söndag och tjänar massa pengar!"</p></h3>
     </section>
 
 </footer>
@@ -115,6 +116,7 @@
 <script type="text/javascript" src="/lightbox.js"></script>
 <script type="text/javascript" th:utext="'var lunchBoxes =' + ${lunchBoxes}"></script>
 <script type="text/javascript" src="/app.js"></script>
+<script type="text/javascript" src="/markerclusterer.js"></script>
 <script async="async" defer="defer" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBTZQRmcgBi0Fw0rNCsKoUBZohWk7UW0dw&amp;callback=initMap"></script>
 <script type="text/javascript" th:if="${showNewUser}">fn()</script>
 <script type="text/javascript" th:if="${showLogin}">fa()</script>
