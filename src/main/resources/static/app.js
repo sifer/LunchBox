@@ -170,11 +170,9 @@ navigator.geolocation.getCurrentPosition(success, error, options);
 
 document.querySelector('.address').addEventListener('keyup', function(event) {
     if (event.keyCode == 13) {
-
         codeAddress(geocoder, map);
     }}
 );
-
 function codeAddress() {
 
     geocoder = new google.maps.Geocoder();
