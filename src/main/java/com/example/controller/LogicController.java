@@ -219,14 +219,11 @@ public class LogicController {
 
     @GetMapping("/settings")
     public ModelAndView settings(HttpSession session) {
-        User user = (User)session.getAttribute("user");
-        Person person = (Person)session.getAttribute("person");
         return new ModelAndView("settings")
                 .addObject("userSession", session);
-
     }
     @PostMapping("/settings")
-    public ModelAndView changeSettings(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, @RequestParam String repeatedPassword, HttpSession session) {
+    public ModelAndView changeSettings(@Valid User user, BindingResult bru, @Valid Person person, BindingResult brp, @RequestParam String repeatedPassword, HttpSession session) throws Exception {
 
         if (bru.hasErrors() || brp.hasErrors() || userNameDuplicate(user) || confirmPassword(user.getPassword(), repeatedPassword) == false) {
             String error = "";
@@ -250,6 +247,8 @@ public class LogicController {
         session.removeAttribute("person");
         session.setAttribute("user", user);
         session.setAttribute("person", person);
+        repository.updateUser(user, person);
+
         updateUserList(user);
         updatePersonList(person);
 
@@ -265,8 +264,9 @@ public class LogicController {
         ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
 
         for (int i = 0; i<lunchBoxes.size(); i++) {
-            if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+            if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID()){
                 personLunchBoxes.add(lunchBoxes.get(i));
+            }
         }
 
         return new ModelAndView("userLunchBoxes")
