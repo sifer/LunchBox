@@ -168,7 +168,7 @@ public class Repository {
             PreparedStatement ps = conn.prepareStatement("DELETE FROM [dbo].[LunchBox]WHERE LunchBoxID = ?")) {
 
             ps.setInt(1, lunchboxid);
-
+    
             ps.executeUpdate();
         } catch(SQLException e) {
             e.printStackTrace();

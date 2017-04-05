@@ -17,9 +17,7 @@ function initMap() {
         zoomControl: true
     });
 
-/*    document.querySelector('.newLoc').addEventListener('click', function() {
-        codeAddress(geocoder, map);
-    });*/
+
     function createMarker(pos) {
         var icon = {url: 'icon/standard.png', scaledSize: new google.maps.Size(48, 48)};
         var iconDesc = "";
@@ -123,8 +121,8 @@ function initMap() {
             // Byta ut till ett kryss
             iwOuter.parentElement.children[2].innerHTML = 'X';
             // Osynlig hitbox
-            iwOuter.parentElement.children[3].style.top = '22%';
-            iwOuter.parentElement.children[3].style.right = '8%';
+/*            iwOuter.parentElement.children[3].style.top = '22%';
+            iwOuter.parentElement.children[3].style.right = '8%';*/
 
         });
         //Event-listener för on close click
@@ -159,6 +157,11 @@ function initMap() {
 navigator.geolocation.getCurrentPosition(success, error, options);
 
 //Funktion som letar upp koordinater för addressen som anges i textrutan och sätter ut pin
+
+document.querySelector('.newLoc').addEventListener('click', function() {
+    codeAddress(geocoder, map);
+});
+
 function codeAddress() {
 
     geocoder = new google.maps.Geocoder();
@@ -168,12 +171,6 @@ function codeAddress() {
 
         if(status == "OK") {
             map.setCenter(results[0].geometry.location);
-            var marker = new google.maps.Marker({
-                map: map,
-                position: results[0].geometry.location,
-
-
-            });
 
             //Om ingen träff på addressen
         } else {
