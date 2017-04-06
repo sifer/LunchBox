@@ -215,7 +215,7 @@ public class LogicController {
         Person person = ((Person)session.getAttribute("person"));
         lunchbox.setPerson_ID(person.getPersonID());
 
-        repository.addLunchBox(lunchbox);
+        lunchbox.setLunchBoxID(repository.addLunchBox(lunchbox));
         lunchBoxes.add(lunchbox);
         lunchBoxesJson = objectToJSON(lunchBoxes);
         personJson = personToJSON(persons);
@@ -294,12 +294,14 @@ public class LogicController {
 
         ArrayList<LunchBox> personLunchBoxes = new ArrayList<>();
         Person person =(Person)session.getAttribute("person");
-
         if(lunchboxid > 0) {
             repository.removeLunchBox(lunchboxid);
             for (int i = 0; i<lunchBoxes.size(); i++) {
                 if(lunchBoxes.get(i).getLunchBoxID() == lunchboxid) {
                     lunchBoxes.remove(i);
+                    for(LunchBox box : lunchBoxes){
+                        System.out.println(box.getDescription());
+                    }
                 }
             }
 
