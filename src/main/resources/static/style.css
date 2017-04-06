@@ -76,7 +76,7 @@ body > header:nth-child(1) > div:nth-child(1) {
 }
 
 #infoWindowDiv {
-    padding: 30%;
+    padding: 10%;
     background-color: red;
 }
 body > header:nth-child(1) > div:nth-child(2) {
@@ -124,7 +124,7 @@ body > section:nth-of-type(2){
     font-family:mySecondFont;
 }
 .filter{
-    border: rgb(230, 230, 230);;
+    border: 20px solid rgba(1, 1, 1, 0.1);
     border-top:0;
     width:20%;
     text-align: center;
