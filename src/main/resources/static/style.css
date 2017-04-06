@@ -1,4 +1,9 @@
+html{
+    margin: 0;
+    line-height: 1;
+}
 body {
+    line-height: 1;
     width: 100%;
     height: 100%;
     background-size: cover;
@@ -17,6 +22,7 @@ body >  header {
 body > header:nth-child(1) > div:nth-child(1) {
     margin-bottom: -71px;
     text-align: right;
+    margin-right: 54px;
 }
 .knappstor {
     /*padding: 12px 90px;*/
@@ -27,11 +33,11 @@ body > header:nth-child(1) > div:nth-child(1) {
     background: beige;
     color: #66CC99;
     height: 60px;
-    width: 100px;
+    width: 130px;
     line-height: 60px;
-    margin: 15px 15px;
     text-align: center;
-    border: 0;
+    border: 4px solid #66CC99;
+    margin: 15px 10px;
     /* transition: all 0.3s ease 0s;*/
 }
 .knappstor:hover {
@@ -156,10 +162,7 @@ body> footer:nth-of-type(1) > section:nth-of-type(1){
 body > footer:nth-of-type(1)> section:nth-of-type(2) {
     float: right;
 }
-body  > footer:nth-of-type(1)> section:nth-of-type(2) > img {
-    width: 20%;
-}
-body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
+body  > footer:nth-of-type(1)> section > img {
     width: 20%;
 }
 /*NADIAS som Cissi klistrat in*/
@@ -167,12 +170,13 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
     background-color:#66CC99;
     font-family: mySecondFont;
     font-size: 17px;
+    border: 4px solid beige;
     color: white;
     height: 60px;
-    width: 200px;
+    max-width: 300px;
+    width: 100%;
     line-height: 60px;
     text-align: center;
-    border: 0;
     font-size: x-large;
 }
 
@@ -193,7 +197,7 @@ a {
 /*FOOTER NUMMER 2*/
 
 body > footer:nth-of-type(2){
-       display: block;
+    font-size: 0;
        overflow: visible;
        margin-right: auto;
        margin-left: auto;
@@ -202,8 +206,8 @@ body > footer:nth-of-type(2){
        background-color: #66CC99;
    }
 body > footer:nth-of-type(2) > section {
-       width: 24.5%;
-       display: inline-block;
+    width: 24.5%;
+    display: inline-block;
        height: 100%;
        text-align: center;
 }
@@ -771,4 +775,100 @@ padding-bottom: 40px;
 
 p {
 text-size: x-small
+}
+
+
+/* MOBIL CSS */
+@media screen and (max-width: 740px) {
+    h3{
+        font-size: 20px;
+    }
+    body > header:nth-child(1) > div:nth-child(1) {
+        margin-bottom: -20px;
+        text-align: center;
+    }
+    #text1{
+        line-height: 50px;
+    }
+    #brodtext{
+        margin-top: 20px;
+        margin-bottom: 20px;
+        line-height: 30px;
+    }
+    #map {
+        border: 0;
+        height: 500px;
+        width: 90%;
+        margin: 0 auto;
+        margin-top: 13px;
+    }
+    body > section:nth-of-type(2) {
+        padding: 3% 0;
+    }
+    body > footer:nth-of-type(1)> section > img {
+        width: 60%;
+    }
+    body > footer:nth-of-type(2){
+        padding-top: 25px;
+    }
+    body > footer:nth-of-type(2) > section:nth-of-type(1){
+        display: block;
+        width: auto;
+        margin: 0 auto 20px;
+    }
+    body > footer:nth-of-type(2) > section{
+        width: 50%;
+        display: inline-block;
+    }
+    body > footer:nth-of-type(2) > section:nth-of-type(4){
+        padding-top: 12px;
+        width: 100%;
+    }
+    .annons{
+        width: 87%;
+    }
+    #id{
+        width: 87%;
+    }
+    #bg{
+        width: 87%;
+    }
+    #faq{
+        width: 87%;
+    }
+    .knappstor{
+        border: 4px solid #66CC99;
+        margin: 15px 10px;
+        width: 40%;
+    }
+    #kontaktaoss{
+        width: 87%;
+    }
+    #sidebar{
+        float: none;
+        width: auto;
+        height: auto;
+        padding: 10px;
+    }
+    #sidebar #text1 {
+        margin-top: 10px;
+    }
+    #main{
+        float: none;
+        height: auto;
+        width: auto;
+    }
+    .knappfooter{
+        height: 40px;
+        width: 87%;
+    }
+    .left{
+        padding: 4px;
+    }
+    .centered{
+        padding: 4px;
+    }
+    .right{
+        padding: 4px;
+    }
 }
