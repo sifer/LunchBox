@@ -134,10 +134,10 @@ public class Repository {
                 resultset.getString(4));
     }
 
-    public void addLunchBox(LunchBox lunchbox) throws SQLException {
-
+    public int addLunchBox(LunchBox lunchbox) throws SQLException {
+        int key = 0;
         try(Connection conn = dataSource.getConnection();
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image, Person_ID, AmountOfLunchBoxes, Pris) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)")) {
+            PreparedStatement ps = conn.prepareStatement("INSERT INTO [dbo].[LunchBox](Description, Ingrediences, Long, Lat, Vego, Vegan, Laktos, Gluten, Kyckling, Fläsk, Nöt, Fisk, Image, Person_ID, AmountOfLunchBoxes, Pris) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
 
             ps.setString(1, lunchbox.getDescription());
             ps.setString(2, lunchbox.getIngridiences());
@@ -157,10 +157,15 @@ public class Repository {
             ps.setInt(16, lunchbox.getPris());
 
             ps.executeUpdate();
+
+            ResultSet genKeys = ps.getGeneratedKeys();
+            if (genKeys.next()) {
+                key = genKeys.getInt(1);
+            }return key;
         } catch(SQLException e) {
             e.printStackTrace();
 
-        }
+        }return key;
 
     }
 
