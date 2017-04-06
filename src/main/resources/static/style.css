@@ -450,7 +450,7 @@ label.light {
     top: 55%;
     transform: translate(-50%, -50%);
 }
-#kontaktaoss, #faq {
+#kontaktaoss {
     font-family: Montserrat, sans-serif;
     color:white;
     rgba(128, 128, 128, 0.93);
@@ -467,6 +467,24 @@ label.light {
     top: 55%;
     transform: translate(-50%, -50%);
     }
+
+#faq{
+    font-family: Montserrat, sans-serif;
+    color:white;
+    rgba(128, 128, 128, 0.93);
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: rgba(128, 128, 128, 0.93);
+    text-align: center;
+    align-content: center;
+    visibility: hidden;
+    z-index:999;
+    width:800px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
 .module{
     position:relative;
     top:15%;
@@ -545,7 +563,10 @@ label.light {
 }
 
 
-
+.h1faq {
+margin:0 0 0 0;
+text-align: center;
+}
 .button{
     height:50px;
     width:100%;
@@ -717,4 +738,8 @@ h4 {
 #inloggsida {
 padding-bottom: 40px;
 
+}
+
+p {
+text-size: x-small
 }
