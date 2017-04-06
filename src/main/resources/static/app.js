@@ -74,7 +74,7 @@ function initMap() {
             title: pos.description,
             icon: icon
         });
-        var loggedIn = "";
+        var loggedIn = '<div id="infoWindowDiv">'+"Logga in för att se mer information"+'</div>';
         if(pers != ""){
             loggedIn = '<p>Säljare: '+pers.firstName+'</p><p>Telefonnummer: 0'+pers.phoneNumber+'</p>';
         }
@@ -82,7 +82,7 @@ function initMap() {
             content: '<div class="infoWindow"><div><h1>'+pos.description+'</h1>' +
             '<p>'+iconDesc+'</p>' +
             '<p>Beskrivning: '+pos.ingridiences+'</p>' +
-            loggedIn+
+            loggedIn +
             '</div><img src="'+imageurl+'"></div>',
             bgColor: bgColor
         });
