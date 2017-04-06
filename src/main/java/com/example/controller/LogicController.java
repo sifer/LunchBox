@@ -18,14 +18,12 @@ import com.google.maps.model.AddressComponentType;
 import com.google.maps.model.GeocodingResult;
 import net.minidev.json.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -84,6 +82,7 @@ public class LogicController {
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
     }
+
 // Om någon redan är inloggad skickas direkt till "userSession", annars visas startsidan
     @GetMapping("/")
     public ModelAndView form(HttpSession session) {
@@ -305,9 +304,9 @@ public class LogicController {
             }
 
             for (int i = 0; i<lunchBoxes.size(); i++) {
-                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID()) {
                 personLunchBoxes.add(lunchBoxes.get(i));
-            }
+            }}
         }
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
@@ -433,6 +432,7 @@ public class LogicController {
 
     }
 
+
     //Built if we want to use matapi.se
     private static String readUrl(String urlString) throws Exception {
         BufferedReader reader = null;
@@ -480,4 +480,6 @@ public class LogicController {
             }
         }
     }
+
+
 }
