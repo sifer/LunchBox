@@ -786,6 +786,7 @@ text-size: x-small
     body > header:nth-child(1) > div:nth-child(1) {
         margin-bottom: -20px;
         text-align: center;
+        margin-right: 0;
     }
     #text1{
         line-height: 50px;
@@ -826,6 +827,30 @@ text-size: x-small
     }
     .annons{
         width: 87%;
+        padding: 0;
+        position: absolute;
+        top: 95%;
+    }
+    .infoWindow{
+        min-width: 0;
+    }
+    .infoWindow img{
+        width: 35%;
+        right: 0px;
+    }
+    .infoWindow p:nth-of-type(1){
+        top: 84px;
+        right: -5px;
+        width: 96px;
+    }
+    .infoWindow h1{
+        margin-bottom: 0px;
+    }
+    .infoWindow p:nth-of-type(2){
+        font-size: 13px;
+    }
+    #infoWindowDiv{
+        padding: 0;
     }
     #id{
         width: 87%;
