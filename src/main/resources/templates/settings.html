@@ -10,7 +10,7 @@
     <form class="form" th:action="settings" method="POST">
         <h1>Uppdatera användaruppgifter</h1>
         <fieldset>
-            <legend><span class="number">1</span>Fyll i din information nedan!</legend>
+            <legend>Fyll i din information nedan!</legend>
             <label for="name">Namn:</label>
             <input type="text" id="name" th:value="${session.person.firstName}" name="firstName"/>
 
@@ -32,7 +32,7 @@
             <p th:text="${error}"></p>
 
         </fieldset>
-        <button type="submit">Sign Up</button>
+        <button type="submit">Uppdatera</button>
     </form>
     <form action="/" method="get">
         <button type="submit">Tillbaka</button>

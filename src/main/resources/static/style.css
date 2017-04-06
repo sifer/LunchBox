@@ -66,6 +66,7 @@ body > header:nth-child(1) > div:nth-child(1) {
 .userButton {
     width: 49%;
     display: inline-block;
+
 }
 body > header:nth-child(1) > div:nth-child(2) {
     padding-bottom: 10px;

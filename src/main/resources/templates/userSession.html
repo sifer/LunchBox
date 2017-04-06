@@ -106,10 +106,10 @@
             <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
             <div><label for="image">Lägg upp en bild</label>
-            <input type="file" id="image" accept="image/*"/>
+            <div><input type="file" id="image" accept="image/*"/></div>
             <input id="hiddenImage" type="hidden" name="image" value="value"/></div>
             <div><label for="matlada">Kort beskrivning av din rätt. inkl ingredienser.</label>
-                <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea></div>
+            <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea></div>
             <label for="amountOfLunchBoxes">Hur många matlådor vill du sälja?</label>
             <input type="text" id="amountOfLunchBoxes" name="amountOfLunchBoxes"
                    th:value="${lunchbox.amountOfLunchBoxes}"/>
