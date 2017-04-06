@@ -50,9 +50,9 @@ body > header:nth-child(1) > div:nth-child(1) {
     background: beige;
     color: #66CC99;
     height: 60px;
-    width: 150px;
+    width: 90%;
     line-height: 60px;
-    margin: 15px 15px;
+    margin: 5px 5px;
     text-align: center;
     border: 0;
     /* transition: all 0.3s ease 0s;*/
@@ -61,6 +61,12 @@ body > header:nth-child(1) > div:nth-child(1) {
     background-color:#66CC99;
     color: white;
     cursor: pointer;
+}
+
+.userButton {
+    width: 49%;
+    display: inline-block;
+
 }
 body > header:nth-child(1) > div:nth-child(2) {
     padding-bottom: 10px;
@@ -317,6 +323,7 @@ h1 {
 
 .settings {
     visibility: visible;
+    padding: 10px;
 }
 
 h1 {
@@ -542,7 +549,7 @@ label.light {
     height:86%;
     width:100%;
     box-sizing:border-box;
-    padding:40px;
+    padding:10px;
 }
 
 .textbox{
@@ -732,7 +739,7 @@ h4 {
 padding-bottom: 40px;
 
 }
+
 p {
 text-size: x-small
-}
 }
