@@ -89,7 +89,8 @@ body > section:nth-of-type(1){
 }
 body > section:nth-of-type(2){
     background-color: white;
-    padding: 8% 0% 8% 0%;
+    padding: 1% 0% 1% 0%;
+    margin: 1% 0% 1% 0%;
 }
 .filter::-webkit-input-placeholder {
      color: #4a4a4a;
@@ -163,7 +164,7 @@ body  > footer:nth-of-type(1)> section:nth-of-type(1) > img {
 }
 /*NADIAS som Cissi klistrat in*/
 .knappfooter {
-    background-color:#4bc970;
+    background-color:#66CC99;
     font-family: mySecondFont;
     font-size: 17px;
     color: white;
@@ -198,7 +199,7 @@ body > footer:nth-of-type(2){
        margin-left: auto;
        padding-top: 40px;
        padding-bottom: 20px;
-       background-color: #4bc970;
+       background-color: #66CC99;
    }
 body > footer:nth-of-type(2) > section {
        width: 24.5%;
@@ -250,7 +251,6 @@ color:white;
 
 
 #text1 {
-
     margin-bottom: -16px;
     font-family: mySecondFont;
     letter-spacing: 4px;
@@ -264,6 +264,22 @@ color:white;
 
 #text1:hover {
     color: #ff5c5c;
+}
+
+.text2 {
+    margin-bottom: 25px;
+    font-family: mySecondFont;
+    letter-spacing: 4px;
+    color: #66CC99;
+    font-size: 45px;
+    line-height: 74px;
+    font-weight: 400;
+    text-align: center;
+    text-align: center;
+}
+
+.text2:hover {
+    color: #373838
 }
 
 .headerimg {
@@ -624,7 +640,15 @@ h3 {
 h4 {
     font-family: mySecondFont;
     color: #373838;
-    font-size:15px
+    font-size:15px;
+    font-weight: 100;
+}
+h5 {
+    font-family: mySecondFont;
+    color: #373838;
+    font-size:15px;
+    font-weight: 100;
+    font-style: italic;
 }
 .close {
     position: absolute;
