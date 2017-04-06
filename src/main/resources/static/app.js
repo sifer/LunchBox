@@ -147,7 +147,7 @@ function initMap() {
                 map.panTo(this.getPosition());
                 activeMarker = this;
                 infowindow.open(map, marker);
-                setTimeout(function() { map.panBy(-30,-60)}, 1000);
+                setTimeout(function() { map.panBy(-10,-60)}, 700);
 
             }
         });
