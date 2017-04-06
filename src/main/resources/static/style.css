@@ -897,3 +897,8 @@ text-size: x-small
         padding: 4px;
     }
 }
+@media screen and (max-height: 641px){
+    #map {
+        height: 400px;
+    }
+}
