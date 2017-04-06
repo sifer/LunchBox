@@ -79,6 +79,25 @@ function closefaqfunk(){
     document.querySelector('.black_overlay').style.visibility = 'hidden';
     }
 
+function ready(omossfunk) {
+    if (document.readyState != 'loading') {
+        omossfunk();
+    }else{
+        document.addEventListener('DOMContentLoaded', omossfunk)
+    }
+}
+function omossfunk() {
+    var element =  document.querySelector("#omoss");
+    element.style.visibility = 'visible';
+    var element2 =  document.querySelector('.black_overlay');
+    element2.style.visibility = 'visible';
+}
+function closeomossfunk(){
+    var element =  document.querySelector("#omoss");
+    element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
+
+}
 function hej(popupfunk) {
     if (document.readyState != 'loading') {
         popupfunk();
