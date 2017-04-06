@@ -129,3 +129,11 @@ function closeSalesForm(){
     element.style.visibility = 'hidden';
     document.querySelector('.black_overlay').style.visibility = 'hidden';
 }
+function showBuyerInfo() {
+    var element = document.querySelector("#buyerinfo");
+    element.style.visibility='visible';
+}
+function closeBuyerInfo() {
+    var element = document.querySelector("#buyerinfo");
+    element.style.visibility='hidden';
+}
