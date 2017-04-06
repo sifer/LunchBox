@@ -12,8 +12,6 @@
 <header id="header">
     <img src="../images/lunchboxlogga.png" class="headerimg"/>
 </header>
-
-<!--<div id="formular">-->
 <article id="sidebar">
     <header>
         <h2 id="text1" th:inline="text">Hej, [[${session.person.firstName}]]!</h2>
@@ -23,29 +21,28 @@
     </section>
     <section>
         <form id="form" action="login" method="POST">
-                <input onclick="showSalesForm()" class="knappstor2" value="Sälja mat"/>
+            <input onclick="showSalesForm()" class="knappstor2" value="Sälja mat"/>
         </form>
         <form action="updateLunchBoxes" method="post">
             <input type="submit" class="knappstor2" value="Hantera matlådor"/>
         </form>
         <form action="settings" method="get">
-            <input type="submit" class="knappliten" value="Användarinställningar"/>
+            <input type="submit" class="knappstor2" value="Användarinställningar"/>
         </form>
         <form action="logout" method="post">
-            <input type="submit" class="knappliten" value="Logga ut"/>
+            <input type="submit" class="knappstor2" value="Logga ut"/>
         </form>
     </section>
 </article>
 
-<aside id="main">
-    <section>
-        <div id="map"></div>
-    </section>
-    <section>
-        <input class="filter" placeholder="Sök på sökord.." type="text" value="" onkeyup="filterMap(this.value)"/><input class="filter address" placeholder="Sök på plats.." type="text" value="" />
-    </section>
-
-</aside>
+    <aside id="main">
+        <section>
+            <div id="map"></div>
+        </section>
+        <section>
+            <input class="filter" placeholder="Sök på sökord.." type="text" value="" onkeyup="filterMap(this.value)"/><input class="filter address" placeholder="Sök på plats.." type="text" value="" />
+        </section>
+    </aside>
 
 <footer id="footer">
     <section>
@@ -59,25 +56,59 @@
     </section>
 
 </footer>
+<footer>
+    <section>
+        <img src="../images/lunchboxlogga-footer.png" class="headerimg"/>
+    </section>
+    <section>
+        <input onclick="fa()" class="knappfooter" value="Om oss"/>
+        <input onclick="fa()" class="knappfooter" value="Så fungerar det"/>
+        <input onclick="fa()" class="knappfooter" value="Få inspiration"/>
+    </section>
+    <section>
+        <input onclick="fa()" class="knappfooter" value="Aktuellt just nu"/>
+        <input onclick="fa()" class="knappfooter" value="FAQ"/>
+        <input onclick="fa()" class="knappfooter" value="Kontakta oss"/>
+    </section>
+    <section>
+        <h3 class="foljoss">Följ oss</h3>
+        <div>
+            <a href="[full link to your Twitter]">
+                <img title="Twitter" alt="Twitter" src="https://socialmediawidgets.files.wordpress.com/2014/03/01_twitter.png" width="35" height="35" />
+            </a>
+            <a href="[full link to your Pinterest]">
+                <img title="Pinterest" alt="Pinterest" src="https://socialmediawidgets.files.wordpress.com/2014/03/13_pinterest.png" width="35" height="35" />
+            </a>
+            <a href="[full link to your Facebook page]">
+                <img title="Facebook" alt="Facebook" src="https://socialmediawidgets.files.wordpress.com/2014/03/02_facebook.png" width="35" height="35" />
+            </a>
+            <a href="[full link to your LinkedIn]">
+                <img title="LinkedIn" alt="LinkedIn" src="https://socialmediawidgets.files.wordpress.com/2014/03/07_linkedin.png" width="35" height="35" />
+            </a>
+            <a href="[full link to your Instagram]">
+                <img title="Instagram" alt="RSS" src="https://socialmediawidgets.files.wordpress.com/2014/03/10_instagram.png" width="35" height="35" />
+            </a>
+        </div>
+        <h3 class="foljoss">Tack!</h3>
+    </section>
+</footer>
 
 
 
 <!--</div>-->
 <!--HÄR BÖRJAR NY ANVÄNDARFORMULÄRET -->
 <div class="annons">
-
     <form class="form" th:action="lunchbox" method="post">
         <h1>Lägg upp din matlåda</h1>
         <fieldset>
             <!--<legend><span class="number">1</span>Berätta om din matlåda</legend>-->
-
             <label for="name">Vad heter din rätt?</label>
             <input type="text" id="name" name="description" th:value="${lunchbox.description}"/>
 
             <div><label for="image">Lägg upp en bild</label>
             <input type="file" id="image" accept="image/*"/>
             <input id="hiddenImage" type="hidden" name="image" value="value"/></div>
-            <div><label for="matlada">Finns några nämnvärda ingredienser din rätt innehåller?</label>
+            <div><label for="matlada">Kort beskrivning av din rätt. inkl ingredienser.</label>
                 <textarea id="matlada" th:field="${lunchbox.ingridiences}" name="ingridiences"></textarea></div>
             <label for="amountOfLunchBoxes">Hur många matlådor vill du sälja?</label>
             <input type="text" id="amountOfLunchBoxes" name="amountOfLunchBoxes"

@@ -106,7 +106,7 @@ body > section:nth-of-type(2){
     font-family:mySecondFont;
 }
 .filter{
-    border: 20px solid rgb(221, 221, 199);
+    border: rgb(230, 230, 230);;
     border-top:0;
     width:20%
     text-align: center;
@@ -268,6 +268,7 @@ color:white;
     height: 360px;
     width: 700px;
     margin: 0 auto;
+    margin-top: 13px;
 }
 
 h1 {
@@ -311,6 +312,7 @@ h1 {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+    letter-spacing: 1px;
 }
 
 .settings {
@@ -426,7 +428,7 @@ label.light {
 
 #bg{
     font-family: Montserrat, sans-serif;
-    color:darkgrey;
+    color:white;
     rgba(128, 128, 128, 0.93);
     padding: 10px 20px;
     border-radius: 8px;
@@ -440,9 +442,24 @@ label.light {
     left: 50%;
     top: 55%;
     transform: translate(-50%, -50%);
-
 }
-
+#kontaktaoss, #faq {
+    font-family: Montserrat, sans-serif;
+    color:white;
+    rgba(128, 128, 128, 0.93);
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: rgba(128, 128, 128, 0.93);
+    text-align: center;
+    align-content: center;
+    visibility: hidden;
+    z-index:999;
+    width: 550px;
+    position: fixed;
+    left: 50%;
+    top: 55%;
+    transform: translate(-50%, -50%);
+    }
 .module{
     position:relative;
     top:15%;
@@ -670,4 +687,8 @@ h4 {
     border: 1px #66CC99;
     height: 450px;
     overflow-y: scroll;
+}
+#inloggsida {
+padding-bottom: 40px;
+
 }

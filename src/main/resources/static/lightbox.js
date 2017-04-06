@@ -1,20 +1,20 @@
 /**
  * Created by Administrator on 2017-03-29.
  */
-function ready(fn) {
+function ready(annonsfunk) {
     if (document.readyState != 'loading') {
-        fn();
+        annonsfunk();
     }else{
-        document.addEventListener('DOMContentLoaded', fn)
+        document.addEventListener('DOMContentLoaded', annonsfunk)
     }
 }
-function fn() {
+function annonsfunk() {
     var element =  document.querySelector(".annons");
     element.style.visibility = 'visible';
     var element2 =  document.querySelector('.black_overlay');
     element2.style.visibility = 'visible';
 }
-function closeFn(){
+function closeannonsfunk(){
     var element =  document.querySelector(".annons");
     element.style.visibility = 'hidden';
     document.querySelector('.black_overlay').style.visibility = 'hidden';
@@ -22,37 +22,76 @@ function closeFn(){
 
 }
 
-function hej(fa) {
+function hej(bgfunk) {
     if (document.readyState != 'loading') {
-        fa();
+        bgfunk();
     } else {
-        document.addEventListener('DOMContentLoaded', fa)
+        document.addEventListener('DOMContentLoaded', bgfunk)
     }
 }
-function fa() {
+function bgfunk() {
     var elementt =  document.querySelector("#bg");
     elementt.style.visibility = 'visible';
   var elementt2 =  document.querySelector(".black_overlay");
     elementt2.style.visibility = 'visible';
 }
-function closeFa(){
+function closebgfunk(){
     var element =  document.querySelector("#bg");
     element.style.visibility = 'hidden';
     document.querySelector('.black_overlay').style.visibility = 'hidden';
 }
 
-function hej(popup) {
+function ready(kontaktaossfunk) {
     if (document.readyState != 'loading') {
-        popup();
+        kontaktaossfunk();
+    }else{
+        document.addEventListener('DOMContentLoaded', kontaktaossfunk)
+    }
+}
+function kontaktaossfunk() {
+    var element =  document.querySelector("#kontaktaoss");
+    element.style.visibility = 'visible';
+    var element2 =  document.querySelector('.black_overlay');
+    element2.style.visibility = 'visible';
+}
+function closekontaktaossfunk(){
+    var element =  document.querySelector("#kontaktaoss");
+    element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
+    }
+
+function ready(faqfunk) {
+    if (document.readyState != 'loading') {
+        faqfunk();
+    }else{
+        document.addEventListener('DOMContentLoaded', faqfunk)
+    }
+}
+function faqfunk() {
+    var element =  document.querySelector("#faq");
+    element.style.visibility = 'visible';
+    var element2 =  document.querySelector('.black_overlay');
+    element2.style.visibility = 'visible';
+}
+function closefaqfunk(){
+    var element =  document.querySelector("#faq");
+    element.style.visibility = 'hidden';
+    document.querySelector('.black_overlay').style.visibility = 'hidden';
+    }
+
+function hej(popupfunk) {
+    if (document.readyState != 'loading') {
+        popupfunk();
     } else {
-        document.addEventListener('DOMContentLoaded', popup)
+        document.addEventListener('DOMContentLoaded', popupfunk)
     }
 }
 
-function popup() {
+function popupfunk() {
     var elementt = document.querySelector("#Popup");
     elementt.style.visibility = 'visible';
 }
+
 function ready(showSalesForm) {
     if (document.readyState != 'loading') {
         showSalesForm();
@@ -63,7 +102,7 @@ function ready(showSalesForm) {
 function showSalesForm() {
     var elementt =  document.querySelector(".annons");
     elementt.style.visibility = 'visible';
-    /*    var elementt2 =  document.querySelector(".black_overlay");
+/*        var elementt2 =  document.querySelector(".black_overlay");
      elementt2.style.visibility = 'visible';*/
 }
 function closeSalesForm(){
