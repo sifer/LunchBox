@@ -334,9 +334,9 @@ public class LogicController {
                 repository.decreaseAmount(lunchboxid, currentAmount);
             }
             for (int i = 0; i<lunchBoxes.size(); i++) {
-                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID());
+                if (lunchBoxes.get(i).getPerson_ID() == person.getPersonID()) {
                 personLunchBoxes.add(lunchBoxes.get(i));
-            }
+            } }
         }
         lunchBoxesJson = objectToJSON(lunchBoxes);
 
